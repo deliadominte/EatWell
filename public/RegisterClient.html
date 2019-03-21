@@ -91,7 +91,7 @@ body{
 	font-weight: 400;
 	padding: 4px;
 }
-.login input[type=text2]{
+.login input[type=text2], input[type=date]{
 	width: 250px;
 	height: 30px;
 	background: transparent;
@@ -158,7 +158,7 @@ body{
 	border: 1px solid rgba(255,255,255,0.9);
 }
 
-.login input[type=password]:focus,input[type=text2]:focus{
+.login input[type=password]:focus,input[type=text2]:focus, input[type=date]:focus{
 	outline: none;
 	border: 1px solid rgba(255,255,255,0.9);
 }
@@ -193,6 +193,8 @@ body{
 		<div class="login">
                 <input type="text" placeholder="Code" name="code"><br>
 				<input type="text2" placeholder="UserName" name="user"><br>
+				<input type="text2" placeholder="Place" name="place"><br>
+				<input type="date"  name="bday"><br>
 				<input type="password" placeholder="Password" name="password"><br>
                 <a href="./index.html"><input type="button" value="Register"></a><br>
 		</div>
