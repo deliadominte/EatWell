@@ -18,7 +18,7 @@ html, body, h1, h2, h3, h4, h5
 	body{
 	background-image: url("./media/Apple.jpg");
 	background-size: 100%; 
-	background-repeat: no-repeat;
+	background-repeat: repeat-y;
 }
 </style>
 <body class="w3-theme-l5">
@@ -69,10 +69,12 @@ html, body, h1, h2, h3, h4, h5
           <br>
           <!-- Accordion -->
     <div class="w3-card w3-round">
+           
             <div class="w3-white">
               <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Allergies</button>
               <div id="Demo1" class="w3-hide w3-container">
-                <p>
+                <div id="tags">
+                  <br>
                   <span class="w3-tag w3-small w3-theme-d5">Peanut
                     <button onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-d5">
                     <i class="fa fa-remove"></i>
@@ -86,16 +88,17 @@ html, body, h1, h2, h3, h4, h5
                   <span class="w3-tag w3-small w3-theme-d2">Dairy 
                       <button onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-d2">
                       <i class="fa fa-remove"></i></button></span>
+                </div>
                   <br>
                     <button onclick="appearAdd('Add2');" id='Add1' class="w3-button w3-theme-d2 w3-show">
                         <i class="fa fa-plus"></i></button>
                     
                     <span class="w3-tag w3-small w3-theme-d2 w3-hide" id='Add2'>
-                          <input type="text" name="allergie">
+                          <input id="new-tag" type="text" name="allergie" placeholder="Your allergy">
                           <button onclick="appearAdd('Add1');" class="w3-button w3-theme-d2">
                               <i class="fa fa-plus"></i></button>
                     </span>
-                </p>
+                    <br>
               </div>
               <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i>Current Measures</button>
               <div id="Demo2" class="w3-hide w3-container">
@@ -163,7 +166,10 @@ else{
   x.className = x.className.replace("w3-hide", "w3-show");
   var y= document.getElementById('Add2');
   y.className = y.className.replace("w3-show", "w3-hide");
-  var z=document.getElementByName("allergie").value;
+
+  document.getElementById("tags").innerHTML+='\
+  <span class="w3-tag w3-small w3-theme-d2">'+document.getElementById("new-tag").value+' <button onclick="this.parentElement.style.display='+"'none'"+'" class="w3-button w3-theme-d2">  <i class="fa fa-remove"></i></button></span>'
+
 }
 }
 
