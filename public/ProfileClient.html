@@ -20,6 +20,15 @@ html, body, h1, h2, h3, h4, h5
 	background-size: 100%; 
 	background-repeat: repeat-y;
 }
+input{
+    display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color:#f2f2f2;
+  width: 15%;
+  height: 30px;
+}
 </style>
 <body class="w3-theme-l5">
 
@@ -58,11 +67,12 @@ html, body, h1, h2, h3, h4, h5
         <!-- Profile -->
       <div class="w3-card w3-round w3-white">
             <div class="w3-container">
-             <h4 class="w3-center">My Profile</h4>
+             <h4 class="w3-center">UserNameClient</h4>
              <p class="w3-center"><img src="./media/avatar.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
              <hr>
-             <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
-             <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
+             <p class="w3-center"><i class="fa fa-home fa-fw w3-margin-right w3-text-theme "></i> London, UK</p class="w3-center">
+             <p class="w3-center"><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme "></i> April 1, 1988</p>
+             <p class="w3-center"><button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-edit"></i> Delete Client</button></p>
             </div>
           </div>
           <br>
@@ -70,34 +80,17 @@ html, body, h1, h2, h3, h4, h5
     <div class="w3-card w3-round">
            
             <div class="w3-white">
-              <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Allergies</button>
+              <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> Allergies</button>
               <div id="Demo1" class="w3-hide w3-container">
                 <div id="tags">
                   <br>
-                  <span class="w3-tag w3-small w3-theme-d5">Peanut
-                    <button onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-d5">
-                    <i class="fa fa-remove"></i>
-                    </button></span>
-                  <span class="w3-tag w3-small w3-theme-d4">Tomato 
-                      <button onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-d4">
-                      <i class="fa fa-remove"></i></button></span>
-                  <span class="w3-tag w3-small w3-theme-d3">Strawberry
-                      <button onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-d3">
-                      <i class="fa fa-remove"></i></button></span>
-                  <span class="w3-tag w3-small w3-theme-d2">Dairy 
-                      <button onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-d2">
-                      <i class="fa fa-remove"></i></button></span>
-                </div>
+                  <span class="w3-tag w3-small w3-theme-d5">Peanut</span>
+                  <span class="w3-tag w3-small w3-theme-d4">Tomato</span>
+                  <span class="w3-tag w3-small w3-theme-d3">Strawberry</span>
+                  <span class="w3-tag w3-small w3-theme-d2">Dairy</span>
                   <br>
-                    <button onclick="appearAdd('Add2');" id='Add1' class="w3-button w3-theme-d2 w3-show">
-                        <i class="fa fa-plus"></i></button>
-                    
-                    <span class="w3-tag w3-small w3-theme-d2 w3-hide" id='Add2'>
-                          <input id="new-tag" type="text" name="allergie" placeholder="Your allergy">
-                          <button onclick="appearAdd('Add1');" class="w3-button w3-theme-d2">
-                              <i class="fa fa-plus"></i></button>
-                    </span>
-                    <br>
+                  <br>
+                </div>
               </div>
               <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i>Current Measures</button>
               <div id="Demo2" class="w3-hide w3-container">
@@ -114,6 +107,13 @@ html, body, h1, h2, h3, h4, h5
                 <p>Carbohydrates:</p>
                 <p>Protein:</p>
                 <p>Fat:</p>
+                <button type="button" id="editbutton" onclick="editp()" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-edit"></i> Edit Percentage</button>
+                <div id="edit" class=" w3-container w3-white w3-round w3-margin-bottom w3-hide" style="padding-left: 0;">
+                    <input type="number" name="calories" min="0" max="100000" placeholder="Calories">
+                    <input type="number" name="carbohydrates" min="0" max="100" placeholder="Carbohydrates Percentage">
+                    <input type="number" name="protein" min="0" max="100" placeholder="Protein Percentage">
+                    <input type="number" name="fat" min="0" max="100" placeholder="Fat Percentage">
+                </div>
               </div>
             </div>      
           </div>
@@ -153,23 +153,16 @@ function openNav() {
   }
 }
 
-function appearAdd(id){
-  if(id =='Add2'){
-  var x = document.getElementById(id);
-  x.className = x.className.replace("w3-hide", "w3-show");
-  var y= document.getElementById('Add1');
-  y.className = y.className.replace("w3-show", "w3-hide");
-}
-else{
-  var x = document.getElementById(id);
-  x.className = x.className.replace("w3-hide", "w3-show");
-  var y= document.getElementById('Add2');
-  y.className = y.className.replace("w3-show", "w3-hide");
-
-  document.getElementById("tags").innerHTML+='\
-  <span class="w3-tag w3-small w3-theme-d2">'+document.getElementById("new-tag").value+' <button onclick="this.parentElement.style.display='+"'none'"+'" class="w3-button w3-theme-d2">  <i class="fa fa-remove"></i></button></span>'
-
-}
+function editp(){
+    var x = document.getElementById("edit"),y = document.getElementById("editbutton" );
+    if (x.className.indexOf("w3-show") == -1) {
+    x.className = x.className.replace("w3-hide","w3-show");
+    y.innerHTML='<i class="fa fa-edit"></i> Save Percentage';
+    }
+    else{
+    x.className = x.className.replace("w3-show","w3-hide");
+    y.innerHTML='<i class="fa fa-edit"></i> Edit Percentage';
+    }
 }
 
 </script>

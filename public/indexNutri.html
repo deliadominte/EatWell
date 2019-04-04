@@ -21,6 +21,36 @@ html, body, h1, h2, h3, h4, h5
 	  background-size: 100%; 
   	background-repeat: repeat-y;
 }
+#search input[type=text] {
+  padding: 10px;
+	border: 1px solid rgba(255,255,255,0.6);
+  width: 30%;
+  height: 10%;
+  background: #f1f1f1;
+  padding-right: 0;
+}
+
+#search button {
+  width: 10%;
+  height: 10%;
+  padding: 10px;
+  background: rgb(36, 143, 36);
+  color: white;
+  border: 1px solid rgb(187, 184, 184);
+  border-left: none;
+  padding-left: 0;
+  cursor: pointer;
+}
+
+#search button:hover {
+  background:  rgb(187, 184, 184);
+}
+
+#search::after {
+  content: "";
+  clear: both;
+  display: table;
+}
 </style>
 <body class="w3-theme-l5">
 
@@ -38,7 +68,7 @@ html, body, h1, h2, h3, h4, h5
       <a href="./index.html" class="w3-bar-item w3-button">One new Appointment</a>
       <a href="./Messages.html" class="w3-bar-item w3-button">New Message</a>
     </div>
-  </div>S
+  </div>
  </div>
 </div>
 
@@ -53,113 +83,40 @@ html, body, h1, h2, h3, h4, h5
 <div id="body" class="w3-container w3-content" style="max-width:1400px; margin-top:60px;">    
   <!-- The Grid -->
   <div class="w3-row">
-    <!-- Left Column -->
-    <div class="w3-col m3">
-      <!-- Profile -->
-      <div class="w3-card w3-round w3-white">
-        <div class="w3-container">
-         <h4 class="w3-center">My Profile</h4>
-         <p class="w3-center"><img src="./media/avatar.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
-         <hr>
-         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Designer, UI</p>
-         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
-         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
-        </div>
-      </div>
-      <br>
-      
-      <!-- Accordion -->
-      <div class="w3-card w3-round">
-        <div class="w3-white">
-          <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Allergies</button>
-          <div id="Demo1" class="w3-hide w3-container">
-            <p>Some text..</p>
-          </div>
-          <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i>Current Measures</button>
-          <div id="Demo2" class="w3-hide w3-container">
-            <p>Weight:</p>
-            <p>Body Fat:</p>
-            <p>Arm:</p>
-            <p>Waistline:</p>
-            <p>Butt:</p>
-            <p>Thighs:</p>
-          </div>
-          <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> Nutrition</button>
-          <div id="Demo3" class="w3-hide w3-container">
-            <p>Calories:</p>
-            <p>Carbohydrates:</p>
-            <p>Protein:</p>
-            <p>Fat:</p>
-          </div>
-        </div>      
-      </div>
-      <br>
-    <!-- End Left Column -->
-    </div>
+  
     
     <!-- Middle Column -->
-    <div class="w3-col m7">
+    <div class="w3-col m7" style="width:100%">
     
-      
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <span class="w3-right w3-opacity">300 kcal</span>
-        <h4>Breakfast</h4><br>
-        <hr class="w3-clear">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-check"></i>  Done</button> 
-        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="	fa fa-plus"></i>  Add to favorites</button> 
+        <p class="w3-center"><button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-plus"></i> Add Client</button></p>
+        <p id="search" class="w3-center">
+          <input type="text" placeholder="Search.." name="search">
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </p>
       </div>
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <span class="w3-right w3-opacity">300 kcal</span>
-        <h4>Lunch</h4><br>
+        <h4 class="w3-center">UserNameClient</h4>
         <hr class="w3-clear">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-check"></i>  Done</button> 
-        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="	fa fa-plus"></i>  Add to favorites</button> 
+        <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
+        <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
+        <a href="./ProfileClient.html"  class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-user"></i>  Profile</a> 
+        <a href="./ProgressClient.html" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-line-chart"></i>  Progress</a> 
+        <a href="./MenuDets.html" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-bars"></i>  Menu details</a>
+        <a href="./MakeApoint.html" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-calendar-plus-o"></i>  Make Appointment</a>
       </div>
+
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <span class="w3-right w3-opacity">300 kcal</span>
-        <h4>Dinner</h4><br>
+        <h4 class="w3-center">UserNameClient</h4>
         <hr class="w3-clear">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-check"></i>  Done</button> 
-        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="	fa fa-plus"></i>  Add to favorites</button> 
-      </div>
-    <!-- End Middle Column -->
+        <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
+        <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
+        <a href="./ProfileClient.html"  class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-user"></i>  Profile</a> 
+        <a href="./ProgressClient.html" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-line-chart"></i>  Progress</a> 
+        <a href="./MenuDets.html" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-bars"></i>  Menu details</a>
+        <a href="./MakeApoint.html" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-calendar-plus-o"></i>  Make Appointment</a>
+      </div><!-- End Middle Column -->
     </div>
-    
-    <!-- Right Column -->
-    <div class="w3-col m2">
-      <div class="w3-card w3-round w3-white w3-center">
-        <div class="w3-container">
-          <p>Upcoming Appointment:</p>
-          <img src="./media/calendar.png" alt="Calendar" style="width:50%"><br>
-          <p>Friday 15:00</p>
-          <p><button class="w3-button w3-block w3-theme-l4">Info</button></p>
-        </div>
-      </div>
-      <br>
-      
-      <div class="w3-card w3-round w3-white w3-center">
-        <div class="w3-container">
-          <p>Appointment</p>
-          <img src="./media/calendar.png" alt="Calendar" style="width:50%"><br>
-          <span>15 May 15:00</span>
-          <div class="w3-row w3-opacity">
-            <div class="w3-half">
-              <button class="w3-button w3-block w3-green w3-section" title="Accept"><i class="fa fa-check"></i></button>
-            </div>
-            <div class="w3-half">
-              <button class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-remove"></i></button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <br>
-      
-    <!-- End Right Column -->
-    </div>
-    
   <!-- End Grid -->
   </div>
   
