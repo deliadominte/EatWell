@@ -3,10 +3,16 @@
 <title>EatWell</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="assets/css/select2.min.css">
+<link rel="stylesheet" type="text/css" href="assets/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-green.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
 	@import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
   @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
@@ -21,36 +27,16 @@ html, body, h1, h2, h3, h4, h5
 	  background-size: 100%; 
   	background-repeat: repeat-y;
 }
-#search input[type=text] {
+ input {
   padding: 10px;
-	border: 1px solid rgba(255,255,255,0.6);
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 2px;
   width: 30%;
   height: 10%;
   background: #f1f1f1;
   padding-right: 0;
 }
 
-#search button {
-  width: 10%;
-  height: 10%;
-  padding: 10px;
-  background: rgb(36, 143, 36);
-  color: white;
-  border: 1px solid rgb(187, 184, 184);
-  border-left: none;
-  padding-left: 0;
-  cursor: pointer;
-}
-
-#search button:hover {
-  background:  rgb(187, 184, 184);
-}
-
-#search::after {
-  content: "";
-  clear: both;
-  display: table;
-}
 </style>
 <body class="w3-theme-l5">
 
@@ -86,41 +72,56 @@ html, body, h1, h2, h3, h4, h5
   
     
     <!-- Middle Column -->
-    <div class="w3-col m7" style="width:100%">
+    <div class="w3-col m10" >
     
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <p id="search" class="w3-center">
-          <input type="text" placeholder="Search.." name="search">
-          <button type="submit"><i class="fa fa-search"></i></button>
-        </p>
-      </div>
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <h4 class="w3-center">UserNameClient</h4>
-        <hr class="w3-clear">
-        <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
-        <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
-        <a href="./ProfileClient.html"  class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-user"></i>  Profile</a> 
-        <a href="./ProgressClient.html" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-line-chart"></i>  Progress</a> 
-        <a href="./MenuDets.html" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-bars"></i>  Menu details</a>
-        <a href="./MakeApoint.html" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-calendar-plus-o"></i>  Make Appointment</a>
-      </div>
+        <p class="w3-center">New Appointment:<p id="name"></p></p>
+        <div class="w3-row w3-section w3-center">
+                <div class="w3-col" style="width:30%"> Date: </div>
+                  <div class="w3-rest">
+                        <input class="w3-input w3-border " style="width:50%" id="datefield" type="date"  name="date" min="1899-01-01">
+                  </div>
+        </div>
+        
+        <div class="w3-row w3-section w3-center">
+                <div class="w3-col" style="width:30%"> Time: </div>
+                  <div class="w3-rest">
+                        <input class="w3-input w3-border " style="width:50%" id="timefield" type="time" name="time" min="9:00">
+                  </div>
+        </div>
 
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <h4 class="w3-center">UserNameClient</h4>
-        <hr class="w3-clear">
-        <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
-        <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
-        <a href="./ProfileClient.html"  class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-user"></i>  Profile</a> 
-        <a href="./ProgressClient.html" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-line-chart"></i>  Progress</a> 
-        <a href="./MenuDets.html" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-bars"></i>  Menu details</a>
-        <a href="./MakeApoint.html" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-calendar-plus-o"></i>  Make Appointment</a>
+        <div class="w3-row w3-section w3-center">
+                <div class="w3-col" style="width:30%"> Details about appointment: </div>
+                  <div class="w3-rest">
+                        <input class="w3-input w3-border " style="width:50%; height: 100px;" type="text" name="description" placeholder="Details..">
+                  </div>
+        </div>
+        <p class="w3-center"><a href="./Appointment.html" class="w3-button w3-theme-d2 w3-margin-bottom"> Make Appointment</a></p>
       </div>
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <p class="w3-center"><button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-plus"></i> Add Client</button></p>
-      </div>
+      
       <!-- End Middle Column -->
     </div>
+
+    <!-- Right Column -->
+    <div class="w3-col m2">
+      <div class="w3-card w3-round w3-white w3-center">
+        <div class="w3-container"  id="apoint">
+          <p>Appointment</p>
+          <img src="./media/calendar.png" alt="Calendar" style="width:50%"><br>
+          <span>15 May 15:00</span>
+          <div class="w3-row w3-opacity">
+            <div class="w3-center">
+              <button onclick="getElementById('apoint').style.display='none'" class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-remove"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      
+    <!-- End Right Column -->
+    </div>
   <!-- End Grid -->
+  
   </div>
   
 <!-- End Page Container -->
@@ -130,6 +131,25 @@ html, body, h1, h2, h3, h4, h5
 
  
 <script>
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var time = today.getTime();
+var yyyy = today.getFullYear();
+ if(dd<10){
+        dd='0'+dd
+    } 
+    if(mm<10){
+        mm='0'+mm
+    } 
+
+today = yyyy+'-'+mm+'-'+dd;
+document.getElementById("datefield").setAttribute("min", today);
+
+// console.log(document.getElementById("timefield").nodeValue);
+// if (document.getElementById("datefield").value==today)
+//     document.getElementById("timefield").setAttribute("min", time);
+
 // Accordion
 function myFunction(id) {
   var x = document.getElementById(id);

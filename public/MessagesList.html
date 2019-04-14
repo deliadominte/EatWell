@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<title>EatWell</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-green.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+	@import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
+  @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
+  html, body, h1, h2, h3, h4, h5 
+{
+	font-family: 'Exo', sans-serif;
+	font-size: 12px;
+	}
+	body{
+	background-image: url("./media/Apple.jpg");
+	background-size: 100%; 
+	background-repeat: repeat-y;
+}
+h4{
+    font-weight: bold;
+    font-size: 20px;
+}
+input[type=text]{
+	width: 100%;
+	background: #fff;
+	border: 2px solid #fff;
+	border-radius: 2px;
+	color: #a18d6c;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 6px;
+	margin-top: 10px;
+}
+</style>
+<body class="w3-theme-l5">
+
+<!-- Navbar -->
+<div class="w3-top">
+    <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+     <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+     <a href="./index.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4" style="font-family: 'Exo', sans-serif;"><i class="fa fa-home w3-margin-right"></i>EatWell</a>
+     <a href="./SettingsClient.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account"><i class="fa fa-user"></i></a>
+     <a href="./ProgressClient.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Progress"><i class="fa fa-line-chart"></i></a>
+     <a href="./Messages.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
+     <div class="w3-dropdown-hover w3-hide-small">
+       <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">2</span></button>     
+       <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
+         <a href="./index.html" class="w3-bar-item w3-button">One new Appointment</a>
+         <a href="./Messages.html" class="w3-bar-item w3-button">New Message</a>
+       </div>
+     </div>
+    </div>
+   </div>
+   
+   <!-- Navbar on small screens -->
+   <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+     <a href="./SettingsClient.html" class="w3-bar-item w3-button w3-padding-large">Account</a>
+     <a href="./ProgressClient.html" class="w3-bar-item w3-button w3-padding-large">Progress</a>
+     <a href="./Messages.html" class="w3-bar-item w3-button w3-padding-large">Messages</a>
+   </div>
+
+<!-- Page Container -->
+<div id="body" class="w3-container w3-content" style="max-width:1400px; margin-top:60px;">    
+  <!-- The Grid -->
+  <div class="w3-row">
+    
+    
+    <!-- Middle Column -->
+    <div class="w3-col l12 w3-center">
+    
+      
+      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+            <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+                <img src="./media/avatar.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+                <span class="w3-right w3-opacity">16 min</span>
+                <h4>Jane Doe</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <a href="MessagesNutri.html" class="w3-button w3-theme-d1 w3-margin-bottom w3-right"> See Messages <i class="	fa fa-angle-right"></i></a>
+              </div>  
+              <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+                <img src="./media/avatar.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+                <span class="w3-right w3-opacity">16 min</span>
+                <h4>Jane Doe</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <a href="MessagesNutri.html" class="w3-button w3-theme-d1 w3-margin-bottom w3-right"> See Messages <i class="	fa fa-angle-right"></i></a>
+              </div>
+              <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+                <img src="./media/avatar.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+                <span class="w3-right w3-opacity">16 min</span>
+                <h4>Jane Doe</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <a href="MessagesNutri.html" class="w3-button w3-theme-d1 w3-margin-bottom w3-right"> See Messages <i class="	fa fa-angle-right"></i></a>
+              </div> 
+    <!-- End Middle Column -->
+    </div>
+    
+  <!-- End Grid -->
+  </div>
+  
+<!-- End Page Container -->
+</div>
+<br>
+
+
+ 
+<script>
+    
+    </script>
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+</body>
+</html> 
