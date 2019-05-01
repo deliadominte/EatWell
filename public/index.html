@@ -2,196 +2,244 @@
 <html>
 <title>EatWell</title>
 <meta charset="UTF-8">
+<link rel="shortcut icon" type="image/ico" href="./media/broccoli.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-green.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-	@import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
+  @import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
   @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
-html, body, h1, h2, h3, h4, h5 
+
+  html, body, h1, h2, h3, h4, h5 
 {
-	font-family: Arial;
+	font-family: 'Exo', sans-serif;
 	font-size: 12px;
 	}
 	body{
-    text-align: center;
+     text-align: center; 
 	  background-image: url("./media/Apple.jpg");
 	  background-size: 100%; 
   	background-repeat: repeat-y;
 }
+h4{
+    font-weight: bold;
+    font-size: 20px;
+    margin: none;
+}
 </style>
+
 <body class="w3-theme-l5">
 
-<!-- Navbar -->
-<div class="w3-top">
- <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-  <a href="./index.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4" style="font-family: 'Exo', sans-serif;"><i class="fa fa-home w3-margin-right"></i>EatWell</a>
-  <a href="./SettingsClient.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account"><i class="fa fa-user"></i></a>
-  <a href="./ProgressClient.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Progress"><i class="fa fa-line-chart"></i></a>
-  <a href="./Messages.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
-  <div class="w3-dropdown-hover w3-hide-small">
-    <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">2</span></button>     
-    <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-      <a href="./index.html" class="w3-bar-item w3-button">One new Appointment</a>
-      <a href="./Messages.html" class="w3-bar-item w3-button">New Message</a>
+  <!-- Navbar -->
+  <div class="w3-top">
+    <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+      <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
+        href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+      <a href="./index.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"
+        style="font-family: 'Exo', sans-serif;"><i class="fa fa-home w3-margin-right"></i>EatWell</a>
+      <a href="./SettingsClient.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+        title="Account"><i class="fa fa-user"></i></a>
+      <a href="./ProgressClient.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+        title="Progress"><i class="fa fa-line-chart"></i></a>
+      <a href="./MessagesClient.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+        title="Messages"><i class="fa fa-envelope"></i></a>
+      <div class="w3-dropdown-hover w3-hide-small">
+        <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span
+            class="w3-badge w3-right w3-small w3-green">2</span></button>
+        <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
+          <a href="./index.html" class="w3-bar-item w3-button">One new Appointment</a>
+          <a href="./MessagesClient.html" class="w3-bar-item w3-button">New Message</a>
+        </div>
+      </div>
     </div>
   </div>
- </div>
-</div>
 
-<!-- Navbar on small screens -->
-<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-  <a href="./SettingsClient.html" class="w3-bar-item w3-button w3-padding-large">Account</a>
-  <a href="./ProgressClient.html" class="w3-bar-item w3-button w3-padding-large">Progress</a>
-  <a href="./Messages.html" class="w3-bar-item w3-button w3-padding-large">Messages</a>
-</div>
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+    <a href="./SettingsClient.html" class="w3-bar-item w3-button w3-padding-large">Account</a>
+    <a href="./ProgressClient.html" class="w3-bar-item w3-button w3-padding-large">Progress</a>
+    <a href="./MessagesClient.html" class="w3-bar-item w3-button w3-padding-large">Messages</a>
+  </div>
 
-<!-- Page Container -->
-<div id="body" class="w3-container w3-content" style="max-width:1400px; margin-top:60px;">    
-  <!-- The Grid -->
-  <div class="w3-row">
-    <!-- Left Column -->
-    <div class="w3-col m3">
-      <!-- Profile -->
-      <div class="w3-card w3-round w3-white">
-        <div class="w3-container">
-         <h4 class="w3-center">My Profile</h4>
-         <p class="w3-center"><img src="./media/avatar.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
-         <hr>
-         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
-         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
+  <!-- Page Container -->
+  <div id="body" class="w3-container w3-content" style="max-width:1400px; margin-top:60px;">
+    <!-- The Grid -->
+    <div class="w3-row">
+      <!-- Left Column -->
+      <div class="w3-col m3">
+        <!-- Profile -->
+        <div class="w3-card w3-round w3-white">
+          <div class="w3-container">
+            <h4 class="w3-center">My Profile</h4>
+            <p class="w3-center"><img src="./media/avatar.png" class="w3-circle" style="height:106px;width:106px"
+                alt="Avatar"></p>
+            <hr>
+            <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
+            <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
+          </div>
         </div>
-      </div>
-      <br>
-      
-      <!-- Accordion -->
-      <div class="w3-card w3-round">
-        <div class="w3-white">
-          <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Allergies</button>
-          <div id="Demo1" class="w3-hide w3-container">
-            <p>Some text..</p>
-          </div>
-          <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i>Current Measures</button>
-          <div id="Demo2" class="w3-hide w3-container">
-            <p>Weight:</p>
-            <p>Body Fat:</p>
-            <p>Arm:</p>
-            <p>Waistline:</p>
-            <p>Butt:</p>
-            <p>Thighs:</p>
-          </div>
-          <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> Nutrition</button>
-          <div id="Demo3" class="w3-hide w3-container">
-            <p>Calories:</p>
-            <p>Carbohydrates:</p>
-            <p>Protein:</p>
-            <p>Fat:</p>
-          </div>
-        </div>      
-      </div>
-      <br>
-    <!-- End Left Column -->
-    </div>
-    
-    <!-- Middle Column -->
-    <div class="w3-col m7">
-    
-      
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <span class="w3-right w3-opacity">300 kcal</span>
-        <h4>Breakfast</h4><br>
-        <hr class="w3-clear">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-check"></i>  Done</button> 
-        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="	fa fa-plus"></i>  Add to favorites</button> 
-      </div>
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <span class="w3-right w3-opacity">300 kcal</span>
-        <h4>Lunch</h4><br>
-        <hr class="w3-clear">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-check"></i>  Done</button> 
-        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="	fa fa-plus"></i>  Add to favorites</button> 
-      </div>
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <span class="w3-right w3-opacity">300 kcal</span>
-        <h4>Dinner</h4><br>
-        <hr class="w3-clear">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-check"></i>  Done</button> 
-        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="	fa fa-plus"></i>  Add to favorites</button> 
-      </div>
-    <!-- End Middle Column -->
-    </div>
-    
-    <!-- Right Column -->
-    <div class="w3-col m2">
-      <div class="w3-card w3-round w3-white w3-center">
-        <div class="w3-container">
-          <p>Upcoming Appointment:</p>
-          <img src="./media/calendar.png" alt="Calendar" style="width:50%"><br>
-          <p>Friday 15:00</p>
-          <p><button class="w3-button w3-block w3-theme-l4">Info</button></p>
-        </div>
-      </div>
-      <br>
-      
-      <div class="w3-card w3-round w3-white w3-center">
-        <div class="w3-container">
-          <p>Appointment</p>
-          <img src="./media/calendar.png" alt="Calendar" style="width:50%"><br>
-          <span>15 May 15:00</span>
-          <div class="w3-row w3-opacity">
-            <div class="w3-half">
-              <button class="w3-button w3-block w3-green w3-section" title="Accept"><i class="fa fa-check"></i></button>
+        <br>
+
+        <!-- Accordion -->
+        <div class="w3-card w3-round">
+          <div class="w3-white">
+            <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i
+                class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Allergies</button>
+            <div id="Demo1" class="w3-hide w3-container">
+              <p>Some text..</p>
             </div>
-            <div class="w3-half">
-              <button class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-remove"></i></button>
+            <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i
+                class="fa fa-calendar-check-o fa-fw w3-margin-right"></i>Current Measures</button>
+            <div id="Demo2" class="w3-hide w3-container">
+              <p>Weight:</p>
+              <p>Body Fat:</p>
+              <p>Arm:</p>
+              <p>Waistline:</p>
+              <p>Butt:</p>
+              <p>Thighs:</p>
+            </div>
+            <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i
+                class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> Nutrition</button>
+            <div id="Demo3" class="w3-hide w3-container">
+              <p>Calories:</p>
+              <p>Carbohydrates:</p>
+              <p>Protein:</p>
+              <p>Fat:</p>
             </div>
           </div>
         </div>
+        <br>
+        <!-- End Left Column -->
       </div>
-      <br>
-      
-    <!-- End Right Column -->
+
+      <!-- Middle Column -->
+      <div class="w3-col m7">
+
+
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+          <span class="w3-right w3-opacity">Breakfast</span>
+          <h4 class="w3-left-align w3-margin-left">Recipe2</h4>
+          <hr class="w3-clear">
+          <p>Calories:</p>
+          <p>Carbohydrates:</p>
+          <p>Protein:</p>
+          <p>Fat:</p>
+          <hr class="w3-clear">
+          <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-check"></i>
+             Done</button>
+          <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="	fa fa-plus"></i>  Add to
+            favorites</button>
+          <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html"><i class="fa fa-bars"></i>
+             See Recipe</a>
+
+        </div>
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+          <span class="w3-right w3-opacity">Lunch</span>
+          <h4 class="w3-left-align w3-margin-left">Recipe3</h4>
+          <hr class="w3-clear">
+          <p>Calories:</p>
+          <p>Carbohydrates:</p>
+          <p>Protein:</p>
+          <p>Fat:</p>
+          <hr class="w3-clear">
+          <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-check"></i>
+             Done</button>
+          <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="	fa fa-plus"></i>  Add to
+            favorites</button>
+          <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html"><i class="fa fa-bars"></i>
+             See Recipe</a>
+
+        </div>
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+          <span class="w3-right w3-opacity">Dinner</span>
+          <h4 class="w3-left-align w3-margin-left">Recipe 7</h4>
+          <hr class="w3-clear">
+          <p>Calories:</p>
+          <p>Carbohydrates:</p>
+          <p>Protein:</p>
+          <p>Fat:</p>
+          <hr class="w3-clear">
+          <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-check"></i>
+             Done</button>
+          <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="	fa fa-plus"></i>  Add to
+            favorites</button>
+          <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html"><i class="fa fa-bars"></i>
+             See Recipe</a>
+
+        </div>
+        <!-- End Middle Column -->
+      </div>
+
+      <!-- Right Column -->
+      <div class="w3-col m2">
+        <div class="w3-card w3-round w3-white w3-center">
+          <div class="w3-container">
+            <p>Upcoming Appointment:</p>
+            <img src="./media/calendar.png" alt="Calendar" style="width:50%"><br>
+            <p>Friday 15:00</p>
+            <p><button class="w3-button w3-block w3-theme-l4">Info</button></p>
+          </div>
+        </div>
+        <br>
+
+        <div class="w3-card w3-round w3-white w3-center">
+          <div class="w3-container">
+            <p>Appointment</p>
+            <img src="./media/calendar.png" alt="Calendar" style="width:50%"><br>
+            <span>15 May 15:00</span>
+            <div class="w3-row w3-opacity">
+              <div class="w3-half">
+                <button class="w3-button w3-block w3-green w3-section" title="Accept"><i
+                    class="fa fa-check"></i></button>
+              </div>
+              <div class="w3-half">
+                <button class="w3-button w3-block w3-red w3-section" title="Decline"><i
+                    class="fa fa-remove"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+
+        <!-- End Right Column -->
+      </div>
+
+      <!-- End Grid -->
     </div>
-    
-  <!-- End Grid -->
+
+    <!-- End Page Container -->
   </div>
-  
-<!-- End Page Container -->
-</div>
-<br>
+  <br>
 
 
- 
-<script>
-// Accordion
-function myFunction(id) {
-  var x = document.getElementById(id);
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-    x.previousElementSibling.className += " w3-theme-d1";
-  } else { 
-    x.className = x.className.replace("w3-show", "");
-    x.previousElementSibling.className = 
-    x.previousElementSibling.className.replace(" w3-theme-d1", "");
-  }
-}
 
-// Used to toggle the menu on smaller screens when clicking on the menu button
-function openNav() {
-  var x = document.getElementById("navDemo");
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-  } else { 
-    x.className = x.className.replace(" w3-show", "");
-  }
-}
-</script>
+  <script>
+    // Accordion
+    function myFunction(id) {
+      var x = document.getElementById(id);
+      if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className += " w3-theme-d1";
+      } else {
+        x.className = x.className.replace("w3-show", "");
+        x.previousElementSibling.className =
+          x.previousElementSibling.className.replace(" w3-theme-d1", "");
+      }
+    }
+
+    // Used to toggle the menu on smaller screens when clicking on the menu button
+    function openNav() {
+      var x = document.getElementById("navDemo");
+      if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+      } else {
+        x.className = x.className.replace(" w3-show", "");
+      }
+    }
+  </script>
 
 </body>
-</html> 
+
+</html>

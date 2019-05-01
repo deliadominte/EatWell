@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<title>EatWell</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/ico" href="./media/broccoli.png" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-green.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+  @import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
+  @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
+
+  html,
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: 'Exo', sans-serif;
+    font-size: 12px;
+  }
+
+  body {
+    text-align: center;
+    background-image: url("./media/Apple.jpg");
+    background-size: 100%;
+    background-repeat: repeat-y;
+  }
+
+  h4 {
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  h1 {
+    font-weight: bold;
+    font-size: 15px;
+  }
+
+  h2 {
+    font-weight: bold;
+    font-size: 13px;
+
+  }
+
+  h2 :first-child {
+    font-weight: normal;
+    font-size: 12px;
+  }
+
+  ul {
+    list-style-type: circle;
+    list-style-position: inside;
+  }
+
+  ol {
+    list-style-position: inside;
+  }
+
+  textarea {
+    text-align: left;
+  }
+  #dirbut{
+    margin-bottom: 30px;
+  }
+  #dir {
+    width: 75%;
+    height: 50px;
+  }
+</style>
+<script>
+  // Put this script in header or above select element
+  function check(elem) {
+    // use one of possible conditions
+    if (elem.value == 'Other')
+      if (elem.selectedIndex == 5) {
+        document.getElementById("other-div").style.display = 'block';
+      } else {
+        document.getElementById("other-div").style.display = 'none';
+      }
+  }
+</script>
+
+<body class="w3-theme-l5">
+
+  <!-- Navbar -->
+  <div class="w3-top">
+    <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+      <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
+        href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+      <a href="./indexNutri.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"
+        style="font-family: 'Exo', sans-serif;"><i class="fa fa-home w3-margin-right"></i>EatWell</a>
+      <a href="./RecipesList.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+        title="Recipes"><i class="fa fa-bars"></i></a>
+      <a href="./Apointments.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+        title="Apointments"><i class="fa fa-calendar"></i></a>
+      <a href="./MessagesList.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+        title="Messages"><i class="fa fa-envelope"></i></a>
+      <div class="w3-dropdown-hover w3-hide-small">
+        <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span
+            class="w3-badge w3-right w3-small w3-green">2</span></button>
+        <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
+          <a href="./Apointments.html" class="w3-bar-item w3-button">One new Appointment</a>
+          <a href="./MessagesList.html" class="w3-bar-item w3-button">New Message</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+    <a href="./RecipesList.html" class="w3-bar-item w3-button w3-padding-large">Recipes</a>
+    <a href="./Apointments.html" class="w3-bar-item w3-button w3-padding-large">Apointments</a>
+    <a href="./MessagesList.html" class="w3-bar-item w3-button w3-padding-large">Messages</a>
+  </div>
+
+  <!-- Page Container -->
+  <div id="body" class="w3-container w3-content" style="max-width:1400px; margin-top:60px;">
+    <!-- The Grid -->
+    <div class="w3-row">
+
+
+      <!-- Middle Column -->
+      <div class="w3-col m7" style="width:100%">
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+          <h4 class="w3-center"><input type="text" name="name" placeholder="Nume reteta..."></h4>
+          <hr class="w3-clear">
+          <h1>Informations for 100 grams:</h1>
+          <h2>Calories: <span><input type="number" name="Calories" min="0"> kcal</span> </h2>
+          <h2>Carbohydrates: <span><input type="number" name="Carbohydrates" min="0"> grams</span></h2>
+          <h2>Protein: <span><input type="number" name="Protein" min="0"> grams</span></h2>
+          <h2>Fat: <span><input type="number" name="Fat" min="0"> grams</span></h2>
+          <hr class="w3-clear">
+          <h2>Prep Time: <span><input type="number" name="h" min="0" max="24" placeholder="0"> h <input type="number"
+                name="min" min="0" max="60" placeholder="0"> min</span></h2>
+          <h2>Cook Time: <span><input type="number" name="h" min="0" max="24" placeholder="0"> h <input type="number"
+                name="min" min="0" max="60" placeholder="0"> min</span></h2>
+          <h2>Ready in: <span><input type="number" name="h" min="0" max="24" placeholder="0"> h <input type="number"
+                name="min" min="0" max="60" placeholder="0"> min</span></h2>
+          <h2>Yield: <span><input type="number" name='yeld' min="1" max="100" placeholder="1"> servings</span></h2>
+          <hr class="w3-clear">
+          <h1>Ingredients: </h1>
+          <ul id="ingredient">
+            <br>
+            <li>
+              <input type="number" name="weight" min="0" max='1000'>
+              <select id="mySelect" onChange="check(this);">
+                <option>-</option>
+                <option>grams</option>
+                <option>teaspoons</option>
+                <option>tablespoons</option>
+                <option>cups</option>
+                <option>millilitres</option>
+              </select>
+              <input type="text" name="ingredient" max='50'>
+              <button onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-d5">
+                <i class="fa fa-remove"></i>
+              </button>
+            </li><br>
+          </ul>
+          <br>
+          <button onclick="appearAdd('ingredient');" class="w3-button w3-theme-d2 w3-show">
+            <i class="fa fa-plus"></i></button>
+          <br>
+          <hr class="w3-clear">
+          <h1>Directions: </h1>
+          <ol id="step">
+            <li>
+              <textarea id="dir" cols="200" rows="10" name="step"></textarea>
+              <button id="dirbut" onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-d5" >
+                <i class="fa fa-remove"></i>
+              </button>
+            </li>
+            <br>
+          </ol>
+          <br>
+          <button onclick="appearAdd('step');" class="w3-button w3-theme-d2 w3-show">
+            <i class="fa fa-plus"></i></button>
+          <br>
+          <button href="MessagesNutri.html" class="w3-button w3-theme-d2 w3-margin-bottom w3-center"><i
+              class="	fa fa-check"></i> Save</i></button>
+        </div>
+        <!-- End Middle Column -->
+      </div>
+      <!-- End Grid -->
+    </div>
+
+    <!-- End Page Container -->
+  </div>
+  <br>
+
+
+
+  <script>
+    // Accordion
+    function myFunction(id) {
+      var x = document.getElementById(id);
+      if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className += " w3-theme-d1";
+      } else {
+        x.className = x.className.replace("w3-show", "");
+        x.previousElementSibling.className =
+          x.previousElementSibling.className.replace(" w3-theme-d1", "");
+      }
+    }
+
+    // Used to toggle the menu on smaller screens when clicking on the menu button
+    function openNav() {
+      var x = document.getElementById("navDemo");
+      if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+      } else {
+        x.className = x.className.replace(" w3-show", "");
+      }
+    }
+
+    function appearAdd(id) {
+      if (id == "ingredient") {
+        document.getElementById(id).innerHTML += '\
+  <li>\
+              <input type="number" name="weight" min="0" max='+ "'1000'" + '>\
+              <select id="mySelect" onChange="check(this);">\
+                <option>-</option>\
+                <option>grams</option>\
+                <option>teaspoons</option>\
+                <option>tablespoons</option>\
+                <option>cups</option>\
+                <option>millilitres</option>\
+              </select>\
+              <input type="text" name="ingredient" max='+ "'50'" + '>\
+              <button onclick="this.parentElement.style.display='+ "'none'" + '" class="w3-button w3-theme-d5">\
+                <i class="fa fa-remove"></i>\
+              </button>\
+            </li><br>'
+      }
+      else {
+        document.getElementById(id).innerHTML += ' <li>\
+          <textarea id="dir" cols="200" rows="10" name="step"></textarea>\
+              <button id="dirbut" onclick="this.parentElement.style.display='+ "'none'" + '" class="w3-button w3-theme-d5">\
+                <i class="fa fa-remove"></i>\
+              </button>\
+          </li><br>'
+      }
+
+    }
+
+  </script>
+
+</body>
+
+</html>

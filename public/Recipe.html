@@ -11,47 +11,43 @@
 <style>
 	@import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
   @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
-html, body, h1, h2, h3, h4, h5 
+  html, body, h1, h2, h3, h4, h5 
 {
-	font-family: Arial;
+	font-family: 'Exo', sans-serif;
 	font-size: 12px;
 	}
 	body{
-    text-align: center;
+     text-align: center; 
 	  background-image: url("./media/Apple.jpg");
 	  background-size: 100%; 
   	background-repeat: repeat-y;
 }
-#search input[type=text] {
-  padding: 10px;
-	border: 1px solid rgba(255,255,255,0.6);
-  width: 30%;
-  height: 10%;
-  background: #f1f1f1;
-  padding-right: 0;
+h4{
+    font-weight: bold;
+    font-size: 20px;
+}
+h1{
+    font-weight: bold;
+    font-size: 15px;
+}
+h2{
+    font-weight: bold;
+    font-size: 13px;
+
+}
+h2 :first-child{
+  font-weight: normal;
+    font-size: 12px;
+}
+ul  {list-style-type: circle;
+     list-style-position: inside;
+}
+ol{
+  list-style-position: inside;
+}
+li{
 }
 
-#search button {
-  width: 10%;
-  height: 10%;
-  padding: 10px;
-  background: rgb(36, 143, 36);
-  color: white;
-  border: 1px solid rgb(187, 184, 184);
-  border-left: none;
-  padding-left: 0;
-  cursor: pointer;
-}
-
-#search button:hover {
-  background:  rgb(187, 184, 184);
-}
-
-#search::after {
-  content: "";
-  clear: both;
-  display: table;
-}
 </style>
 <body class="w3-theme-l5">
 
@@ -94,39 +90,34 @@ html, body, h1, h2, h3, h4, h5
     
     <!-- Middle Column -->
     <div class="w3-col m7" style="width:100%">
-    
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <p id="search" class="w3-center">
-          <input type="text" placeholder="Search.." name="search">
-          <button type="submit"><i class="fa fa-search"></i></button>
-        </p>
-      </div>
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <h4 class="w3-center">UserNameClient</h4>
+        <h4 class="w3-center">Recipe1</h4>
         <hr class="w3-clear">
-        <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
-        <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
-        <a href="./ProfileClient.html"  class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-user"></i>  Profile</a> 
-        <a href="./ProgressClient.html" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-line-chart"></i>  Progress</a> 
-        <a href="./MenuDets.html" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-bars"></i>  Menu details</a>
-        <a href="./RecipesList.html" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-bars"></i>  Favorite Recipes</a>
-        <a href="./MakeApoint.html" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-calendar-plus-o"></i>  Make Appointment</a>
-      </div>
-
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <h4 class="w3-center">UserNameClient</h4>
+        <h1>Informations for 100 grams:</h1>
+        <h2>Calories: </h2>
+        <h2>Carbohydrates: </h2>
+        <h2>Protein: </h2>
+        <h2>Fat: </h2>
         <hr class="w3-clear">
-        <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
-        <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
-        <a href="./ProfileClient.html"  class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-user"></i>  Profile</a> 
-        <a href="./ProgressClient.html" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-line-chart"></i>  Progress</a> 
-        <a href="./MenuDets.html" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-bars"></i>  Menu details</a>
-        <a href="./RecipesList.html" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-bars"></i>  Favorite Recipes</a>
-        <a href="./MakeApoint.html" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-calendar-plus-o"></i>  Make Appointment</a>
-      </div>
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <p class="w3-center"><button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-plus"></i> Add Client</button></p>
-      </div>
+        <h2>Prep Time: <span>40 min</span></h2>
+        <h2>Cook Time: <span>30 min</span></h2>
+        <h2>Ready in: <span>2 h</span></h2>
+        <h2>Yield: <span>8 slices</span></h2>
+        <hr class="w3-clear">
+        <h1>Ingredients: </h1>
+          <ul>
+            <li>200 grams-flour</li>
+            <li>100 grams-water</li>
+            <li>1 tsp-salt</li>
+          </ul>
+        <hr class="w3-clear">
+        <h1>Directions: </h1>
+        <ol>
+            <li>first step</li>
+            <li>second step</li>
+            <li>third step</li>
+        </ol>
+     </div>
       <!-- End Middle Column -->
     </div>
   <!-- End Grid -->
