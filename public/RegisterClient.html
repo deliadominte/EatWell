@@ -119,7 +119,7 @@ body{
 	margin-top: 10px;
 }
 
-.login input[type=button]{
+.login button[type=submit]{
 	width: 260px;
 	height: 35px;
 	background: #fff;
@@ -146,11 +146,11 @@ body{
 	margin-top: 12px;
    
 }
-.login input[type=button]:hover{
+.login button[type=submit]:hover{
 	opacity: 0.8;
 }
 
-.login input[type=button]:active{
+.login button[type=submit]:active{
 	opacity: 0.6;
 }
 
@@ -164,7 +164,7 @@ body{
 	border: 1px solid rgba(255,255,255,0.9);
 }
 
-.login input[type=button]:focus{
+.login button[type=submit]:focus{
 	outline: none;
 }
 .login #register:hover{
@@ -191,16 +191,26 @@ body{
 			<div>Eat<span>Well</span></div>
 		</div>
 		<br>
-		<div class="login">
-                <input type="text" placeholder="Code" name="code"><br>
-				<input type="text2" placeholder="UserName" name="user"><br>
-				<input type="text2" placeholder="Place" name="place"><br>
-				<input type="date"  name="bday"><br>
-				<input type="password" placeholder="Password" name="password"><br>
-                <a href="./index.html"><input type="button" value="Register"></a><br>
+		<form id="registerForum">
+			<div class="login">
+                <input type="text" id="code" placeholder="Code" name="code"><br>
+				<input type="text2" id="username" placeholder="UserName" name="user"><br>
+				<input type="text2" id="telephone" placeholder="Telephone" name="telephone" ><br>
+				<input type="text2" id="place" placeholder="Place" name="place"><br>
+				<input type="date" id="bday" name="bday"><br>
+				<input type="password" id="password" placeholder="Password" name="password"><br>
+                <button type="submit">Register</button><br>
 		</div>
+		</form>
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 
+  <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-firestore.js"></script>
+  
+  <script src="./js/config-database.js"></script>
+  
+  <script src="./js/register.js"></script>
   
 
 </body>
