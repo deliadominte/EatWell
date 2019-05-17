@@ -4,11 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/ico" href="./media/broccoli.png" />
-<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="assets/css/select2.min.css">
-<link rel="stylesheet" type="text/css" href="assets/css/bootstrap-datetimepicker.min.css">
-<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-green.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
@@ -28,16 +23,36 @@ html, body, h1, h2, h3, h4, h5
 	  background-size: 100%; 
   	background-repeat: repeat-y;
 }
- input {
+#search input[type=text] {
   padding: 10px;
-  border: 1px solid rgba(255,255,255,0.6);
-  border-radius: 2px;
+	border: 1px solid rgba(255,255,255,0.6);
   width: 30%;
   height: 10%;
   background: #f1f1f1;
   padding-right: 0;
 }
 
+#search button {
+  width: 10%;
+  height: 10%;
+  padding: 10px;
+  background: rgb(36, 143, 36);
+  color: white;
+  border: 1px solid rgb(187, 184, 184);
+  border-left: none;
+  padding-left: 0;
+  cursor: pointer;
+}
+
+#search button:hover {
+  background:  rgb(187, 184, 184);
+}
+
+#search::after {
+  content: "";
+  clear: both;
+  display: table;
+}
 </style>
 <body class="w3-theme-l5">
 
@@ -76,55 +91,45 @@ html, body, h1, h2, h3, h4, h5
   
     
     <!-- Middle Column -->
-    <div class="w3-col m10" >
-    
+    <div class="w3-col m7" style="width:100%">
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <p class="w3-center">New Appointment:<p id="name"></p></p>
-        <div class="w3-row w3-section w3-center">
-                <div class="w3-col" style="width:30%"> Date: </div>
-                  <div class="w3-rest">
-                        <input class="w3-input w3-border " style="width:50%" id="datefield" type="date"  name="date" min="1899-01-01">
-                  </div>
+        <form id="getInfoForum">
+                <!-- 
+                arm: {},
+                body_fat: {},
+                butt: {},
+                goal: 0,
+                height: 0,
+                thighs: {},
+                time_prog: {},
+                waistline: {},
+                weight: {},
+                nutrition: {}, -->
+            <input class="w3-input w3-theme-d0" id="gender" placeholder="Gender" type="text" list="gen">
+            <datalist id="gen">
+                <option value="F"></option>
+                <option value="M"></option>
+            </datalist><br>
+            <input class="w3-input w3-theme-d0" id="activity" placeholder="Level of Activity" type="text" list="act">
+            <datalist id="act">
+                <option value="Sedentary"></option>
+                <option value="Light Activity"></option>
+                <option value="Active"></option>
+                <option value="Very Active"></option>
+            </datalist><br>
+            <input class="w3-input w3-theme-d0" min=0 id="weight" type="number" placeholder="Weight (kg)"><br>
+            <input class="w3-input w3-theme-d0" min=0 id="goal" type="number" placeholder="Goal (kg)"><br>
+            <input class="w3-input w3-theme-d0" min=0 id="height" type="number" placeholder="Height (cm)"><br>
+            <input class="w3-input w3-theme-d0" min=0 id="waistline" type="number" placeholder="Waistline (cm)"><br>
+            <input class="w3-input w3-theme-d0" min=0 id="thighs" type="number" placeholder="Thighs (cm)"><br>
+            <input class="w3-input w3-theme-d0" min=0 id="arm" type="number" placeholder="Arm (cm)"><br>
+            <input class="w3-input w3-theme-d0" min=0 id="butt" type="number" placeholder="Butt (cm)"><br>
+            <input class="w3-input w3-theme-d0" min=0 max=100 id="body_fat" type="number" placeholder="Body Fat (procentage)"><br>
+            <p class="w3-center"><button type="submit" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-plus"></i> Add Client</button></p>
+        </form>
         </div>
-        
-        <div class="w3-row w3-section w3-center">
-                <div class="w3-col" style="width:30%"> Time: </div>
-                  <div class="w3-rest">
-                        <input class="w3-input w3-border " style="width:50%" id="timefield" type="time" name="time" min="9:00">
-                  </div>
-        </div>
-
-        <div class="w3-row w3-section w3-center">
-                <div class="w3-col" style="width:30%"> Details about appointment: </div>
-                  <div class="w3-rest">
-                        <input class="w3-input w3-border " style="width:50%; height: 100px;" type="text" name="description" placeholder="Details..">
-                  </div>
-        </div>
-        <p class="w3-center"><a href="./Appointment.html" class="w3-button w3-theme-d2 w3-margin-bottom"> Make Appointment</a></p>
-      </div>
-      
       <!-- End Middle Column -->
     </div>
-
-    <!-- Right Column -->
-    <div class="w3-col m2">
-      <div class="w3-card w3-round w3-white w3-center">
-        <div class="w3-container"  id="apoint">
-          <p>Appointment</p>
-          <img src="./media/calendar.png" alt="Calendar" style="width:50%"><br>
-          <span>15 May 15:00</span>
-          <div class="w3-row w3-opacity">
-            <div class="w3-center">
-              <button onclick="getElementById('apoint').style.display='none'" class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-remove"></i></button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <br>
-      
-    <!-- End Right Column -->
-    </div>
-
     <button class="open-button" onclick="openForm(1)">Chat</button>
       <div class="chat-popup" id="myForm">
           <div class="form-container" id="form-container1">
@@ -179,7 +184,6 @@ html, body, h1, h2, h3, h4, h5
           </div>
       </div>
   <!-- End Grid -->
-  
   </div>
   
 <!-- End Page Container -->
@@ -189,25 +193,6 @@ html, body, h1, h2, h3, h4, h5
 
  
 <script>
-var today = new Date();
-var dd = today.getDate();
-var mm = today.getMonth()+1; //January is 0!
-var time = today.getTime();
-var yyyy = today.getFullYear();
- if(dd<10){
-        dd='0'+dd
-    } 
-    if(mm<10){
-        mm='0'+mm
-    } 
-
-today = yyyy+'-'+mm+'-'+dd;
-document.getElementById("datefield").setAttribute("min", today);
-
-// console.log(document.getElementById("timefield").nodeValue);
-// if (document.getElementById("datefield").value==today)
-//     document.getElementById("timefield").setAttribute("min", time);
-
 // Accordion
 function myFunction(id) {
   var x = document.getElementById(id);
@@ -239,5 +224,7 @@ function openNav() {
 
 <script src="./js/config-database.js"></script>
 <script src="./js/chat.js"></script>
+
+<script src="./js/makenewclient.js"></script>
 </body>
 </html> 

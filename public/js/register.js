@@ -1,6 +1,5 @@
 window.onload = () => {
     const userId = Cookies.get('userId');
-    console.log("yaaas");
     if (!userId) {
         document.getElementById('registerForum').onsubmit = e => {
             e.preventDefault();

@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-green.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="./css/chat.css">
 <style>
 	@import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
   @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
@@ -113,8 +114,6 @@ a{text-decoration: none;}
         title="Recipes"><i class="fa fa-bars"></i></a>
       <a href="./Apointments.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
         title="Apointments"><i class="fa fa-calendar"></i></a>
-      <a href="./MessagesList.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-        title="Messages"><i class="fa fa-envelope"></i></a>
       <div class="w3-dropdown-hover w3-hide-small">
         <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span
             class="w3-badge w3-right w3-small w3-green">2</span></button>
@@ -130,7 +129,6 @@ a{text-decoration: none;}
   <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
     <a href="./RecipesList.html" class="w3-bar-item w3-button w3-padding-large">Recipes</a>
     <a href="./Apointments.html" class="w3-bar-item w3-button w3-padding-large">Apointments</a>
-    <a href="./MessagesList.html" class="w3-bar-item w3-button w3-padding-large">Messages</a>
   </div>
 
 <!-- Page Container -->
@@ -219,7 +217,7 @@ a{text-decoration: none;}
             <li></li>
 
             <li>14:00</li>
-            <li>Client1</li>
+            <li><a href="#">Client1</a></li>
             <li></li>
             <li></li>
             <li></li>
@@ -232,14 +230,14 @@ a{text-decoration: none;}
             <li></li>
             <li></li>
             <li></li>
-            <li><a >Client1</a></li>
+            <li><a href="#">Client3</a></li>
             <li></li>
             <li></li>
 
             <li>16:00</li>
             <li></li>
             <li></li>
-            <li>Client5</li>
+            <li><a href="#">Client5</a></li>
             <li></li>
             <li></li>
             <li></li>
@@ -265,7 +263,59 @@ a{text-decoration: none;}
           </ul>          
     </div>
 
-    
+    <button class="open-button" onclick="openForm(1)">Chat</button>
+      <div class="chat-popup" id="myForm">
+          <div class="form-container" id="form-container1">
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+          <img src="./media/avatar.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <span class="w3-right w3-opacity">16 min</span>
+          <h4>Jane Doe</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <button onclick="openClientM()" id="openbtn" class="w3-button w3-theme-d1 w3-margin-bottom w3-right"> See Messages <i class="	fa fa-angle-right"></i></button>
+        </div>  
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+          <img src="./media/avatar.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <span class="w3-right w3-opacity">16 min</span>
+          <h4>Jane Doe</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <button onclick="openClientM()"id="openbtn"  class="w3-button w3-theme-d1 w3-margin-bottom w3-right"> See Messages <i class="	fa fa-angle-right"></i></button>
+        </div>
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+          <img src="./media/avatar.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <span class="w3-right w3-opacity">16 min</span>
+          <h4>Jane Doe</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <button onclick="openClientM()" id="openbtn" class="w3-button w3-theme-d1 w3-margin-bottom w3-right"> See Messages <i class="	fa fa-angle-right"></i></button>
+        </div> 
+        
+        <button type="button" class="btn cancel" onclick="closeForm(1)">Close</button>
+      </div>
+      </div>
+      <button class="open-button" id="clientmsg" style="display : none">Chat Client</button>
+       <div class="chat-popup" id="myFormC">
+        <div class="form-container" id="form-container2">
+          <h1>Chat</h1>
+          <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+            <img src="./media/avatar_doctor.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+            <span class="w3-right w3-opacity w3-margin-bottom">16 min</span><br>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>  
+          <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+            <img src="./media/avatar.png" alt="Avatar" class="w3-right w3-circle w3-margin-left" style="width:60px">
+            <span class="w3-left w3-opacity w3-margin-bottom">16 min</span><br>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+           </div>
+           <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+            <img src="./media/avatar_doctor.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+            <span class="w3-right w3-opacity w3-margin-bottom">16 min</span><br>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div> 
+          <textarea placeholder="Type message.." name="msg" required></textarea>
+      
+          <button type="submit" class="btn">Send</button>
+          <button type="button" class="btn cancel" onclick="closeForm(2)">Close</button>
+          </div>
+      </div>
   <!-- End Grid -->
   </div>
   
@@ -312,6 +362,13 @@ function editp(){
 }
 
 </script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 
+<script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-firestore.js"></script>
+
+<script src="./js/config-database.js"></script>
+<script src="./js/chat.js"></script>
 </body>
 </html> 
