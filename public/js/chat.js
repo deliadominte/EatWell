@@ -11,17 +11,17 @@ function openForm(i) {
     document.getElementById("myFormC").style.display = "none";
   }
   
-  const out = document.getElementById("form-container");
-  let c = 0;
-  setInterval(function() {
-      // allow 1px inaccuracy by adding 1
-      const isScrolledToBottom = out.scrollHeight - out.clientHeight >= out.scrollTop + 1;
+  // const out = document.getElementById("form-container");
+  // let c = 0;
+  // setInterval(function() {
+  //     // allow 1px inaccuracy by adding 1
+  //     const isScrolledToBottom = out.scrollHeight - out.clientHeight >= out.scrollTop + 1;
   
-      // scroll to bottom if isScrolledToBottom is true
-      if (isScrolledToBottom) {
-        out.scrollTop = out.scrollHeight - out.clientHeight;
-      }
-  }, 500)
+  //     // scroll to bottom if isScrolledToBottom is true
+  //     if (isScrolledToBottom) {
+  //       out.scrollTop = out.scrollHeight - out.clientHeight;
+  //     }
+  // }, 500)
   
  function openClientM(){
     openForm(2);

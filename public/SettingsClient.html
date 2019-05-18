@@ -58,11 +58,13 @@ html, body, h1, h2, h3, h4, h5
         <!-- Profile -->
       <div class="w3-card w3-round w3-white">
             <div class="w3-container">
-             <h4 class="w3-center">My Profile</h4>
+             <h4 class="w3-center" id="username"></h4>
              <p class="w3-center"><img src="./media/avatar.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
              <hr>
-             <p class="w3-center"><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
-             <p class="w3-center"><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
+             <p class="w3-center" id="place"><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> </p>
+             <p class="w3-center" id="date"><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> </p>
+             <p class="w3-center" id="gender"> </p>
+             <!-- fa fa-mars -->
              <p class="w3-center"><a href="./RecipesFavorites.html" class=" w3-center w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-bars"></i>  Favorite Recipes</a></p>
             </div>
           </div>
@@ -75,19 +77,6 @@ html, body, h1, h2, h3, h4, h5
               <div id="Demo1" class="w3-hide w3-container">
                 <div id="tags">
                   <br>
-                  <span class="w3-tag w3-small w3-theme-d5">Peanut
-                    <button onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-d5">
-                    <i class="fa fa-remove"></i>
-                    </button></span>
-                  <span class="w3-tag w3-small w3-theme-d4">Tomato 
-                      <button onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-d4">
-                      <i class="fa fa-remove"></i></button></span>
-                  <span class="w3-tag w3-small w3-theme-d3">Strawberry
-                      <button onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-d3">
-                      <i class="fa fa-remove"></i></button></span>
-                  <span class="w3-tag w3-small w3-theme-d2">Dairy 
-                      <button onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-d2">
-                      <i class="fa fa-remove"></i></button></span>
                 </div>
                   <br>
                     <button onclick="appearAdd('Add2');" id='Add1' class="w3-button w3-theme-d2 w3-show">
@@ -102,19 +91,11 @@ html, body, h1, h2, h3, h4, h5
               </div>
               <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i>Current Measures</button>
               <div id="Demo2" class="w3-hide w3-container">
-                <p>Weight:</p>
-                <p>Body Fat:</p>
-                <p>Arm:</p>
-                <p>Waistline:</p>
-                <p>Butt:</p>
-                <p>Thighs:</p>
+                
               </div>
               <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> Nutrition</button>
               <div id="Demo3" class="w3-hide w3-container">
-                <p>Calories:</p>
-                <p>Carbohydrates:</p>
-                <p>Protein:</p>
-                <p>Fat:</p>
+                
               </div>
             </div>      
           </div>
@@ -180,52 +161,6 @@ html, body, h1, h2, h3, h4, h5
 </div>
 <br>
 
-
- 
-<script>
-// Accordion
-function myFunction(id) {
-  var x = document.getElementById(id);
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-    x.previousElementSibling.className += " w3-theme-d1";
-  } else { 
-    x.className = x.className.replace("w3-show", "");
-    x.previousElementSibling.className = 
-    x.previousElementSibling.className.replace(" w3-theme-d1", "");
-  }
-}
-
-// Used to toggle the menu on smaller screens when clicking on the menu button
-function openNav() {
-  var x = document.getElementById("navDemo");
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-  } else { 
-    x.className = x.className.replace(" w3-show", "");
-  }
-}
-
-function appearAdd(id){
-  if(id =='Add2'){
-  var x = document.getElementById(id);
-  x.className = x.className.replace("w3-hide", "w3-show");
-  var y= document.getElementById('Add1');
-  y.className = y.className.replace("w3-show", "w3-hide");
-}
-else{
-  var x = document.getElementById(id);
-  x.className = x.className.replace("w3-hide", "w3-show");
-  var y= document.getElementById('Add2');
-  y.className = y.className.replace("w3-show", "w3-hide");
-
-  document.getElementById("tags").innerHTML+='\
-  <span class="w3-tag w3-small w3-theme-d2">'+document.getElementById("new-tag").value+' <button onclick="this.parentElement.style.display='+"'none'"+'" class="w3-button w3-theme-d2">  <i class="fa fa-remove"></i></button></span>'
-
-}
-}
-
-</script>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 
@@ -234,5 +169,6 @@ else{
 
 <script src="./js/config-database.js"></script>
 <script src="./js/chat.js"></script>
+<script src="./js/settingsC.js"></script>
 </body>
 </html> 

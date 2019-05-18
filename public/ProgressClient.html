@@ -76,11 +76,13 @@ input{
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
         <h4> Curent state:</h4><br>
         <p>Weight:</p>
+        <p>Height:</p>
         <p>Body Fat:</p>
         <p>Arm:</p>
         <p>Waistline:</p>
         <p>Butt:</p>
         <p>Thighs:</p>
+        <p>Level of activity:</p>
         <hr class="w3-clear">
         <h4> Goal:</h4><br>
         <p>Weight:</p>
@@ -94,12 +96,21 @@ input{
       </div>
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
         <h4>Add measures:</h4><br>
-        <p>Weight: <input type="number" name="weight" min="30" max="200"></p>
-        <p>Body Fat: <input type="number" name="bodyfat" min="0" max="100"></p>
-        <p>Arm: <input type="number" name="arm" min="10" max="100"></p>
-        <p>Waistline: <input type="number" name="waistline" min="10" max="200"></p>
-        <p>Butt: <input type="number" name="butt" min="10" max="300"></p>
-        <p>Thighs: <input type="number" name="thighs" min="10" max="200"></p>
+        <input class="w3-input w3-theme-d0" min=0 id="weight" type="number" placeholder="Weight (kg)"><br>
+        <input class="w3-input w3-theme-d0" min=0 id="goal" type="number" placeholder="Goal (kg)"><br>
+        <input class="w3-input w3-theme-d0" min=0 id="height" type="number" placeholder="Height (cm)"><br>
+        <input class="w3-input w3-theme-d0" min=0 id="waistline" type="number" placeholder="Waistline (cm)"><br>
+        <input class="w3-input w3-theme-d0" min=0 id="thighs" type="number" placeholder="Thighs (cm)"><br>
+        <input class="w3-input w3-theme-d0" min=0 id="arm" type="number" placeholder="Arm (cm)"><br>
+        <input class="w3-input w3-theme-d0" min=0 id="butt" type="number" placeholder="Butt (cm)"><br>
+        <input class="w3-input w3-theme-d0" min=0 max=100 id="body_fat" type="number" placeholder="Body Fat (procentage)"><br>
+        <input class="w3-input w3-theme-d0" id="activity" placeholder="Level of Activity" type="text" list="act">
+            <datalist id="act">
+                <option value="Sedentary"></option>
+                <option value="Light Activity"></option>
+                <option value="Active"></option>
+                <option value="Very Active"></option>
+            </datalist><br>
         <button type="button" class="w3-button w3-theme-d2 w3-center-bottom" style="margin-bottom:10px"><i class="	fa fa-plus"></i>  Add </button> 
       </div>
     <!-- End Middle Column -->
