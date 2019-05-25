@@ -13,7 +13,6 @@ window.onload = () => {
                 querySnapshot.forEach(function (doc) {
                     const user = doc.data();
                     console.log(user.password);
-                    if(user.isClient){
                         flag=1;
                         if (user.password === password) {
                             Cookies.set('userId', doc.id);
@@ -21,25 +20,19 @@ window.onload = () => {
                         } else {
                                 alert("Incorrect Password!");
                         }
-                    }
-                    else{
-                        flag=2
-                    }
                 });
                 if(flag==0) alert('Incorrect Username!');
-                if(flag==2) alert("This isn't a Client Account!");
             });
         }
         
     } else {
+        var flag=0;
         db.collection('users').where('id', '==', userId).get().then(querySnapshot => {
             querySnapshot.forEach(function (doc) {
-                if(doc.isClient==true)
                 window.location.href = './index.html';
-                else
-                window.location.href = './indexNutri.html';
             });
         }
         );
+        if (flag==0){window.location.href = './indexNutri.html';}
     }
 }

@@ -74,14 +74,14 @@ function calculateMacros() {
   db.collection('users').doc(userId).get().then(doc => {
     if (doc.exists) {
       const user = doc.data();
-      console.log(user);
+      //console.log(user);
       var tday = new Date();
       const years = tday.getFullYear() - user.bday.toDate().getFullYear();
       const h = user.height[user.height.length - 1];
       const g = user.weight[user.weight.length - 1];
       const bf = user.body_fat[user.body_fat.length - 1];
       var sum;
-      console.log([years,h,g,bf]);
+      //console.log([years,h,g,bf]);
       if (user.gender == "Female") {
         sum = 26;
         if (h < 153)//inaltime
@@ -124,9 +124,9 @@ function calculateMacros() {
               sum+=0;
               else sum+=-0.5;
       var REE = g * sum;
-      console.log(REE);
+      //console.log(REE);
       var TDEE;
-      console.log(user.lvl_activity[user.lvl_activity.length-1]);
+      //console.log(user.lvl_activity[user.lvl_activity.length-1]);
       switch (user.lvl_activity[user.lvl_activity.length-1]) {
         case "Sedentary":
           TDEE = REE * 1.2;
@@ -143,9 +143,9 @@ function calculateMacros() {
         default:
           TDEE = REE;
       }
-      console.log(TDEE);
+     // console.log(TDEE);
       const diff = user.goal[user.goal.length - 1] - user.weight[user.weight.length - 1];
-      console.log(diff);
+     // console.log(diff);
       var kcal, carb, prot, fat;
       if (diff == 0)// mentinere
       //45 carb, 35 prot, 20 fat

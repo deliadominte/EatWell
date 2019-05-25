@@ -49,6 +49,7 @@ h4{
   cursor: pointer;
 }
 
+#more-btn{ width: 20%;}
 #search button:hover {
   background:  rgb(187, 184, 184);
 }
@@ -97,46 +98,19 @@ h4{
     
     <!-- Middle Column -->
     <div class="w3-col m7" style="width:100%">
-    
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
         <p class="w3-center"><a class="w3-button w3-theme-d2 w3-margin-bottom" href="RecipeNew.html"><i class="fa fa-plus"></i> Add New Recipe</a></p>
       </div> 
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <p id="search" class="w3-center">
-          <input type="text" placeholder="Search.." name="search">
-          <button type="submit"><i class="fa fa-search"></i></button>
-        </p>
+        <form id="search" class="w3-center">
+          <input id="searchbar" type="text" placeholder="Search.." name="search">
+          <button disabled><i class="fa fa-search"></i></button>
+        </form>
       </div>
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <h4 class="w3-center">Recipe1</h4>
-        <hr class="w3-clear">
-        <p>Calories:</p>
-        <p>Carbohydrates:</p>
-        <p>Protein:</p>
-        <p>Fat:</p>
-        <hr class="w3-clear">
-        <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html" ><i class="fa fa-bars"></i>  See Recipe</a>
-       </div>
-       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <h4 class="w3-center">Recipe2</h4>
-        <hr class="w3-clear">
-        <p>Calories:</p>
-        <p>Carbohydrates:</p>
-        <p>Protein:</p>
-        <p>Fat:</p>
-        <hr class="w3-clear">
-        <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html" ><i class="fa fa-bars"></i>  See Recipe</a>
-       </div>
-       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <h4 class="w3-center">Recipe3</h4>
-        <hr class="w3-clear">
-        <p>Calories:</p>
-        <p>Carbohydrates:</p>
-        <p>Protein:</p>
-        <p>Fat:</p>
-        <hr class="w3-clear">
-        <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html" ><i class="fa fa-bars"></i>  See Recipe</a>
-       </div>
+      <div id="container" >
+
+      </div>
+       <a id="more-btn" class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" >More</a>
       <!-- End Middle Column -->
     </div>
     <button class="open-button" onclick="openForm(1)">Chat</button>
@@ -233,5 +207,6 @@ function openNav() {
 
 <script src="./js/config-database.js"></script>
 <script src="./js/chat.js"></script>
+<script src="./js/recipesList.js"></script>
 </body>
 </html> 

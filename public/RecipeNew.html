@@ -33,7 +33,7 @@
 
   h4 {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 17px;
   }
 
   h1 {
@@ -64,12 +64,24 @@
   textarea {
     text-align: left;
   }
-  #dirbut{
+
+  #dirbut {
     margin-bottom: 30px;
   }
+
   #dir {
     width: 75%;
     height: 50px;
+  }
+
+  input,
+  textarea,
+  select {
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #f2f2f2;
   }
 </style>
 <script>
@@ -123,191 +135,162 @@
 
       <!-- Middle Column -->
       <div class="w3-col m7" style="width:100%">
-        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-          <h4 class="w3-center"><input type="text" name="name" placeholder="Nume reteta..."></h4>
-          <hr class="w3-clear">
-          <h1>Informations for 100 grams:</h1>
-          <h2>Calories: <span><input type="number" name="Calories" min="0"> kcal</span> </h2>
-          <h2>Carbohydrates: <span><input type="number" name="Carbohydrates" min="0"> grams</span></h2>
-          <h2>Protein: <span><input type="number" name="Protein" min="0"> grams</span></h2>
-          <h2>Fat: <span><input type="number" name="Fat" min="0"> grams</span></h2>
-          <hr class="w3-clear">
-          <h2>Prep Time: <span><input type="number" name="h" min="0" max="24" placeholder="0"> h <input type="number"
-                name="min" min="0" max="60" placeholder="0"> min</span></h2>
-          <h2>Cook Time: <span><input type="number" name="h" min="0" max="24" placeholder="0"> h <input type="number"
-                name="min" min="0" max="60" placeholder="0"> min</span></h2>
-          <h2>Ready in: <span><input type="number" name="h" min="0" max="24" placeholder="0"> h <input type="number"
-                name="min" min="0" max="60" placeholder="0"> min</span></h2>
-          <h2>Yield: <span><input type="number" name='yeld' min="1" max="100" placeholder="1"> servings</span></h2>
-          <hr class="w3-clear">
-          <h1>Ingredients: </h1>
-          <ul id="ingredient">
-            <br>
-            <li>
-              <input type="number" name="weight" min="0" max='1000'>
-              <select id="mySelect" onChange="check(this);">
-                <option>-</option>
-                <option>grams</option>
-                <option>teaspoons</option>
-                <option>tablespoons</option>
-                <option>cups</option>
-                <option>millilitres</option>
-              </select>
-              <input type="text" name="ingredient" max='50'>
-              <button onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-d5">
-                <i class="fa fa-remove"></i>
-              </button>
-            </li><br>
-          </ul>
-          <br>
-          <button onclick="appearAdd('ingredient');" class="w3-button w3-theme-d2 w3-show">
-            <i class="fa fa-plus"></i></button>
-          <br>
-          <hr class="w3-clear">
-          <h1>Directions: </h1>
-          <ol id="step">
-            <li>
-              <textarea id="dir" cols="200" rows="10" name="step"></textarea>
-              <button id="dirbut" onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-d5" >
-                <i class="fa fa-remove"></i>
-              </button>
-            </li>
-            <br>
-          </ol>
-          <br>
-          <button onclick="appearAdd('step');" class="w3-button w3-theme-d2 w3-show">
-            <i class="fa fa-plus"></i></button>
-          <br>
-          <button href="MessagesNutri.html" class="w3-button w3-theme-d2 w3-margin-bottom w3-center"><i
-              class="	fa fa-check"></i> Save</i></button>
-        </div>
-        <!-- End Middle Column -->
-      </div>
-      <button class="open-button" onclick="openForm(1)">Chat</button>
-      <div class="chat-popup" id="myForm">
-          <div class="form-container" id="form-container1">
-        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-          <img src="./media/avatar.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-          <span class="w3-right w3-opacity">16 min</span>
-          <h4>Jane Doe</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <button onclick="openClientM()" id="openbtn" class="w3-button w3-theme-d1 w3-margin-bottom w3-right"> See Messages <i class="	fa fa-angle-right"></i></button>
-        </div>  
-        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-          <img src="./media/avatar.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-          <span class="w3-right w3-opacity">16 min</span>
-          <h4>Jane Doe</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <button onclick="openClientM()"id="openbtn"  class="w3-button w3-theme-d1 w3-margin-bottom w3-right"> See Messages <i class="	fa fa-angle-right"></i></button>
-        </div>
-        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-          <img src="./media/avatar.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-          <span class="w3-right w3-opacity">16 min</span>
-          <h4>Jane Doe</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <button onclick="openClientM()" id="openbtn" class="w3-button w3-theme-d1 w3-margin-bottom w3-right"> See Messages <i class="	fa fa-angle-right"></i></button>
-        </div> 
-        
-        <button type="button" class="btn cancel" onclick="closeForm(1)">Close</button>
-      </div>
-      </div>
-      <button class="open-button" id="clientmsg" style="display : none">Chat Client</button>
-       <div class="chat-popup" id="myFormC">
-        <div class="form-container" id="form-container2">
-          <h1>Chat</h1>
+        <form id="recipeForum">
           <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-            <img src="./media/avatar_doctor.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-            <span class="w3-right w3-opacity w3-margin-bottom">16 min</span><br>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            </div>  
-          <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-            <img src="./media/avatar.png" alt="Avatar" class="w3-right w3-circle w3-margin-left" style="width:60px">
-            <span class="w3-left w3-opacity w3-margin-bottom">16 min</span><br>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-           </div>
-           <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-            <img src="./media/avatar_doctor.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-            <span class="w3-right w3-opacity w3-margin-bottom">16 min</span><br>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            </div> 
-          <textarea placeholder="Type message.." name="msg" required></textarea>
-      
-          <button type="submit" class="btn">Send</button>
-          <button type="button" class="btn cancel" onclick="closeForm(2)">Close</button>
-          </div>
+            <h4 class="w3-center"><input  id="name" class="w3-input w3-theme-d0 w3-margin-bottom" type="text" name="name"
+                placeholder="Nume reteta..."></h4>
+            <hr class="w3-clear">
+            <h1>Informations for 100 grams:</h1>
+            <h2>Calories: <span><input id="cal" class="w3-input w3-theme-d0 w3-margin-bottom" type="number" name="Calories"
+                  min="0" placeholder="kcal"></span> </h2>
+            <h2>Carbohydrates: <span><input  id="carbo" class="w3-input w3-theme-d0 w3-margin-bottom" type="number"
+                  name="Carbohydrates" min="0" placeholder="grams"></span></h2>
+            <h2>Protein: <span><input id="protein" class="w3-input w3-theme-d0 w3-margin-bottom" type="number" name="Protein" min="0"
+                  placeholder="grams">
+              </span></h2>
+            <h2>Fat: <span><input id="fat" class="w3-input w3-theme-d0 w3-margin-bottom" type="number" name="Fat" min="0"
+                  placeholder="grams">
+              </span></h2>
+            <hr class="w3-clear">
+            <h2>Prep Time: <span><input id="preph" class="w3-input w3-theme-d0 w3-margin-bottom" type="number" name="h" min="0"
+                  max="24" placeholder="hours"><input id="prepmin" class="w3-input w3-theme-d0 w3-margin-bottom" type="number"
+                  name="min" min="0" max="60" placeholder="minutes"></span></h2>
+            <h2>Cook Time: <span><input id="cookh" class="w3-input w3-theme-d0 w3-margin-bottom" type="number" name="h" min="0"
+                  max="24" placeholder="hours"><input id="cookmin" class="w3-input w3-theme-d0 w3-margin-bottom" type="number"
+                  name="min" min="0" max="60" placeholder="minutes"></span></h2>
+            <h2>Ready in: <span><input id="readyh" class="w3-input w3-theme-d0 w3-margin-bottom" type="number" name="h" min="0"
+                  max="24" placeholder="hours"><input id="readymin" class="w3-input w3-theme-d0 w3-margin-bottom" type="number"
+                  name="min" min="0" max="60" placeholder="minutes"></span></h2>
+            <hr class="w3-clear">
+            <h1>Ingredients: </h1>
+            <ul id="ingredient">
+              <br>
+              <li>
+                <input id="weight0" class="w3-input w3-theme-d0 w3-margin-bottom" type="number" name="weight" min="0" max='1000'>
+                <select class="w3-input w3-theme-d0 w3-margin-bottom" id="mySelect0" onChange="check(this);">
+                  <option>-</option>
+                  <option>grams</option>
+                  <option>teaspoons</option>
+                  <option>tablespoons</option>
+                  <option>cups</option>
+                  <option>millilitres</option>
+                </select>
+                <input id="ingred0" class="w3-input w3-theme-d0 w3-margin-bottom" type="text" name="ingredient" max='50'
+                  placeholder="ingredient">
+                </button>
+              </li><br>
+            </ul>
+            <br>
+            <button  type="button" onclick="appearAdd('ingredient');" class="w3-button w3-theme-d2 w3-show">
+              <i class="fa fa-plus"></i></button>
+            <br>
+            <hr class="w3-clear">
+            <h1>Directions: </h1>
+            <ol id="step" class=" w3-center">
+              <li>
+                <textarea id="dir0" class="w3-input w3-theme-d0 w3-margin-bottom" cols="200" rows="10" name="step"></textarea>
+              </li>
+              <br>
+            </ol>
+            <br>
+            <button  type="button" onclick="appearAdd('step');" class="w3-button w3-theme-d2 w3-show">
+              <i class="fa fa-plus"></i></button>
+            <br>
+            <button type="submit" id="save" class="w3-button w3-theme-d2 w3-margin-bottom w3-center"><i class="	fa fa-check"></i>
+              Save</i></button>
+        </form>
       </div>
-      <!-- End Grid -->
+      <!-- End Middle Column -->
     </div>
 
-    <!-- End Page Container -->
+    <!-- Chat Live -->
+    <button class="open-button" onclick="openForm(1)">Chat</button>
+    <div class="chat-popup" id="myForm">
+      <div class="form-container" id="form-container1">
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+          <img src="./media/avatar.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <span class="w3-right w3-opacity">16 min</span>
+          <h4>Jane Doe</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat.</p>
+          <button onclick="openClientM()" id="openbtn" class="w3-button w3-theme-d1 w3-margin-bottom w3-right"> See
+            Messages <i class="	fa fa-angle-right"></i></button>
+        </div>
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+          <img src="./media/avatar.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <span class="w3-right w3-opacity">16 min</span>
+          <h4>Jane Doe</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat.</p>
+          <button onclick="openClientM()" id="openbtn" class="w3-button w3-theme-d1 w3-margin-bottom w3-right"> See
+            Messages <i class="	fa fa-angle-right"></i></button>
+        </div>
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+          <img src="./media/avatar.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <span class="w3-right w3-opacity">16 min</span>
+          <h4>Jane Doe</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat.</p>
+          <button onclick="openClientM()" id="openbtn" class="w3-button w3-theme-d1 w3-margin-bottom w3-right"> See
+            Messages <i class="	fa fa-angle-right"></i></button>
+        </div>
+
+        <button type="button" class="btn cancel" onclick="closeForm(1)">Close</button>
+      </div>
+    </div>
+
+    <button class="open-button" id="clientmsg" style="display : none">Chat Client</button>
+    <div class="chat-popup" id="myFormC">
+      <div class="form-container" id="form-container2">
+        <h1>Chat</h1>
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+          <img src="./media/avatar_doctor.png" alt="Avatar" class="w3-left w3-circle w3-margin-right"
+            style="width:60px">
+          <span class="w3-right w3-opacity w3-margin-bottom">16 min</span><br>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat.</p>
+        </div>
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+          <img src="./media/avatar.png" alt="Avatar" class="w3-right w3-circle w3-margin-left" style="width:60px">
+          <span class="w3-left w3-opacity w3-margin-bottom">16 min</span><br>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat.</p>
+        </div>
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+          <img src="./media/avatar_doctor.png" alt="Avatar" class="w3-left w3-circle w3-margin-right"
+            style="width:60px">
+          <span class="w3-right w3-opacity w3-margin-bottom">16 min</span><br>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat.</p>
+        </div>
+        <textarea placeholder="Type message.." name="msg" required></textarea>
+
+        <button type="submit" class="btn">Send</button>
+        <button type="button" class="btn cancel" onclick="closeForm(2)">Close</button>
+      </div>
+    </div>
+    <!-- End Grid -->
+  </div>
+
+  <!-- End Page Container -->
   </div>
   <br>
 
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 
+  <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-firestore.js"></script>
 
-  <script>
-    // Accordion
-    function myFunction(id) {
-      var x = document.getElementById(id);
-      if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-        x.previousElementSibling.className += " w3-theme-d1";
-      } else {
-        x.className = x.className.replace("w3-show", "");
-        x.previousElementSibling.className =
-          x.previousElementSibling.className.replace(" w3-theme-d1", "");
-      }
-    }
-
-    // Used to toggle the menu on smaller screens when clicking on the menu button
-    function openNav() {
-      var x = document.getElementById("navDemo");
-      if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-      } else {
-        x.className = x.className.replace(" w3-show", "");
-      }
-    }
-
-    function appearAdd(id) {
-      if (id == "ingredient") {
-        document.getElementById(id).innerHTML += '\
-  <li>\
-              <input type="number" name="weight" min="0" max='+ "'1000'" + '>\
-              <select id="mySelect" onChange="check(this);">\
-                <option>-</option>\
-                <option>grams</option>\
-                <option>teaspoons</option>\
-                <option>tablespoons</option>\
-                <option>cups</option>\
-                <option>millilitres</option>\
-              </select>\
-              <input type="text" name="ingredient" max='+ "'50'" + '>\
-              <button onclick="this.parentElement.style.display='+ "'none'" + '" class="w3-button w3-theme-d5">\
-                <i class="fa fa-remove"></i>\
-              </button>\
-            </li><br>'
-      }
-      else {
-        document.getElementById(id).innerHTML += ' <li>\
-          <textarea id="dir" cols="200" rows="10" name="step"></textarea>\
-              <button id="dirbut" onclick="this.parentElement.style.display='+ "'none'" + '" class="w3-button w3-theme-d5">\
-                <i class="fa fa-remove"></i>\
-              </button>\
-          </li><br>'
-      }
-
-    }
-
-  </script>
-<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-firestore.js"></script>
-
-<script src="./js/config-database.js"></script>
-<script src="./js/chat.js"></script>
+  <script src="./js/config-database.js"></script>
+  <script src="./js/chat.js"></script>
+  <script src="./js/recipeNew.js"></script>
 </body>
 
 </html>

@@ -1,35 +1,32 @@
-
 window.onload = () => {
     const userId = Cookies.get('userId');
   
-    if (!userId) {
-        window.location.href = './LoginNutri.html';
-    } else {
+    if (userId) {
         let ord=0;
         const   MAX_LOAD = 3;
-      db.collection('users').where("id_nutri","==",userId).get().then( querySnapshot => {
+db.collection('recipes').get().then( querySnapshot => {
     querySnapshot.forEach(function (doc) {
         ord = ord + 1;
         let displaystyle;
-        const user = doc.data();
+        const recipe = doc.data();
+        console.log(ord);
         if(ord<=MAX_LOAD){
-        displaystyle = "block";
+            displaystyle = "block";
+            console.log(ord);
         }else{
             displaystyle = "none";
         }
         var elem = document.createElement("div");
-        elem.innerHTML ='<div id = "p-'+ord+'" class="pers w3-container w3-card w3-white w3-round w3-margin"><br>\
-        <h4 class="name w3-center">'+user.username+'</h4>\
+        elem.innerHTML ='<div id = "p-'+ord+'" class="pers w3-container w3-card w3-white w3-round w3-margin" style="display:'+displaystyle+'"><br>\
+        <h4 class="name w3-center">'+recipe.name+'</h4>\
         <hr class="w3-clear">\
-        <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i>'+user.place+'</p>\
-        <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>'+ formatDate(user.bday.toDate())+'</p>\
-        <a href="./ProfileClient.html?userId='+doc.id+'"  class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-user"></i>  Profile</a>\
-        <a href="./ProgressClient.html?userId='+doc.id+'" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-line-chart"></i>  Progress</a> \
-        <a href="./MenuDets.html?userId='+doc.id+'" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-bars"></i>  Menu details</a>\
-        <a href="./RecipesFavorites.html?userId='+doc.id+'" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-bars"></i>  Favorite Recipes</a>\
-        <a href="./MakeApoint.html?userId='+doc.id+'" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-calendar-plus-o"></i>  Make Appointment</a>\
-      </div>\
-      ';
+        <p>Calories:'+recipe.nutrition[0]+'</p>\
+        <p>Carbohydrates:'+recipe.nutrition[1]+'</p>\
+        <p>Protein:'+recipe.nutrition[1]+'</p>\
+        <p>Fat:'+recipe.nutrition[1]+'</p>\
+        <hr class="w3-clear">\
+        <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html?recipeId='+recipe.id+'" ><i class="fa fa-bars"></i>  See Recipe</a>\
+       </div>';
         document.getElementById("container").appendChild(elem);
     });});
     let loaded = MAX_LOAD;
@@ -66,19 +63,7 @@ window.onload = () => {
                 }
             }
 }
+else{
+    window.location.href = './Login.html';
 }
-
-function formatDate(date) {
-    var monthNames = [
-      "January", "February", "March",
-      "April", "May", "June", "July",
-      "August", "September", "October",
-      "November", "December"
-    ];
-  
-    var day = date.getDate();
-    var monthIndex = date.getMonth();
-    var year = date.getFullYear();
-  
-    return day + ' ' + monthNames[monthIndex] + ' ' + year;
-  }
+}

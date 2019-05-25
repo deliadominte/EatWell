@@ -4,11 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/ico" href="./media/broccoli.png" />
-<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="assets/css/select2.min.css">
-<link rel="stylesheet" type="text/css" href="assets/css/bootstrap-datetimepicker.min.css">
-<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-green.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
@@ -28,14 +24,12 @@ html, body, h1, h2, h3, h4, h5
 	  background-size: 100%; 
   	background-repeat: repeat-y;
 }
- input {
-  padding: 10px;
-  border: 1px solid rgba(255,255,255,0.6);
-  border-radius: 2px;
-  width: 30%;
-  height: 10%;
-  background: #f1f1f1;
-  padding-right: 0;
+input{
+    display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color:#f2f2f2;
 }
 
 </style>
@@ -81,46 +75,33 @@ html, body, h1, h2, h3, h4, h5
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
         <p class="w3-center">New Appointment:<p id="name"></p></p>
         <div class="w3-row w3-section w3-center">
+                <form id="apForum">
                 <div class="w3-col" style="width:30%"> Date: </div>
                   <div class="w3-rest">
-                        <input class="w3-input w3-border " style="width:50%" id="datefield" type="date"  name="date" min="1899-01-01">
+                        <input id="date" class="w3-input w3-theme-d0"  style="width:50%" id="datefield" type="date"  name="date" min="1899-01-01">
                   </div>
-        </div>
-        
-        <div class="w3-row w3-section w3-center">
-                <div class="w3-col" style="width:30%"> Time: </div>
+                  <br>
+                  <div class="w3-col" style="width:30%"> Time: </div>
                   <div class="w3-rest">
-                        <input class="w3-input w3-border " style="width:50%" id="timefield" type="time" name="time" min="9:00">
+                        <input id="time" class="w3-input w3-theme-d0"  style="width:50%" id="timefield" type="time" name="time" min="9:00">
                   </div>
-        </div>
-
-        <div class="w3-row w3-section w3-center">
-                <div class="w3-col" style="width:30%"> Details about appointment: </div>
+                  <br>
+                  <div class="w3-col" style="width:30%"> Details about appointment: </div>
                   <div class="w3-rest">
-                        <input class="w3-input w3-border " style="width:50%; height: 100px;" type="text" name="description" placeholder="Details..">
+                        <input id="dets" class="w3-input w3-theme-d0"  style="width:50%; height: 100px;" type="text" name="description" placeholder="Details..">
                   </div>
+                  <br>
+                  <p class="w3-center"><button type="submit" class="w3-button w3-theme-d2"> Make Appointment</a></p>
+                </form>
         </div>
-        <p class="w3-center"><a href="./Appointment.html" class="w3-button w3-theme-d2 w3-margin-bottom"> Make Appointment</a></p>
       </div>
       
       <!-- End Middle Column -->
     </div>
 
     <!-- Right Column -->
-    <div class="w3-col m2">
-      <div class="w3-card w3-round w3-white w3-center">
-        <div class="w3-container"  id="apoint">
-          <p>Appointment</p>
-          <img src="./media/calendar.png" alt="Calendar" style="width:50%"><br>
-          <span>15 May 15:00</span>
-          <div class="w3-row w3-opacity">
-            <div class="w3-center">
-              <button onclick="getElementById('apoint').style.display='none'" class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-remove"></i></button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <br>
+    <div id="active" class="w3-col m2">
+      
       
     <!-- End Right Column -->
     </div>
@@ -186,51 +167,6 @@ html, body, h1, h2, h3, h4, h5
 </div>
 <br>
 
-
- 
-<script>
-var today = new Date();
-var dd = today.getDate();
-var mm = today.getMonth()+1; //January is 0!
-var time = today.getTime();
-var yyyy = today.getFullYear();
- if(dd<10){
-        dd='0'+dd
-    } 
-    if(mm<10){
-        mm='0'+mm
-    } 
-
-today = yyyy+'-'+mm+'-'+dd;
-document.getElementById("datefield").setAttribute("min", today);
-
-// console.log(document.getElementById("timefield").nodeValue);
-// if (document.getElementById("datefield").value==today)
-//     document.getElementById("timefield").setAttribute("min", time);
-
-// Accordion
-function myFunction(id) {
-  var x = document.getElementById(id);
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-    x.previousElementSibling.className += " w3-theme-d1";
-  } else { 
-    x.className = x.className.replace("w3-show", "");
-    x.previousElementSibling.className = 
-    x.previousElementSibling.className.replace(" w3-theme-d1", "");
-  }
-}
-
-// Used to toggle the menu on smaller screens when clicking on the menu button
-function openNav() {
-  var x = document.getElementById("navDemo");
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-  } else { 
-    x.className = x.className.replace(" w3-show", "");
-  }
-}
-</script>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 
@@ -239,5 +175,6 @@ function openNav() {
 
 <script src="./js/config-database.js"></script>
 <script src="./js/chat.js"></script>
+<script src="./js/makeApoint.js"></script>
 </body>
 </html> 

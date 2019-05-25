@@ -42,16 +42,13 @@ window.onload = () => {
                     alert('The code is not valid!');
         });}
     } else {
-        console.log("11");
+        var flag=0;
         db.collection('users').where('id', '==', userId).get().then(querySnapshot => {
-            console.log("12");
             querySnapshot.forEach(function (doc) {
-                if(doc.isClient==true)
                 window.location.href = './index.html';
-                else
-                window.location.href = './indexNutri.html';
             });
         }
         );
+        if (flag==0){window.location.href = './indexNutri.html';}
     }
 }

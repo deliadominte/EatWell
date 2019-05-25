@@ -52,30 +52,14 @@ ol{
 
   <!-- Navbar -->
   <div class="w3-top">
-    <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-      <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
-        href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-      <a href="./indexNutri.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"
-        style="font-family: 'Exo', sans-serif;"><i class="fa fa-home w3-margin-right"></i>EatWell</a>
-      <a href="./RecipesList.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-        title="Recipes"><i class="fa fa-bars"></i></a>
-      <a href="./Apointments.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-        title="Apointments"><i class="fa fa-calendar"></i></a>
-      <div class="w3-dropdown-hover w3-hide-small">
-        <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span
-            class="w3-badge w3-right w3-small w3-green">2</span></button>
-        <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-          <a href="./Apointments.html" class="w3-bar-item w3-button">One new Appointment</a>
-          <a href="./MessagesList.html" class="w3-bar-item w3-button">New Message</a>
-        </div>
-      </div>
+    <div  id="nav" class="w3-bar w3-theme-d2 w3-left-align w3-large">
+      
     </div>
   </div>
 
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-    <a href="./RecipesList.html" class="w3-bar-item w3-button w3-padding-large">Recipes</a>
-    <a href="./Apointments.html" class="w3-bar-item w3-button w3-padding-large">Apointments</a>
+    
   </div>
 
 <!-- Page Container -->
@@ -87,31 +71,24 @@ ol{
     <!-- Middle Column -->
     <div class="w3-col m7" style="width:100%">
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <h4 class="w3-center">Recipe1</h4>
+        <h4 id="name" class="w3-center"></h4>
         <hr class="w3-clear">
         <h1>Informations for 100 grams:</h1>
-        <h2>Calories: </h2>
-        <h2>Carbohydrates: </h2>
-        <h2>Protein: </h2>
-        <h2>Fat: </h2>
+        <h2 id="cal">Calories: </h2>
+        <h2 id="carbo">Carbohydrates: </h2>
+        <h2 id="protein">Protein: </h2>
+        <h2 id="fat">Fat: </h2>
         <hr class="w3-clear">
-        <h2>Prep Time: <span>40 min</span></h2>
-        <h2>Cook Time: <span>30 min</span></h2>
-        <h2>Ready in: <span>2 h</span></h2>
-        <h2>Yield: <span>8 slices</span></h2>
+        <h2>Prep Time: <span id="prep"></span></h2>
+        <h2>Cook Time: <span id="cook"></span></h2>
+        <h2>Ready in: <span id="ready"></span></h2>
         <hr class="w3-clear">
         <h1>Ingredients: </h1>
-          <ul>
-            <li>200 grams-flour</li>
-            <li>100 grams-water</li>
-            <li>1 tsp-salt</li>
+          <ul id="ingred"> 
           </ul>
         <hr class="w3-clear">
         <h1>Directions: </h1>
-        <ol>
-            <li>first step</li>
-            <li>second step</li>
-            <li>third step</li>
+        <ol id="dir">
         </ol>
      </div>
       <!-- End Middle Column -->
@@ -176,32 +153,6 @@ ol{
 </div>
 <br>
 
-
- 
-<script>
-// Accordion
-function myFunction(id) {
-  var x = document.getElementById(id);
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-    x.previousElementSibling.className += " w3-theme-d1";
-  } else { 
-    x.className = x.className.replace("w3-show", "");
-    x.previousElementSibling.className = 
-    x.previousElementSibling.className.replace(" w3-theme-d1", "");
-  }
-}
-
-// Used to toggle the menu on smaller screens when clicking on the menu button
-function openNav() {
-  var x = document.getElementById("navDemo");
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-  } else { 
-    x.className = x.className.replace(" w3-show", "");
-  }
-}
-</script>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 
@@ -210,5 +161,6 @@ function openNav() {
 
 <script src="./js/config-database.js"></script>
 <script src="./js/chat.js"></script>
+<script src="./js/recipe.js"></script>
 </body>
 </html> 
