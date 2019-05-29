@@ -220,10 +220,3 @@ function fmin(arr) {
     return min;
 }
 
-function wait(waitsecs){
-    setTimeout(donothing(), 'waitsecs');
-    }
-    
-    function donothing() {
-    
-    }
