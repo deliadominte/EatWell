@@ -206,26 +206,13 @@ h4{
       </div>
       <button class="open-button" onclick="openForm(1)">Chat</button>
       <div class="chat-popup" id="myForm">
-        <form action="/action_page.php" class="form-container" id="form-container">
+        <form class="form-container" id="form-container">
           <h1>Chat</h1>
-          <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-            <img src="./media/avatar_doctor.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-            <span class="w3-right w3-opacity w3-margin-bottom">16 min</span><br>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            </div>  
-          <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-            <img src="./media/avatar.png" alt="Avatar" class="w3-right w3-circle w3-margin-left" style="width:60px">
-            <span class="w3-left w3-opacity w3-margin-bottom">16 min</span><br>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-           </div>
-           <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-            <img src="./media/avatar_doctor.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-            <span class="w3-right w3-opacity w3-margin-bottom">16 min</span><br>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            </div> 
-          <textarea placeholder="Type message.." name="msg" required></textarea>
+           <div id="output"></div>
+           <div id="feedback"></div>
+          <textarea id="message" placeholder="Type message.." name="msg" required></textarea>
       
-          <button type="submit" class="btn">Send</button>
+          <button type="submit" id="send" class="btn">Send</button>
           <button type="button" class="btn cancel" onclick="closeForm(1)">Close</button>
         </form>
       </div>
@@ -270,6 +257,8 @@ h4{
 <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-firestore.js"></script>
 
 <script src="./js/config-database.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
 <script src="./js/chat.js"></script>
 </body>
 

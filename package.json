@@ -1,0 +1,22 @@
+{
+  "name": "eatwell",
+  "version": "1.0.0",
+  "description": "chat",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deliadominte/EatWell.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/deliadominte/EatWell/issues"
+  },
+  "homepage": "https://github.com/deliadominte/EatWell#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
