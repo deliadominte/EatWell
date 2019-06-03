@@ -71,12 +71,13 @@ h4{
         <!-- Profile -->
         <div class="w3-card w3-round w3-white">
           <div class="w3-container">
-            <h4 class="w3-center">My Profile</h4>
+            <h4 id="username" class="w3-center"> </h4>
             <p class="w3-center"><img src="./media/avatar.png" class="w3-circle" style="height:106px;width:106px"
                 alt="Avatar"></p>
             <hr>
-            <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
-            <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
+            <p id="place"><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> </p>
+            <p id="date"><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> </p>
+            <p id="gender"></p>
           </div>
         </div>
         <br>
@@ -87,25 +88,15 @@ h4{
             <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i
                 class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Allergies</button>
             <div id="Demo1" class="w3-hide w3-container">
-              <p>Some text..</p>
+              <div id="tags"></div>
             </div>
             <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i
                 class="fa fa-calendar-check-o fa-fw w3-margin-right"></i>Current Measures</button>
             <div id="Demo2" class="w3-hide w3-container">
-              <p>Weight:</p>
-              <p>Body Fat:</p>
-              <p>Arm:</p>
-              <p>Waistline:</p>
-              <p>Butt:</p>
-              <p>Thighs:</p>
             </div>
             <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i
                 class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> Nutrition</button>
             <div id="Demo3" class="w3-hide w3-container">
-              <p>Calories:</p>
-              <p>Carbohydrates:</p>
-              <p>Protein:</p>
-              <p>Fat:</p>
             </div>
           </div>
         </div>
@@ -116,58 +107,12 @@ h4{
       <!-- Middle Column -->
       <div class="w3-col m7">
 
-
-        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-          <span class="w3-right w3-opacity">Breakfast</span>
-          <h4 class="w3-left-align w3-margin-left">Recipe2</h4>
-          <hr class="w3-clear">
-          <p>Calories:</p>
-          <p>Carbohydrates:</p>
-          <p>Protein:</p>
-          <p>Fat:</p>
-          <hr class="w3-clear">
-          <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-check"></i>
-             Done</button>
-          <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="	fa fa-plus"></i>  Add to
-            favorites</button>
-          <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html"><i class="fa fa-bars"></i>
-             See Recipe</a>
+        <div id="meals">
 
         </div>
-        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-          <span class="w3-right w3-opacity">Lunch</span>
-          <h4 class="w3-left-align w3-margin-left">Recipe3</h4>
-          <hr class="w3-clear">
-          <p>Calories:</p>
-          <p>Carbohydrates:</p>
-          <p>Protein:</p>
-          <p>Fat:</p>
-          <hr class="w3-clear">
-          <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-check"></i>
-             Done</button>
-          <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="	fa fa-plus"></i>  Add to
-            favorites</button>
-          <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html"><i class="fa fa-bars"></i>
-             See Recipe</a>
 
-        </div>
-        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-          <span class="w3-right w3-opacity">Dinner</span>
-          <h4 class="w3-left-align w3-margin-left">Recipe 7</h4>
-          <hr class="w3-clear">
-          <p>Calories:</p>
-          <p>Carbohydrates:</p>
-          <p>Protein:</p>
-          <p>Fat:</p>
-          <hr class="w3-clear">
-          <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-check"></i>
-             Done</button>
-          <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="	fa fa-plus"></i>  Add to
-            favorites</button>
-          <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html"><i class="fa fa-bars"></i>
-             See Recipe</a>
-
-        </div>
+        
+        
         <!-- End Middle Column -->
       </div>
 
@@ -204,8 +149,8 @@ h4{
 
         <!-- End Right Column -->
       </div>
-      <button class="open-button" onclick="openForm(1)">Chat</button>
-      <div class="chat-popup" id="myForm">
+      <button id="buttonOpen" class="open-button" onclick="openForm(2)">Chat</button>
+      <div class="chat-popup" id="myFormC" >
         <form class="form-container" id="form-container">
           <h1>Chat</h1>
            <div id="output"></div>
@@ -213,7 +158,7 @@ h4{
           <textarea id="message" placeholder="Type message.." name="msg" required></textarea>
       
           <button type="submit" id="send" class="btn">Send</button>
-          <button type="button" class="btn cancel" onclick="closeForm(1)">Close</button>
+          <button id="buttonClose" type="button" class="btn cancel" onclick="closeForm(2)">Close</button>
         </form>
       </div>
       <!-- End Grid -->
@@ -259,7 +204,8 @@ h4{
 <script src="./js/config-database.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
-<script src="./js/chat.js"></script>
+<!-- <script src="./js/chat.js"></script> -->
+<script src="./js/indexClient.js"></script>
 </body>
 
 </html>

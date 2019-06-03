@@ -22,7 +22,7 @@ window.onload = () => {
         <h4 class="name w3-center">'+user.username+'</h4>\
         <hr class="w3-clear">\
         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i>'+user.place+'</p>\
-        <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>'+ formatDate(user.bday.toDate())+'</p>\
+        <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>'+ formatDate(user.bday)+'</p>\
         <a href="./ProfileClient.html?userId='+doc.id+'"  class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-user"></i>  Profile</a>\
         <a href="./ProgressClient.html?userId='+doc.id+'" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-line-chart"></i>  Progress</a> \
         <a href="./MenuDets.html?userId='+doc.id+'" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-bars"></i>  Menu details</a>\
@@ -69,6 +69,7 @@ window.onload = () => {
 }
 
 function formatDate(date) {
+    date=date.toDate();
     var monthNames = [
       "January", "February", "March",
       "April", "May", "June", "July",
