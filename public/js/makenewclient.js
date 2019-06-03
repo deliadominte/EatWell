@@ -39,8 +39,22 @@ window.onload = () => {
                 allergies: []
             };
             console.log(user);
-            //db.collection('users').add(user).then(alert("The new clients code: "+ user.code));
-            //window.location.href ='./indexNutri.html'
+            db.collection('users').add(user).then(function(){
+                var id_user;
+                db.collection('users').where('code', '==', user.code).get().then(querySnapshot => {
+                    querySnapshot.forEach(function (doc) {
+                        id_user= doc.id;
+                        console.log(id_user);
+                        db.collection('nutritionists').doc(userId).update({
+                    
+                            "id_users": firebase.firestore.FieldValue.arrayUnion(id_user)
+                        })
+                    });});
+                
+            alert("The new clients code: "+ user.code);
+        window.location.href ='./ProfileClient.html?userId='+id_user});
+            
+            
             }
     } else {
         

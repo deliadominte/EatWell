@@ -5,6 +5,7 @@ window.onload = () => {
             e.preventDefault();
     
             const user = {
+                
                 username: document.getElementById('username').value,
                 code: document.getElementById('code').value,
                 isClient: true,
@@ -17,11 +18,13 @@ window.onload = () => {
             db.collection('users').where('code', '==', user.code).get().then(querySnapshot => {
                 let flag=0;
                 querySnapshot.forEach(function (doc){
-                    console.log(user);
+                    
                     const us_id = doc.id;
-                    const us_un = doc.username;
-                    if(us_un=="0"){//sa nu fie registrat deja alt client cu condul respectiv
+                    const us_un = doc.data().username;
+                    console.log(us_un+" "+us_id);
+                    if(us_un==" "){//sa nu fie registrat deja alt client cu condul respectiv
                      flag=1;
+                     
                      db.collection('users').where('username', '==', user.username).get().then(querySnapshot => {
                             let flag1=0;
                             querySnapshot.forEach(data => {flag1=1;});
