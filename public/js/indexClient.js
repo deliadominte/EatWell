@@ -1,6 +1,8 @@
 let done_contor=0, nr_meals;
 window.onload = () => {
     const userId = Cookies.get('userId');
+    
+
     var objToday = new Date();
     if (!userId) {
       window.location.href = './LoginClient.html';
@@ -188,7 +190,6 @@ window.onload = () => {
         x.previousElementSibling.className.replace(" w3-theme-d1", "");
     }
   }
-  
   // Used to toggle the menu on smaller screens when clicking on the menu button
   function openNav() {
     var x = document.getElementById("navDemo");
@@ -198,5 +199,11 @@ window.onload = () => {
       x.className = x.className.replace(" w3-show", "");
     }
   }
-  
-  
+    function logout(){
+      const userId = Cookies.get('userId');
+      if(userId){
+        Cookies.remove('userId');
+        window.location.href = './LoginClient.html';
+ 
+      }
+   }

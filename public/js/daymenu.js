@@ -27,8 +27,11 @@ window.onload = () => {
                 <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">\
                   <a href="./index.html" class="w3-bar-item w3-button">One new Appointment</a>\
                   <a href="./MessagesClient.html" class="w3-bar-item w3-button">New Message</a>\
-                </div>\
-              </div>';
+                 </div>\
+              </div>\
+              <button onclick="logout()" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-theme-d4" title="Logout">\
+       <img src="./media/avatar2.png" class="w3-circle w3-theme-d0" style="height:23px;width:23px" alt="Avatar">\
+     </button>';
                     document.getElementById("navDemo").innerHTML += '\
                 <a href="./SettingsClient.html" class="w3-bar-item w3-button w3-padding-large">Account</a>\
                 <a href="./MenuDetsClient.html" class="w3-bar-item w3-button w3-padding-large">Menu Calendar</a>\
@@ -52,7 +55,10 @@ window.onload = () => {
               <a href="./Apointments.html" class="w3-bar-item w3-button">One new Appointment</a>\
               <a href="./MessagesList.html" class="w3-bar-item w3-button">New Message</a>\
             </div>\
-          </div>';
+          </div>\
+          <button onclick="logout()" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-theme-d4" title="Logout">\
+        <img src="./media/avatar2.png" class="w3-circle w3-theme-d0" style="height:23px;width:23px" alt="Avatar">\
+      </button>';
                 document.getElementById("navDemo").innerHTML += '<a href="./RecipesList.html" class="w3-bar-item w3-button w3-padding-large">Recipes</a>\
             <a href="./Apointments.html" class="w3-bar-item w3-button w3-padding-large">Apointments</a>';
         }
@@ -111,5 +117,14 @@ function openNav() {
     x.className += " w3-show";
   } else {
     x.className = x.className.replace(" w3-show", "");
+  }
+}
+
+function logout(){
+  const userId = Cookies.get('userId');
+  if(userId){
+    Cookies.remove('userId');
+    window.location.href = './LoginClient.html';
+
   }
 }

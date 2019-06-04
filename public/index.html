@@ -55,6 +55,9 @@ h4{
             <a href="./MessagesClient.html" class="w3-bar-item w3-button">New Message</a>
           </div>
         </div>
+        <button onclick="logout()" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-theme-d4" title="Logout">
+          <img src="./media/avatar2.png" class="w3-circle w3-theme-d0" style="height:23px;width:23px" alt="Avatar">
+        </button>
       </div>
     </div>
   
@@ -150,32 +153,8 @@ h4{
 
 
 
-  <script>
-    // Accordion
-    function myFunction(id) {
-      var x = document.getElementById(id);
-      if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-        x.previousElementSibling.className += " w3-theme-d1";
-      } else {
-        x.className = x.className.replace("w3-show", "");
-        x.previousElementSibling.className =
-          x.previousElementSibling.className.replace(" w3-theme-d1", "");
-      }
-    }
+]
 
-    // Used to toggle the menu on smaller screens when clicking on the menu button
-    function openNav() {
-      var x = document.getElementById("navDemo");
-      if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-      } else {
-        x.className = x.className.replace(" w3-show", "");
-      }
-    }
-
-
-  </script>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 

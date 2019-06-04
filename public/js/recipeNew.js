@@ -87,3 +87,11 @@ window.onload = () => {
         }
       }
   
+      function logout(){
+        const userId = Cookies.get('userId');
+        if(userId){
+          Cookies.remove('userId');
+          window.location.href = './LoginClient.html';
+   
+        }
+     }

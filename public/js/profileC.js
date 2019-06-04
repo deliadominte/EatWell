@@ -246,3 +246,12 @@ function savep() {
   x.className = x.className.replace("w3-show", "w3-hide");
   y.innerHTML = '<button type="button" onclick="editp()" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-edit"></i> Edit Percentage</button>';
 }
+
+function logout(){
+  const userId = Cookies.get('userId');
+  if(userId){
+    Cookies.remove('userId');
+    window.location.href = './LoginClient.html';
+
+  }
+}

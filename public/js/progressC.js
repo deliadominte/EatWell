@@ -18,10 +18,10 @@ window.onload = function () {
         ];
 
         let profileId;
-        if(new URLSearchParams(window.location.search).get('userId'))
-          profileId = new URLSearchParams(window.location.search).get('userId');
-        else  profileId = userId;
-        let array=[{ x: new Date(2000, 1, 1), y: 0 }];
+        if (new URLSearchParams(window.location.search).get('userId'))
+            profileId = new URLSearchParams(window.location.search).get('userId');
+        else profileId = userId;
+        let array = [{ x: new Date(2000, 1, 1), y: 0 }];
 
         db.collection('users').doc(profileId).get().then(doc => {
             if (doc.exists) {
@@ -35,67 +35,69 @@ window.onload = function () {
                 let time;
                 let i = 0;
                 for (i = 0; i < user.weight.length; i++) {
-                     date = user.time_prog[i].toDate();
-                     day = date.getDate();
-                     monthIndex = date.getMonth();
-                     year = date.getFullYear();
-                     time = new Date(year + "-" + monthIndex + "-" + day);
+                    date = user.time_prog[i].toDate();
+                    day = date.getDate();
+                    monthIndex = date.getMonth();
+                    year = date.getFullYear();
+                    time = new Date(year + "-" + monthIndex + "-" + day);
                     console.log("a asignat");
-                    array[i]={ x: time, y: parseInt(user.weight[i]) };
+                    array[i] = { x: time, y: parseInt(user.weight[i]) };
                 }
             }
         });
-        
+
         console.log(typeof array[0].x);
         console.log(typeof data[0].x);
         console.log(array);
         console.log(data);
-        setTimeout(function(){let chart = new CanvasJS.Chart("chartContainer", {
-            animationEnabled: true,
-            theme: "light2",
-            title: {
-                text: " Progress"
-            },
-            axisX: {
-                valueFormatString: "DD MMM",
-                crosshair: {
-                    enabled: true,
-                    snapToDataPoint: true
-                }
-            },
-            axisY: {
-                title: "Weight",
-                includeZero: false,
-                crosshair: {
-                    enabled: true
+        setTimeout(function () {
+            let chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                theme: "light2",
+                title: {
+                    text: " Progress"
                 },
-                scaleBreaks: {
-                    autoCalculate: true
-                }
-            },
-            toolTip: {
-                shared: true
-            },
-            legend: {
-                cursor: "pointer",
-                verticalAlign: "bottom",
-                horizontalAlign: "left",
-                dockInsidePlotArea: true,
-                itemclick: toogleDataSeries
-            },
-            data: [{
-                type: "line",
-                showInLegend: true,
-                name: "Kg",
-                markerType: "square",
-                xValueFormatString: "DD MMM, YYYY",
-                color: "#F08080",
-                dataPoints: array
-            }]
-        });
-        console.log("a facut");
-        chart.render();},1000);
-        
+                axisX: {
+                    valueFormatString: "DD MMM",
+                    crosshair: {
+                        enabled: true,
+                        snapToDataPoint: true
+                    }
+                },
+                axisY: {
+                    title: "Weight",
+                    includeZero: false,
+                    crosshair: {
+                        enabled: true
+                    },
+                    scaleBreaks: {
+                        autoCalculate: true
+                    }
+                },
+                toolTip: {
+                    shared: true
+                },
+                legend: {
+                    cursor: "pointer",
+                    verticalAlign: "bottom",
+                    horizontalAlign: "left",
+                    dockInsidePlotArea: true,
+                    itemclick: toogleDataSeries
+                },
+                data: [{
+                    type: "line",
+                    showInLegend: true,
+                    name: "Kg",
+                    markerType: "square",
+                    xValueFormatString: "DD MMM, YYYY",
+                    color: "#F08080",
+                    dataPoints: array
+                }]
+            });
+            console.log("a facut");
+            chart.render();
+        }, 1000);
+
 
         function toogleDataSeries(e) {
             if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
@@ -128,12 +130,15 @@ window.onload = function () {
                       <a href="./index.html" class="w3-bar-item w3-button">One new Appointment</a>\
                       <a href="./MessagesClient.html" class="w3-bar-item w3-button">New Message</a>\
                     </div>\
-                  </div>';
-                        document.getElementById("navDemo").innerHTML = '\
+                  </div>\
+                  <button onclick="logout()" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-theme-d4" title="Logout">\
+        <img src="./media/avatar2.png" class="w3-circle w3-theme-d0" style="height:23px;width:23px" alt="Avatar">\
+      </button>';
+                document.getElementById("navDemo").innerHTML = '\
                     <a href="./SettingsClient.html" class="w3-bar-item w3-button w3-padding-large">Account</a>\
                     <a href="./MenuDetsClient.html" class="w3-bar-item w3-button w3-padding-large">Menu Calendar</a>\
                     <a href="./ProgressClient.html" class="w3-bar-item w3-button w3-padding-large">Progress</a>';
-                  
+
             }
         });
         if (flag == 0) {
@@ -152,7 +157,10 @@ window.onload = function () {
                 <a href="./Apointments.html" class="w3-bar-item w3-button">One new Appointment</a>\
                 <a href="./MessagesList.html" class="w3-bar-item w3-button">New Message</a>\
               </div>\
-            </div>';
+            </div>\
+            <button onclick="logout()" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-theme-d4" title="Logout">\
+        <img src="./media/avatar2.png" class="w3-circle w3-theme-d0" style="height:23px;width:23px" alt="Avatar">\
+      </button>';
             document.getElementById("navDemo").innerHTML = '<a href="./RecipesList.html" class="w3-bar-item w3-button w3-padding-large">Recipes</a>\
               <a href="./Apointments.html" class="w3-bar-item w3-button w3-padding-large">Apointments</a>';
         }
@@ -226,3 +234,11 @@ function fmin(arr) {
     return min;
 }
 
+function logout() {
+    const userId = Cookies.get('userId');
+    if (userId) {
+        Cookies.remove('userId');
+        window.location.href = './LoginClient.html';
+
+    }
+}

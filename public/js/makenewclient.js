@@ -85,3 +85,11 @@ function generateCode(){
     if (flag==1) new_code=generateCode();
     return new_code;
 }
+function logout(){
+    const userId = Cookies.get('userId');
+    if(userId){
+      Cookies.remove('userId');
+      window.location.href = './LoginClient.html';
+
+    }
+ }

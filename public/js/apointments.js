@@ -84,3 +84,11 @@ function openNav() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
+function logout(){
+  const userId = Cookies.get('userId');
+  if(userId){
+    Cookies.remove('userId');
+    window.location.href = './LoginClient.html';
+
+  }
+}
