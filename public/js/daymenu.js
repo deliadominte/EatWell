@@ -1,20 +1,24 @@
 let done_contor=0, nr_meals;
+
+const menuId = new URLSearchParams(window.location.search).get('menuId');
 window.onload = () => {
 
-    const userId = Cookies.get('userId');
-    const menuId = new URLSearchParams(window.location.search).get('menuId');
+
+  const userId = Cookies.get('userId');
     if (userId) {
         var flag=0;
         db.collection('users').doc(userId).get().then(doc => {
             if (doc.exists) {
                 const user = doc.data();
                 flag=1;
-                    document.getElementById("nav").innerHTML += '<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"\
+                    document.getElementById("nav").innerHTML = '<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"\
                 href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>\
               <a href="./index.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"\
                 style="font-family: '+ "'Exo'" + ', sans-serif;"><i class="fa fa-home w3-margin-right"></i>EatWell</a>\
               <a href="./SettingsClient.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"\
                 title="Account"><i class="fa fa-user"></i></a>\
+                <a href="./MenuDetsClient.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"\
+                title="Meniu Calendar"><i class="fa fa-bars"></i></a>\
               <a href="./ProgressClient.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"\
                 title="Progress"><i class="fa fa-line-chart"></i></a>\
               <div class="w3-dropdown-hover w3-hide-small">\
@@ -27,12 +31,13 @@ window.onload = () => {
               </div>';
                     document.getElementById("navDemo").innerHTML += '\
                 <a href="./SettingsClient.html" class="w3-bar-item w3-button w3-padding-large">Account</a>\
+                <a href="./MenuDetsClient.html" class="w3-bar-item w3-button w3-padding-large">Menu Calendar</a>\
                 <a href="./ProgressClient.html" class="w3-bar-item w3-button w3-padding-large">Progress</a>';
                 
             }
         });
         if(flag==0){
-                document.getElementById("nav").innerHTML += '<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"\
+                document.getElementById("nav").innerHTML = '<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"\
             href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>\
           <a href="./indexNutri.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"\
             style="font-family: '+ "'Exo'" + ', sans-serif;"><i class="fa fa-home w3-margin-right"></i>EatWell</a>\
@@ -90,13 +95,15 @@ window.onload = () => {
 }
 
 function done(i){
-    done_contor++; 
-    document.getElementById(i).disabled = true; 
-    if(done_contor==nr_meals)
-          {db.collection('menus').doc(menuId).get().update({is_done: true});
-          alert("Congratulations you finished todays menu!");}
-}
-
+  done_contor++; 
+  document.getElementById(i).disabled = true; 
+  if(done_contor==nr_meals)
+        {a={
+          is_done: true
+        }
+        db.collection('appointments').doc(menuId).set({ ...a }, { merge: true }).then(function(){
+        alert("Congratulations you finished todays menu!");});
+}}
 // Used to toggle the menu on smaller screens when clicking on the menu button
 function openNav() {
   var x = document.getElementById("navDemo");

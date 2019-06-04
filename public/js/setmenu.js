@@ -5,13 +5,20 @@ var fat = 0;
 var allergies = [];
 var index = 1;
 let list = "";
+let d;
+
 const profileId = new URLSearchParams(window.location.search).get('userId');
-const userId = Cookies.get('userId');
+console.log(profileId);
+if (new URLSearchParams(window.location.search).has('date'))
+    d = new Date(new URLSearchParams(window.location.search).get('date'));
+else
+    d = new Date();
 
 window.onload = () => {
-    
 
 
+    const userId = Cookies.get('userId');
+    console.log(userId);
     if (userId) {
         db.collection('users').doc(profileId).get().then(doc => {
             if (doc.exists) {
@@ -129,7 +136,7 @@ function verify() {
                             flag = 0;
                             a = recipe.ing[j];
                             break;
-                            
+
                         }
                     }
                 }
@@ -138,42 +145,42 @@ function verify() {
         });
     }
     setTimeout(function () {
-        
-    console.log(cal + " " + carbo + " " + protein + " " + fat);
-    console.log(sum_cal + " " + sum_carbo + " " + sum_protein + " " + sum_fat);
+
+        console.log(cal + " " + carbo + " " + protein + " " + fat);
+        console.log(sum_cal + " " + sum_carbo + " " + sum_protein + " " + sum_fat);
         if (sum_cal > cal)
-             alert("Calories over limit: " + cal + "! Yours: " + sum_cal );
+            alert("Calories over limit: " + cal + "! Yours: " + sum_cal);
         else if (sum_carbo > carbo)
-         alert("Carbohydrates over limit: " + carbo + "! Yours: " + sum_carbo);
+            alert("Carbohydrates over limit: " + carbo + "! Yours: " + sum_carbo);
         else if (sum_protein > protein)
-         alert("Protein over limit: " + protein  + "! Yours: " + sum_protein );
+            alert("Protein over limit: " + protein + "! Yours: " + sum_protein);
         else if (sum_fat > fat)
-         alert("Fat over limit: " + fat + "! Yours: " + sum_fat );
+            alert("Fat over limit: " + fat + "! Yours: " + sum_fat);
         else if (flag == 0)
-         alert("Client allergic to: " + a);
-         else alert("Meniu is OK!");
+            alert("Client allergic to: " + a);
+        else alert("Meniu is OK!");
     }, 500);
 }
 
-function setMenu(){
+function setMenu() {
     verify();
-    window.alert = function() { }; 
-        const menu={
-            id_nutri: userId,
-            id_user: profileId,
-            date: new Date(),
-            description: [],
-            is_done:false,
-            meals: []
-        }
-        for (i = 1; i < index; i++) {
-         menu.meals.push(document.getElementById("options" + i).value);
-         menu.description.push(document.getElementById("dets"+i).value);
-        }
-        db.collection('menus').add(menu).then(docRef => {
-  
-            window.location.href = './DayMenu.html?menuId='+docRef.id;
-        });
+    window.alert = function () { };
+    const menu = {
+        id_nutri: userId,
+        id_user: profileId,
+        date: d,
+        description: [],
+        is_done: false,
+        meals: []
+    }
+    for (i = 1; i < index; i++) {
+        menu.meals.push(document.getElementById("options" + i).value);
+        menu.description.push(document.getElementById("dets" + i).value);
+    }
+    db.collection('menus').add(menu).then(docRef => {
+
+        window.location.href = './DayMenu.html?menuId=' + docRef.id;
+    });
 }
 // Used to toggle the menu on smaller screens when clicking on the menu button
 function openNav() {

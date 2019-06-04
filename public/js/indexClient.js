@@ -30,7 +30,7 @@ window.onload = () => {
                   <p>Waistline: '+ user.waistline[user.waistline.length - 1] + ' cm</p>\
                   <p>Butt: '+ user.butt[user.butt.length - 1] + ' cm</p>\
                   <p>Thighs: '+ user.thighs[user.thighs.length - 1] + ' cm</p>\
-                  <p>Level of activity: '+ user.lvl_activity[user.lvl_activity.length - 1] + '</p>';
+                  <p>Level of activity: '+ user.activity[user.activity.length - 1] + '</p>';
           document.getElementById("Demo3").innerHTML += '\
                   <p>Calories: '+ user.nutrition[0] + ' kcal</p>\
                   <p>Carbohydrates: '+ user.nutrition[1] + ' grams</p>\
@@ -40,10 +40,12 @@ window.onload = () => {
       }
       );
       var vec_menu=[];
-      db.collection('menus').where('userId','==',userId).get().then(querySnapshot => {
+      console.log(userId);
+      db.collection('menus').where('id_user','==',userId).get().then(querySnapshot => {
         querySnapshot.forEach(function (doc) {
             const menu = doc.data()
             const date = menu.date.toDate();
+            console.log(date);
             if((menu.date.toDate().getUTCDate() == objToday.getUTCDate()) && (menu.date.toDate().getMonth() == objToday.getMonth()) && (menu.date.toDate().getFullYear() == objToday.getFullYear()))//adica e egal
                   { 
                     let i;
@@ -63,7 +65,7 @@ window.onload = () => {
               <p>Protein: '+recipe.nutrition[2]+'</p>\
               <p>Fat: '+recipe.nutrition[3]+'</p>\
               <hr class="w3-clear">\
-              <button onclick="done('+"'"+desc+"'"+')" id="'+desc+'"\
+              <button onclick="done('+"'"+desc+"'"+','+"'"+doc.id+"'"+')" id="'+desc+'"\
                class="w3-button w3-theme-d1 w3-margin-bottom" ><i class="fa fa-check"></i>\
                  Done</button>\
               <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html?recipeId='+doc.id+'"><i class="fa fa-bars"></i>\
@@ -75,16 +77,87 @@ window.onload = () => {
             
         })
     });
+    db.collection('appointments').where('id_user','==',userId).get().then(querySnapshot => {
+      querySnapshot.forEach(function (doc) {
+          const apoint = doc.data();
+          const date=apoint.date.toDate();
+          if(apoint.isAccepted==true && (date>=new Date())){
+            document.getElementById("apoint").innerHTML+='<div class="w3-card w3-round w3-white w3-center">\
+            <div class="w3-container">\
+              <p>Upcoming Appointment:</p>\
+              <img src="./media/calendar.png" alt="Calendar" style="width:50%"><br>\
+              <p>'+date.getHours()+":"+date.getMinutes()+"  "+date.getUTCDate()+"-"+date.getMonth()+"-"+date.getFullYear()+'</p>\
+              <p>Details: '+apoint.details+'</p>\
+            </div>\
+          </div>\
+          <br>';
+          }
+          else{
+             document.getElementById("apoint").innerHTML+='<div  id="'+doc.id+'" class="w3-card w3-round w3-white w3-center">\
+             <div class="w3-container">\
+               <p>Appointment</p>\
+               <img src="./media/calendar.png" alt="Calendar" style="width:50%"><br>\
+               <span>'+date.getUTCDate()+"-"+date.getMonth()+"-"+date.getFullYear()+"  "+date.getHours()+":"+date.getMinutes()+'</span>\
+               <div class="w3-row w3-opacity">\
+                 <div class="w3-half">\
+                   <button onclick="accept(1,'+"'"+doc.id+"'"+')" class="w3-button w3-block w3-green w3-section" title="Accept"><i\
+                       class="fa fa-check"></i></button>\
+                 </div>\
+                 <div class="w3-half">\
+                   <button onclick="accept(0,'+"'"+doc.id+"'"+')" class="w3-button w3-block w3-red w3-section" title="Decline"><i\
+                       class="fa fa-remove"></i></button>\
+                 </div>\
+               </div>\
+             </div>\
+           </div>\
+           <br>';
+          }
+      });
+    });
     }
   }
   
-  function done(i){
+  function accept(i,id){
+    if(i==0){//decline
+      document.getElementById(id).setAttribute("style","display:none");
+      db.collection('appointments').doc(id).delete().then(function() {
+        console.log("Document successfully deleted!");
+    }).catch(function(error) {
+        console.error("Error removing document: ", error);
+    });
+    }
+    else {
+      a={
+        isAccepted: true
+      }
+      db.collection('appointments').doc(id).set({ ...a }, { merge: true }).then(function() {
+        db.collection('appointments').doc(id).get().then(doc => {
+          document.getElementById(id).setAttribute("style","display:none");
+          const apoint=doc.data();
+          const date=apoint.date.toDate();
+          document.getElementById("apoint").innerHTML+='<div class="w3-card w3-round w3-white w3-center">\
+              <div class="w3-container">\
+                <p>Upcoming Appointment:</p>\
+                <img src="./media/calendar.png" alt="Calendar" style="width:50%"><br>\
+                <p>'+date.getHours()+":"+date.getMinutes()+"  "+date.getUTCDate()+"-"+date.getMonth()+"-"+date.getFullYear()+'</p>\
+                <p>Details: '+apoint.details+'</p>\
+              </div>\
+            </div>\
+            <br>'
+        });
+      });
+    }
+  }
+  function done(i,menuId){
     done_contor++; 
     document.getElementById(i).disabled = true; 
     if(done_contor==nr_meals)
-          {db.collection('menus').doc(menuId).get().update({is_done: true});
-          alert("Congratulations you finished todays menu!");}
-}
+          {a={
+            is_done: true
+          }
+          db.collection('appointments').doc(menuId).set({ ...a }, { merge: true }).then(function(){
+          alert("Congratulations you finished todays menu!");});
+}}
   function formatDate(date) {
     var monthNames = [
       "January", "February", "March",

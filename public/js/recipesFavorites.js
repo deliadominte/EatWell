@@ -7,12 +7,14 @@ window.onload = () => {
             if (doc.exists) {
                 const user = doc.data();
                 flag=1;
-                    document.getElementById("nav").innerHTML += '<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"\
+                document.getElementById("nav").innerHTML = '<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"\
                 href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>\
               <a href="./index.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"\
                 style="font-family: '+ "'Exo'" + ', sans-serif;"><i class="fa fa-home w3-margin-right"></i>EatWell</a>\
               <a href="./SettingsClient.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"\
                 title="Account"><i class="fa fa-user"></i></a>\
+                <a href="./MenuDetsClient.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"\
+                title="Meniu Calendar"><i class="fa fa-bars"></i></a>\
               <a href="./ProgressClient.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"\
                 title="Progress"><i class="fa fa-line-chart"></i></a>\
               <div class="w3-dropdown-hover w3-hide-small">\
@@ -23,14 +25,15 @@ window.onload = () => {
                   <a href="./MessagesClient.html" class="w3-bar-item w3-button">New Message</a>\
                 </div>\
               </div>';
-                    document.getElementById("navDemo").innerHTML += '\
+                    document.getElementById("navDemo").innerHTML = '\
                 <a href="./SettingsClient.html" class="w3-bar-item w3-button w3-padding-large">Account</a>\
+                <a href="./MenuDetsClient.html" class="w3-bar-item w3-button w3-padding-large">Menu Calendar</a>\
                 <a href="./ProgressClient.html" class="w3-bar-item w3-button w3-padding-large">Progress</a>';
-                
+              
             }
         });
         if(flag==0){
-                document.getElementById("nav").innerHTML += '<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"\
+                document.getElementById("nav").innerHTML = '<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"\
             href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>\
           <a href="./indexNutri.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"\
             style="font-family: '+ "'Exo'" + ', sans-serif;"><i class="fa fa-home w3-margin-right"></i>EatWell</a>\
@@ -46,7 +49,7 @@ window.onload = () => {
               <a href="./MessagesList.html" class="w3-bar-item w3-button">New Message</a>\
             </div>\
           </div>';
-                document.getElementById("navDemo").innerHTML += '<a href="./RecipesList.html" class="w3-bar-item w3-button w3-padding-large">Recipes</a>\
+                document.getElementById("navDemo").innerHTML = '<a href="./RecipesList.html" class="w3-bar-item w3-button w3-padding-large">Recipes</a>\
             <a href="./Apointments.html" class="w3-bar-item w3-button w3-padding-large">Apointments</a>';
         }
         const userI = new URLSearchParams(window.location.search).get('userId');

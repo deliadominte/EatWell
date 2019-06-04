@@ -13,7 +13,6 @@ var objToday = new Date(),
 var today = curHour + ":" + curMinute + "." + curSeconds + curMeridiem + " " + dayOfWeek + " " + dayOfMonth + " of " + curMonth + ", " + curYear;
 window.onload = () => {
     const userId = Cookies.get('userId');
-    const profileId = new URLSearchParams(window.location.search).get('userId');
 
     if (!userId) {
         window.location.href = './LoginNutri.html';
@@ -32,13 +31,13 @@ window.onload = () => {
             document.getElementById("weekdays").innerHTML += week[i % 7];
             console.log(week[i % 7]);
         }
-        var maxDay = new Date(curYear, objToday.getMonth(), 0).getDate();
+        var maxDay = new Date(curYear, objToday.getMonth()+1, 0).getDate();
         var d = new Date(curYear, objToday.getMonth(), 1);
-        console.log(maxDay);
-        for (i = 1; i < maxDay - 1; i++) {
-            f(d, profileId, objToday, i).then(d = new Date(curYear, objToday.getMonth(), i + 1));
+        // console.log(d);
+        for (i = 1; i < maxDay; i++) {
+            f(d, userId, objToday, i).then(d = new Date(curYear, objToday.getMonth(), i+1));
         }
-        f(d, profileId, objToday, i).then();
+        f(d, userId, objToday, i).then();
     }
 }
 
@@ -53,48 +52,53 @@ function openNav() {
     }
 }
 
-async function f(d, profileId, today, i) {
+async function f(d, userId, today, i) {
     let flag = 0;
     let done = false;
-    console.log(d);
-    if ((d.getUTCDate() == today.getUTCDate()) && (d.getMonth() == today.getMonth()) && (d.getFullYear() == today.getFullYear())) {
-        console.log("azi " + today);
-        document.getElementById("days").innerHTML += '<li id="li' + i + '"><a href="./SetMenu.html?userId=' + profileId + '&date='+d.getUTCDate()+'-'+d.getMonth()+'-'+d.getFullYear()+'" title="Set the menu"><span class="active">' + i + '</span></a></li>';
+    
+    if ((d.getDate() == today.getDate()) && (d.getMonth() == today.getMonth()) && (d.getFullYear() == today.getFullYear())) {
+        
+        console.log(i+" "+d);
+        console.log("azi " + today.getUTCDate());
+        document.getElementById("days").innerHTML += '<li id="li' + i + '"><a href="./SetMenu.html?userId=' + userId + '" title="Set the menu"><span class="active">' + i + '</span></a></li>';
     }
     else if (d > today) {
-        console.log("dupa azi " + today);
-        document.getElementById("days").innerHTML += '<li id="li' + i + '"><a href="./SetMenu.html?userId=' + profileId+ '&date='+d.getUTCDate()+'-'+d.getMonth()+'-'+d.getFullYear() + '" title="Set the menu">' + i + '</a></li>';
+        // console.log(i+" "+d);
+        // console.log("dupa azi " + today);
+        document.getElementById("days").innerHTML += '<li id="li' + i + '"><a href="" title="No data">'+i+'</i></a></li>'
     } else {
-        console.log("inainte de azi " + today);
-        document.getElementById("days").innerHTML += '<li id="li' + i + '"><a href="" title="No data"><i class="	fa fa-remove"></i></a></li>';
+        // console.log(i+" "+d);
+        // console.log("inainte de azi " + today);
+        document.getElementById("days").innerHTML += '<li id="li' + i + '"><a href="" title="No data">'+i+'</i></a></li>';
     }
-    db.collection('menus').where('id_user', '==', profileId).get().then(querySnapshot => {
+    db.collection('menus').where('id_user', '==', userId).get().then(querySnapshot => {
         querySnapshot.forEach(function (doc) {
             const menu = doc.data();
+            
             // console.log(menu.date.toDate());
             // console.log(d);
             // console.log((menu.date.toDate().getDay() == d.getDay()) && (menu.date.toDate().getMonth() == d.getMonth()) && (menu.date.toDate().getFullYear() == d.getFullYear()));
-            if ((menu.date.toDate().getUTCDate() == d.getUTCDate()) && (menu.date.toDate().getMonth() == d.getMonth()) && (menu.date.toDate().getFullYear() == d.getFullYear()))//adica e egal
+            if ((menu.date.toDate().getDate() == d.getDate()) && (menu.date.toDate().getMonth() == d.getMonth()) && (menu.date.toDate().getFullYear() == d.getFullYear()))//adica e egal
             {
-                console.log("facus");
+                // console.log("facus");
                 flag = doc.id;
                 done = menu.is_done;
-                if ((d.getUTCDate() == today.getUTCDate()) && (d.getMonth() == today.getMonth()) && (d.getFullYear() == today.getFullYear())){
+                if ((d.getDate() == today.getDate()) && (d.getMonth() == today.getMonth()) && (d.getFullYear() == today.getFullYear())){
                     if (done == true)
                         document.getElementById("li" + i).innerHTML = '<li><a href="./DayMenu.html?menuId=' + flag + '" title="Client finished the menu"><span class="active"><i class="fa fa-check"></i></span></a></li>';
-                    else document.getElementById("li" + i).innerHTML = '<li><a href="./DayMenu.html?menuId=' + flag + '" title="Menu was set"><span class="active">' + i + '</span></a></li>';
+                    else document.getElementById("li" + i).innerHTML = '<li><a href="./DayMenu.html?menuId=' + flag + '" title="Menu was set"><span class="active">' +i+'</span></a></li>';
                 } 
                 else {
                     if (d > today) {
                         if (done == true)
                             document.getElementById("li" + i).innerHTML = '<li><a href="" title="No data"><i class="	fa fa-remove"></i></a></li>';
                         else
-                            document.getElementById("li" + i).innerHTML = '<li><a href="./DayMenu.html?menuId=' + flag + '" title="Menu was set"><span class="set">' + i + '</span></a></a></li>';
+                            document.getElementById("li" + i).innerHTML = '<li><a href="./DayMenu.html?menuId=' + flag + '" title="Menu was set"><span class="set">' +i+'</span></a></a></li>';
                     } else {
                         if (done == true)
                             document.getElementById("li" + i).innerHTML = '<li><a href="./DayMenu.html?menuId=' + flag + '" title="Client finished the menu"><i class="fa fa-check"></i></a></li>';
                         else
-                            document.getElementById("li" + i).innerHTML = '<li><a href="./DayMenu.html?menuId=' + flag + '" title="Client did not finished the menu">' + i + '</i></a></li>';
+                            document.getElementById("li" + i).innerHTML = '<li><a href="./DayMenu.html?menuId=' + flag + '" title="Client did not finished the menu">' +i+'</i></a></li>';
                     }
                 }
             }

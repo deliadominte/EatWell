@@ -32,7 +32,7 @@ window.onload = () => {
                 <p>Waistline: '+ user.waistline[user.waistline.length - 1] + ' cm</p>\
                 <p>Butt: '+ user.butt[user.butt.length - 1] + ' cm</p>\
                 <p>Thighs: '+ user.thighs[user.thighs.length - 1] + ' cm</p>\
-                <p>Level of activity: '+ user.lvl_activity[user.lvl_activity.length - 1] + '</p>';
+                <p>Level of activity: '+ user.activity[user.activity.length - 1] + '</p>';
         document.getElementById("Demo3").innerHTML += '\
                 <p>Calories: '+ user.nutrition[0] + ' kcal</p>\
                 <p>Carbohydrates: '+ user.nutrition[1] + ' grams</p>\

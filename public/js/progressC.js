@@ -17,7 +17,10 @@ window.onload = function () {
             { x: new Date(2017, 8, 11), y: 65 }
         ];
 
-        const profileId = new URLSearchParams(window.location.search).get('userId');
+        let profileId;
+        if(new URLSearchParams(window.location.search).get('userId'))
+          profileId = new URLSearchParams(window.location.search).get('userId');
+        else  profileId = userId;
         let array=[{ x: new Date(2000, 1, 1), y: 0 }];
 
         db.collection('users').doc(profileId).get().then(doc => {
@@ -108,30 +111,33 @@ window.onload = function () {
             if (doc.exists) {
                 const user = doc.data();
                 flag = 1;
-                document.getElementById("nav").innerHTML += '<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"\
-                  href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>\
-                <a href="./index.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"\
-                  style="font-family: '+ "'Exo'" + ', sans-serif;"><i class="fa fa-home w3-margin-right"></i>EatWell</a>\
-                <a href="./SettingsClient.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"\
-                  title="Account"><i class="fa fa-user"></i></a>\
-                <a href="./ProgressClient.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"\
-                  title="Progress"><i class="fa fa-line-chart"></i></a>\
-                <div class="w3-dropdown-hover w3-hide-small">\
-                  <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span\
-                      class="w3-badge w3-right w3-small w3-green">2</span></button>\
-                  <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">\
-                    <a href="./index.html" class="w3-bar-item w3-button">One new Appointment</a>\
-                    <a href="./MessagesClient.html" class="w3-bar-item w3-button">New Message</a>\
-                  </div>\
-                </div>';
-                document.getElementById("navDemo").innerHTML += '\
-                  <a href="./SettingsClient.html" class="w3-bar-item w3-button w3-padding-large">Account</a>\
-                  <a href="./ProgressClient.html" class="w3-bar-item w3-button w3-padding-large">Progress</a>';
-
+                document.getElementById("nav").innerHTML = '<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"\
+                    href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>\
+                  <a href="./index.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"\
+                    style="font-family: '+ "'Exo'" + ', sans-serif;"><i class="fa fa-home w3-margin-right"></i>EatWell</a>\
+                  <a href="./SettingsClient.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"\
+                    title="Account"><i class="fa fa-user"></i></a>\
+                    <a href="./MenuDetsClient.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"\
+                    title="Meniu Calendar"><i class="fa fa-bars"></i></a>\
+                  <a href="./ProgressClient.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"\
+                    title="Progress"><i class="fa fa-line-chart"></i></a>\
+                  <div class="w3-dropdown-hover w3-hide-small">\
+                    <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span\
+                        class="w3-badge w3-right w3-small w3-green">2</span></button>\
+                    <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">\
+                      <a href="./index.html" class="w3-bar-item w3-button">One new Appointment</a>\
+                      <a href="./MessagesClient.html" class="w3-bar-item w3-button">New Message</a>\
+                    </div>\
+                  </div>';
+                        document.getElementById("navDemo").innerHTML = '\
+                    <a href="./SettingsClient.html" class="w3-bar-item w3-button w3-padding-large">Account</a>\
+                    <a href="./MenuDetsClient.html" class="w3-bar-item w3-button w3-padding-large">Menu Calendar</a>\
+                    <a href="./ProgressClient.html" class="w3-bar-item w3-button w3-padding-large">Progress</a>';
+                  
             }
         });
         if (flag == 0) {
-            document.getElementById("nav").innerHTML += '<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"\
+            document.getElementById("nav").innerHTML = '<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"\
               href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>\
             <a href="./indexNutri.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"\
               style="font-family: '+ "'Exo'" + ', sans-serif;"><i class="fa fa-home w3-margin-right"></i>EatWell</a>\
@@ -147,7 +153,7 @@ window.onload = function () {
                 <a href="./MessagesList.html" class="w3-bar-item w3-button">New Message</a>\
               </div>\
             </div>';
-            document.getElementById("navDemo").innerHTML += '<a href="./RecipesList.html" class="w3-bar-item w3-button w3-padding-large">Recipes</a>\
+            document.getElementById("navDemo").innerHTML = '<a href="./RecipesList.html" class="w3-bar-item w3-button w3-padding-large">Recipes</a>\
               <a href="./Apointments.html" class="w3-bar-item w3-button w3-padding-large">Apointments</a>';
         }
         db.collection('users').doc(profileId).get().then(doc => {
@@ -162,7 +168,7 @@ window.onload = function () {
           <p>Waistline: '+ user.waistline[user.waistline.length - 1] + ' cm</p>\
           <p>Butt: '+ user.butt[user.butt.length - 1] + ' cm</p>\
           <p>Thighs: '+ user.thighs[user.thighs.length - 1] + ' cm</p>\
-          <p>Level of activity: '+ user.lvl_activity[user.lvl_activity.length - 1] + '</p>';
+          <p>Level of activity: '+ user.activity[user.activity.length - 1] + '</p>';
                 document.getElementById("goal").innerHTML += user.goal[user.goal.length - 1];
                 document.getElementById("weight").innerHTML += user.weight[user.weight.length - 1];
                 document.getElementById("prog").innerHTML += Math.floor(100 - ((user.weight[user.weight.length - 1] - user.goal[user.goal.length - 1]) * 100) / (fmax(user.weight) - user.goal[user.goal.length - 1])) + "%";
