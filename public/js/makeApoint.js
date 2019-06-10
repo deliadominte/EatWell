@@ -51,6 +51,15 @@ window.onload = () => {
               </div>\
               <br>';
           });
+          const notif={
+            id_user: profileId,
+            text:"New Appointment! Please accept or decline!",
+            date: new Date(),
+            to_check_date: false,
+            href: "./index.html"
+          }
+          db.collection('notifications').add(notif).then();
+
         }}, 1000);
     
   }

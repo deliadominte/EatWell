@@ -43,11 +43,14 @@ window.onload = () => {
       );
       var vec_menu=[];
       console.log(userId);
+      let flag=0;
       db.collection('menus').where('id_user','==',userId).get().then(querySnapshot => {
         querySnapshot.forEach(function (doc) {
             const menu = doc.data()
             const date = menu.date.toDate();
             console.log(date);
+            flag=1;
+
             if((menu.date.toDate().getUTCDate() == objToday.getUTCDate()) && (menu.date.toDate().getMonth() == objToday.getMonth()) && (menu.date.toDate().getFullYear() == objToday.getFullYear()))//adica e egal
                   { 
                     let i;
@@ -58,22 +61,40 @@ window.onload = () => {
                         db.collection('recipes').doc(menu.meals[i]).get().then(doc => {
                             if (doc.exists) {
                                 const recipe= doc.data();
-                    document.getElementById("meals").innerHTML+='<div class="w3-container w3-card w3-white w3-round w3-margin"><br>\
-              <span class="w3-right w3-opacity">'+desc+'</span>\
-              <h4 class="w3-left-align w3-margin-left">'+recipe.name+'</h4>\
-              <hr class="w3-clear">\
-              <p>Calories: '+recipe.nutrition[0]+'</p>\
-              <p>Carbohydrates: '+recipe.nutrition[1]+'</p>\
-              <p>Protein: '+recipe.nutrition[2]+'</p>\
-              <p>Fat: '+recipe.nutrition[3]+'</p>\
-              <hr class="w3-clear">\
-              <button onclick="done('+"'"+desc+"'"+','+"'"+doc.id+"'"+')" id="'+desc+'"\
-               class="w3-button w3-theme-d1 w3-margin-bottom" ><i class="fa fa-check"></i>\
-                 Done</button>\
-              <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html?recipeId='+doc.id+'"><i class="fa fa-bars"></i>\
-                 See Recipe</a>\
-               </div>';
+                                if(i==0){ document.getElementById("meals").innerHTML='<div class="w3-container w3-card w3-white w3-round w3-margin"><br>\
+                                <span class="w3-right w3-opacity">'+desc+'</span>\
+                                <h4 class="w3-left-align w3-margin-left">'+recipe.name+'</h4>\
+                                <hr class="w3-clear">\
+                                <p>Calories: '+recipe.nutrition[0]+'</p>\
+                                <p>Carbohydrates: '+recipe.nutrition[1]+'</p>\
+                                <p>Protein: '+recipe.nutrition[2]+'</p>\
+                                <p>Fat: '+recipe.nutrition[3]+'</p>\
+                                <hr class="w3-clear">\
+                                <button onclick="done('+"'"+desc+"'"+','+"'"+doc.id+"'"+')" id="'+desc+'"\
+                                 class="w3-button w3-theme-d1 w3-margin-bottom" ><i class="fa fa-check"></i>\
+                                   Done</button>\
+                                <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html?recipeId='+doc.id+'"><i class="fa fa-bars"></i>\
+                                   See Recipe</a>\
+                                 </div>';
+
+                                }else{
+                                  document.getElementById("meals").innerHTML+='<div class="w3-container w3-card w3-white w3-round w3-margin"><br>\
+                                  <span class="w3-right w3-opacity">'+desc+'</span>\
+                                  <h4 class="w3-left-align w3-margin-left">'+recipe.name+'</h4>\
+                                  <hr class="w3-clear">\
+                                  <p>Calories: '+recipe.nutrition[0]+'</p>\
+                                  <p>Carbohydrates: '+recipe.nutrition[1]+'</p>\
+                                  <p>Protein: '+recipe.nutrition[2]+'</p>\
+                                  <p>Fat: '+recipe.nutrition[3]+'</p>\
+                                  <hr class="w3-clear">\
+                                  <button onclick="done('+"'"+desc+"'"+','+"'"+doc.id+"'"+')" id="'+desc+'"\
+                                   class="w3-button w3-theme-d1 w3-margin-bottom" ><i class="fa fa-check"></i>\
+                                     Done</button>\
+                                  <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html?recipeId='+doc.id+'"><i class="fa fa-bars"></i>\
+                                     See Recipe</a>\
+                                   </div>';}
                document.getElementById(desc).disabled = menu.is_done; 
+
                   }});
                 }}
             
@@ -86,10 +107,10 @@ window.onload = () => {
           if(apoint.isAccepted==true && (date>=new Date())){
             document.getElementById("apoint").innerHTML+='<div class="w3-card w3-round w3-white w3-center">\
             <div class="w3-container">\
-              <p>Upcoming Appointment:</p>\
+              <p><strong>Upcoming Appointment:</strong></p>\
               <img src="./media/calendar.png" alt="Calendar" style="width:50%"><br>\
               <p>'+date.getHours()+":"+date.getMinutes()+"  "+date.getUTCDate()+"-"+date.getMonth()+"-"+date.getFullYear()+'</p>\
-              <p>Details: '+apoint.details+'</p>\
+              <p><strong>Details: </strong>'+apoint.details+'</p>\
             </div>\
           </div>\
           <br>';
@@ -97,7 +118,7 @@ window.onload = () => {
           else{
              document.getElementById("apoint").innerHTML+='<div  id="'+doc.id+'" class="w3-card w3-round w3-white w3-center">\
              <div class="w3-container">\
-               <p>Appointment</p>\
+               <p><strong>Appointment: </strong></p>\
                <img src="./media/calendar.png" alt="Calendar" style="width:50%"><br>\
                <span>'+date.getUTCDate()+"-"+date.getMonth()+"-"+date.getFullYear()+"  "+date.getHours()+":"+date.getMinutes()+'</span>\
                <div class="w3-row w3-opacity">\
@@ -121,9 +142,21 @@ window.onload = () => {
   
   function accept(i,id){
     if(i==0){//decline
+      const userId = Cookies.get('userId');
       document.getElementById(id).setAttribute("style","display:none");
       db.collection('appointments').doc(id).delete().then(function() {
-        console.log("Document successfully deleted!");
+        db.collection('users').doc(userId).get().then(doc => {
+          if (doc.exists) {
+            const user = doc.data();
+        const notif={
+          id_user: user.id_nutri,
+          text: user.username+" declined your appointment!",
+          date: new Date(),
+          to_check_date: false,
+          href: "./MakeApoint.html?userId="+userId
+        }
+        db.collection('notifications').add(notif).then();
+        console.log("Document successfully deleted!");}});
     }).catch(function(error) {
         console.error("Error removing document: ", error);
     });
@@ -146,10 +179,63 @@ window.onload = () => {
               </div>\
             </div>\
             <br>'
+            db.collection('users').doc(userId).get().then(doc => {
+              if (doc.exists) {
+                const user = doc.data();
+            const notif={//notificare ca a acceptat programarea
+              id_user: user.id_nutri,
+              text: user.username+" accepted your appointment!",
+              date: new Date(),
+              to_check_date: false,
+              href: "./MakeApoint.html?userId="+userId
+            }
+            db.collection('notifications').add(notif).then();
+    
+            var date_before = new Date(date);
+            date_before.setDate( date.getDate() - 1 );
+
+            const notif_nutri1={//notificare care va aparea doar in cazul in care e cu o zi inainte , sau in ziua programarii
+              id_user: user.id_nutri,
+              text: "You have an appointment tomorrow with "+user.username+"!",
+              date: date_before,
+              to_check_date: true,
+              href: "./MakeApoint.html?userId="+userId
+            }
+            db.collection('notifications').add(notif_nutri1).then();
+    
+            const notif_nutri2={
+              id_user: user.id_nutri,
+              text: "You have an appointment today with "+user.username+"!",
+              date: date,
+              to_check_date: true,
+              href: "./MakeApoint.html?userId="+userId
+            }
+            db.collection('notifications').add(notif_nutri2).then();
+
+            const notif_client1={
+              id_user: userId,
+              text: "You have an appointment tomorrow",
+              date: date_before,
+              to_check_date: true,
+              href: "./index.html"
+            }
+            db.collection('notifications').add(notif_client1).then();
+            
+            const notif_client2={
+              id_user: userId,
+              text:"You have an appointment today!",
+              date: date,
+              to_check_date: true,
+              href: "./index.html"
+            }
+            db.collection('notifications').add(notif_client2).then();
+          }
         });
-      });
-    }
+        });});
   }
+
+}
+  
   function done(i,menuId){
     done_contor++; 
     document.getElementById(i).disabled = true; 

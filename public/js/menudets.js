@@ -56,7 +56,7 @@ function openNav() {
 async function f(d, profileId, today, i) {
     let flag = 0;
     let done = false;
-    console.log(d);
+    console.log("ddddd"+ profileId);
     if ((d.getUTCDate() == today.getUTCDate()) && (d.getMonth() == today.getMonth()) && (d.getFullYear() == today.getFullYear())) {
         console.log("azi " + today);
         document.getElementById("days").innerHTML += '<li id="li' + i + '"><a href="./SetMenu.html?userId=' + profileId + '&date='+d.getUTCDate()+'-'+d.getMonth()+'-'+d.getFullYear()+'" title="Set the menu"><span class="active">' + i + '</span></a></li>';

@@ -163,6 +163,7 @@ function verify() {
 }
 
 function setMenu() {
+    const userId = Cookies.get('userId');
     verify();
     window.alert = function () { };
     const menu = {

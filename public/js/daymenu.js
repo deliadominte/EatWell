@@ -21,13 +21,12 @@ window.onload = () => {
                 title="Meniu Calendar"><i class="fa fa-bars"></i></a>\
               <a href="./ProgressClient.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"\
                 title="Progress"><i class="fa fa-line-chart"></i></a>\
-              <div class="w3-dropdown-hover w3-hide-small">\
+                <div class="w3-dropdown-hover w3-hide-small">\
                 <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span\
-                    class="w3-badge w3-right w3-small w3-green">2</span></button>\
-                <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">\
-                  <a href="./index.html" class="w3-bar-item w3-button">One new Appointment</a>\
-                  <a href="./MessagesClient.html" class="w3-bar-item w3-button">New Message</a>\
-                 </div>\
+                    id="nrNotif" class="w3-badge w3-right w3-small w3-green"></span></button>\
+                <div id="notif" class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">\
+                  \
+                </div>\
               </div>\
               <button onclick="logout()" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-theme-d4" title="Logout">\
        <img src="./media/avatar2.png" class="w3-circle w3-theme-d0" style="height:23px;width:23px" alt="Avatar">\
@@ -48,12 +47,11 @@ window.onload = () => {
             title="Recipes"><i class="fa fa-bars"></i></a>\
           <a href="./Apointments.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"\
             title="Apointments"><i class="fa fa-calendar"></i></a>\
-          <div class="w3-dropdown-hover w3-hide-small">\
+            <div class="w3-dropdown-hover w3-hide-small">\
             <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span\
-                class="w3-badge w3-right w3-small w3-green">2</span></button>\
-            <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">\
-              <a href="./Apointments.html" class="w3-bar-item w3-button">One new Appointment</a>\
-              <a href="./MessagesList.html" class="w3-bar-item w3-button">New Message</a>\
+                id="nrNotif" class="w3-badge w3-right w3-small w3-green"></span></button>\
+            <div id="notif" class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">\
+              \
             </div>\
           </div>\
           <button onclick="logout()" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-theme-d4" title="Logout">\
