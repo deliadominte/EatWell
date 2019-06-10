@@ -1,3 +1,4 @@
+toastr.options = {"positionClass": "toast-bottom-left"};
 window.onload = () => {
   const userId = Cookies.get('userId');
   const profileId = new URLSearchParams(window.location.search).get('userId');
@@ -29,7 +30,7 @@ window.onload = () => {
       });
       setTimeout(function () {
         if (flag == 1) {
-          alert("There is another appointment at this date and time!");
+          toastr.warning("There is another appointment at this date and time!");
         }
         else {
           console.log("incepe");

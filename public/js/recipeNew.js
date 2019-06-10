@@ -1,3 +1,4 @@
+toastr.options = {"positionClass": "toast-bottom-left"};
 window.onload = () => {
   const userId = Cookies.get('userId');
 

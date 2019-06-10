@@ -1,3 +1,4 @@
+toastr.options = {"positionClass": "toast-bottom-left"};
 window.onload = () => {
     const userId = Cookies.get('userId');
 
@@ -18,10 +19,10 @@ window.onload = () => {
                             Cookies.set('userId', doc.id);
                             window.location.href = './indexNutri.html';
                         } else {
-                                alert("Incorrect Password!");
+                            toastr.error("Incorrect Password!");
                         }
                 });
-                if(flag==0) alert('Incorrect Username!');
+                if(flag==0) toastr.error('Incorrect Username!');
             });
         }
     } else {

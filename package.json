@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/deliadominte/EatWell#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "toastr": "^2.1.4"
   }
 }

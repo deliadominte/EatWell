@@ -1,3 +1,4 @@
+toastr.options = {"positionClass": "toast-bottom-left"};
 window.onload = () => {
     const userId = Cookies.get('userId');
     if (!userId) {
@@ -29,7 +30,7 @@ window.onload = () => {
                             let flag1=0;
                             querySnapshot.forEach(data => {flag1=1;});
                             if(flag1!=0)
-                            alert('Username already exists!');
+                            toastr.error('Username already exists!');
                             else{
                                 db.collection('users').doc(us_id).set({ ...user }, { merge: true }).then(docRef => {
                                     Cookies.set('userId', us_id);
@@ -42,7 +43,7 @@ window.onload = () => {
                 });
                 
                 if(flag==0)//cazul in care a fost creat contul de catre nutri si a fost transmis codul clientului
-                    alert('The code is not valid!');
+                toastr.error('The code is not valid!');
         });}
     } else {
         var flag=0;

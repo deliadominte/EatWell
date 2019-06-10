@@ -1,5 +1,5 @@
 let done_contor=0, nr_meals;
-
+toastr.options = {"positionClass": "toast-bottom-left"}
 const menuId = new URLSearchParams(window.location.search).get('menuId');
 window.onload = () => {
 
@@ -111,7 +111,7 @@ function done(i){
           is_done: true
         }
         db.collection('appointments').doc(menuId).set({ ...a }, { merge: true }).then(function(){
-        alert("Congratulations you finished todays menu!");});
+          toastr.success("Congratulations you finished todays menu!");});
 }}
 function add_fav(id){
   const userId = Cookies.get('userId');
@@ -127,10 +127,10 @@ function add_fav(id){
           flag=true;
         }
         console.log(flag);
-        if(flag==true) alert("The recipe is already added to your favorites!");
+        if(flag==true) toastr.warning("The recipe is already added to your favorites!");
         else {
           db.collection('user_recipe').doc(id_u_r).update({
-            "id_recipes": firebase.firestore.FieldValue.arrayUnion(id)}).then(alert("Added!"));
+            "id_recipes": firebase.firestore.FieldValue.arrayUnion(id)}).then(toastr.success("Added!"));
     }
     })});
    

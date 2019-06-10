@@ -6,6 +6,7 @@ var allergies = [];
 var index = 1;
 let list = "";
 let d;
+toastr.options = {"positionClass": "toast-bottom-left"};
 
 const profileId = new URLSearchParams(window.location.search).get('userId');
 console.log(profileId);
@@ -149,24 +150,24 @@ function verify() {
         console.log(cal + " " + carbo + " " + protein + " " + fat);
         console.log(sum_cal + " " + sum_carbo + " " + sum_protein + " " + sum_fat);
         if (sum_cal > cal)
-            alert("Calories over limit: " + cal + "! Yours: " + sum_cal);
+            toastr.warning("Calories over limit: " + cal + "! Yours: " + sum_cal);
         else if (sum_carbo > carbo)
-            alert("Carbohydrates over limit: " + carbo + "! Yours: " + sum_carbo);
+            toastr.warning("Carbohydrates over limit: " + carbo + "! Yours: " + sum_carbo);
         else if (sum_protein > protein)
-            alert("Protein over limit: " + protein + "! Yours: " + sum_protein);
+            toastr.warning("Protein over limit: " + protein + "! Yours: " + sum_protein);
         else if (sum_fat > fat)
-            alert("Fat over limit: " + fat + "! Yours: " + sum_fat);
+            toastr.warning("Fat over limit: " + fat + "! Yours: " + sum_fat);
         else if (flag == 0)
-            alert("Client allergic to: " + a);
-        else alert("Meniu is OK!");
+            toastr.warning("Client allergic to: " + a);
+        else {toastr.success("Meniu is OK!"); return 1;}
     }, 500);
+    return 0;
 }
 
 function setMenu() {
     const userId = Cookies.get('userId');
-    verify();
-    window.alert = function () { };
-    const menu = {
+    if (verify()==1)
+    {const menu = {
         id_nutri: userId,
         id_user: profileId,
         date: d,
@@ -181,7 +182,10 @@ function setMenu() {
     db.collection('menus').add(menu).then(docRef => {
 
         window.location.href = './DayMenu.html?menuId=' + docRef.id;
-    });
+    });}
+    else {
+        toastr.error("Please verify again!");
+    }
 }
 // Used to toggle the menu on smaller screens when clicking on the menu button
 function openNav() {
