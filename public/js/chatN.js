@@ -2,20 +2,20 @@
 var socket = io.connect('http://localhost:5500');
 const userId = Cookies.get('userId');
 socket.emit('login',{userId:'YourUserID'});
+const otherId = new URLSearchParams(window.location.search).get('userId');
 
-var otherId;
 window.onload = () => {
         var objToday = new Date();
         if (!userId) {
           window.location.href = './LoginClient.html';
       
         } else {
-db.collection('users').doc(userId).get().then(doc => {
+db.collection('nutritionists').doc(userId).get().then(doc => {
         if (doc.exists) {
-          const user = doc.data();
-          console.log(user.id_nutri);
-          handle.value=user.username;
-          otherId=user.id_nutri;
+            
+          const nutri = doc.data();
+          console.log(nutri.username);
+          handle.value=nutri.username;
         }});
       }
     }
@@ -29,7 +29,7 @@ var message = document.getElementById('message'),
 // Emit events
 btn.addEventListener('click', function(){
     socket.emit('chat', {
-        type: "client",
+        type: "nutri",
         message: message.value,
         handle: handle.value,
         id_sender: userId,
@@ -46,18 +46,20 @@ message.addEventListener('keypress', function(){
 socket.on('chat', function(data){
     feedback.innerHTML = '';
     if((data.id_reciver==userId || data.id_reciver==otherId) && (data.id_sender==userId || data.id_sender==otherId))
-    {if(data.type=='client'){
-      output.innerHTML +='<div class="w3-container w3-card w3-white w3-round w3-margin"><br>\
-      <img src="./media/avatar.png" alt="Avatar" class="w3-right w3-circle w3-margin-left" style="width:60px">\
-      <p class="w3-right w3-margin-left"><strong>' + data.handle + ': </strong>' + data.message + '</p>\
-     </div>';
-  }
-  else{
-      output.innerHTML +='<div class="w3-container w3-card w3-white w3-round w3-margin"><br>\
-      <img src="./media/avatar_doctor.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">\
-      <p class="w3-left w3-margin-left"><strong>' + data.handle + ': </strong>' + data.message + '</p>\
-      </div> ';
-  }}
+    {
+        if(data.type=='nutri'){
+            output.innerHTML +='<div class="w3-container w3-card w3-white w3-round w3-margin"><br>\
+            <img src="./media/avatar_doctor.png" alt="Avatar" class="w3-right w3-circle w3-margin-left" style="width:60px">\
+            <p class="w3-right w3-margin-left"><strong>' + data.handle + ': </strong>' + data.message + '</p>\
+           </div>';
+        }
+        else{
+            output.innerHTML +='<div class="w3-container w3-card w3-white w3-round w3-margin"><br>\
+            <img src="./media/avatar.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">\
+            <p class="w3-left w3-margin-left"><strong>' + data.handle + ': </strong>' + data.message + '</p>\
+            </div> ';
+        }
+    }
 });
 
 socket.on('typing', function(data){
@@ -65,22 +67,6 @@ socket.on('typing', function(data){
     feedback.innerHTML = '<p><em>' + data.handle + ' is typing a message...</em></p>';
 });
 
-function openForm(i) {
-  if (i == 1)
-    document.getElementById("myForm").style.display = "block";
-  else {
-    document.getElementById("myFormC" + i).style.display = "block";
-    if (document.getElementById("myForm"))
-      document.getElementById("myForm").style.display = "none";
-  }
-}
-
-function closeForm(i) {
-  if (i == 1)
-    document.getElementById("myForm").style.display = "none";
-  else
-    document.getElementById("myFormC" + i).style.display = "none";
-}
 
 // const out = document.getElementById("form-container");
 // let c = 0;
@@ -93,8 +79,3 @@ function closeForm(i) {
 //       out.scrollTop = out.scrollHeight - out.clientHeight;
 //     }
 // }, 500)
-
-function openClientM() {
-  openForm(2);
-
-}

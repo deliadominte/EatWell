@@ -28,6 +28,7 @@ window.onload = () => {
         <a href="./MenuDets.html?userId='+doc.id+'" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-bars"></i>  Menu details</a>\
         <a href="./RecipesFavorites.html?userId='+doc.id+'" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-bars"></i>  Favorite Recipes</a>\
         <a href="./MakeApoint.html?userId='+doc.id+'" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-calendar-plus-o"></i>  Make Appointment</a>\
+        <a href="./MessagesNutri.html?userId='+doc.id+'" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-envelope"></i></i>  Open Chat</a>\
       </div>\
       ';
         document.getElementById("container").appendChild(elem);

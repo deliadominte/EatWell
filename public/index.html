@@ -136,7 +136,7 @@ h4{
         <!-- End Right Column -->
       </div>
       <button id="buttonOpen" class="open-button" onclick="openForm(2)">Chat</button>
-      <div class="chat-popup" id="myFormC" >
+      <div class="chat-popup" id="myFormC2" >
         <form class="form-container" id="form-container">
           <h1>Chat</h1>
            <div id="output"></div>
@@ -144,6 +144,7 @@ h4{
           <textarea id="message" placeholder="Type message.." name="msg" required></textarea>
       
           <button type="submit" id="send" class="btn">Send</button>
+          <div id="handle" style="display: none"></div>
           <button id="buttonClose" type="button" class="btn cancel" onclick="closeForm(2)">Close</button>
         </form>
       </div>
@@ -166,8 +167,6 @@ h4{
 
 <script src="./js/config-database.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
-<!-- <script src="./js/chat.js"></script> -->
 <script src="./js/indexClient.js"></script>
 <script src="./js/notification.js"></script>
 </body>
