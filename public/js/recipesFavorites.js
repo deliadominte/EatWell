@@ -63,7 +63,10 @@ window.onload = () => {
         db.collection('user_recipe').where('id_user', '==', userI).get().then(querySnapshot => {
             querySnapshot.forEach(function (doc) {
                 const user_rec = doc.data();
-                db.collection('recipes').where(firebase.firestore.FieldPath.documentId(), '==', user_rec.id_recipe).get().then(querySnapshot => {
+                let i;
+                for(i=0;i<user_rec.id_recipes.length;i++){
+                    let id_u_r=user_rec.id_recipes[i];
+                db.collection('recipes').where(firebase.firestore.FieldPath.documentId(), '==', id_u_r).get().then(querySnapshot => {
                     querySnapshot.forEach(function (doc) {
                         ord = ord + 1;
                         let displaystyle;
@@ -90,7 +93,9 @@ window.onload = () => {
                         document.getElementById("container").appendChild(elem);
                     });
                 });
+            }
             });
+    
         });
             let loaded = MAX_LOAD;
             document.getElementById("more-btn").onclick = e => {

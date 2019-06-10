@@ -50,7 +50,11 @@ window.onload = () => {
                             "id_users": firebase.firestore.FieldValue.arrayUnion(id_user)
                         })
                     });});
-                
+                let favorite = {
+                        id_user: id_user,
+                        id_recipes: {}
+                    }
+                db.collection('user_recipe').add(favorite);     
             alert("The new clients code: "+ user.code);
         window.location.href ='./ProfileClient.html?userId='+id_user});
             

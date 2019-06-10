@@ -65,12 +65,14 @@ window.onload = () => {
                 const menu = doc.data();
                 let i;
                 nr_meals=menu.meals.length;
-                console.log(nr_meals);
+                
                 for(i=0;i<nr_meals;i++){
                     let desc=menu.description[i];
+                    let id_meal=menu.meals[i];
                     db.collection('recipes').doc(menu.meals[i]).get().then(doc => {
                         if (doc.exists) {
                             const recipe= doc.data();
+                            console.log(id_meal);
                 document.getElementById("meals").innerHTML+='<div class="w3-container w3-card w3-white w3-round w3-margin"><br>\
           <span class="w3-right w3-opacity">'+desc+'</span>\
           <h4 class="w3-left-align w3-margin-left">'+recipe.name+'</h4>\
@@ -83,6 +85,9 @@ window.onload = () => {
           <button onclick="done('+"'"+desc+"'"+')" id="'+desc+'"\
            class="w3-button w3-theme-d1 w3-margin-bottom" ><i class="fa fa-check"></i>\
              Done</button>\
+            <button onclick="add_fav('+"'"+id_meal+"'"+')" id="'+id_meal+'"\
+            class="w3-button w3-theme-d1 w3-margin-bottom" ><i class="fa fa-plus"></i>\
+              Add to favorite</button>\
           <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html?recipeId='+doc.id+'"><i class="fa fa-bars"></i>\
              See Recipe</a>\
            </div>';
@@ -108,6 +113,28 @@ function done(i){
         db.collection('appointments').doc(menuId).set({ ...a }, { merge: true }).then(function(){
         alert("Congratulations you finished todays menu!");});
 }}
+function add_fav(id){
+  const userId = Cookies.get('userId');
+  
+  db.collection('user_recipe').where('id_user','==',userId).get().then(querySnapshot => {
+    
+    querySnapshot.forEach(function (doc) {
+        const favorite = doc.data();
+        const id_u_r=doc.id;
+        let i,flag=false;
+        for (i=0;i<favorite.id_recipes.length;i++){
+          if(favorite.id_recipes[i]==id)
+          flag=true;
+        }
+        console.log(flag);
+        if(flag==true) alert("The recipe is already added to your favorites!");
+        else {
+          db.collection('user_recipe').doc(id_u_r).update({
+            "id_recipes": firebase.firestore.FieldValue.arrayUnion(id)}).then(alert("Added!"));
+    }
+    })});
+   
+}
 // Used to toggle the menu on smaller screens when clicking on the menu button
 function openNav() {
   var x = document.getElementById("navDemo");

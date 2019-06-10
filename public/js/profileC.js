@@ -11,6 +11,7 @@ window.onload = () => {
 
   } else {
     const profileId = new URLSearchParams(window.location.search).get('userId');
+    document.getElementById("fav").setAttribute("href","./RecipesFavorites.html?userId="+profileId);
     db.collection('users').doc(profileId).get().then(doc => {
       if (doc.exists) {
         const user = doc.data();

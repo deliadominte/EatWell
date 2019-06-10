@@ -5,6 +5,7 @@ window.onload = () => {
     window.location.href = './LoginClient.html';
 
   } else {
+    document.getElementById("fav").setAttribute("href","./RecipesFavorites.html?userId="+userId);
     db.collection('users').doc(userId).get().then(doc => {
       if (doc.exists) {
         const user = doc.data();
