@@ -1,7 +1,11 @@
+toastr.options = {
+  "positionClass": "toast-bottom-left",
+  "tapToDismiss": false
+};
 // Make connection
 var socket = io.connect('http://localhost:5500');
 const userId = Cookies.get('userId');
-socket.emit('login',{userId:'YourUserID'});
+socket.emit('login',{userId:userId});
 const otherId = new URLSearchParams(window.location.search).get('userId');
 
 window.onload = () => {
@@ -67,6 +71,19 @@ socket.on('typing', function(data){
     feedback.innerHTML = '<p><em>' + data.handle + ' is typing a message...</em></p>';
 });
 
+socket.on('nu_e_live', function(data){
+  console.log("nu e live boss");
+  toastr.error("Client isn't online!");
+  const notif={
+   id_user: data.id_reciver,
+   text:"New Message from "+data.handle+": "+data.message,
+   date: new Date(),
+   to_check_date: false,
+   href: "./MessagesClient.html"
+ }
+ db.collection('notifications').add(notif).then();
+});
+
 
 // const out = document.getElementById("form-container");
 // let c = 0;
@@ -79,3 +96,11 @@ socket.on('typing', function(data){
 //       out.scrollTop = out.scrollHeight - out.clientHeight;
 //     }
 // }, 500)
+function logout() {
+  const userId = Cookies.get('userId');
+  if (userId) {
+      Cookies.remove('userId');
+      window.location.href = './LoginClient.html';
+
+  }
+}

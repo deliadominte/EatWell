@@ -27,11 +27,14 @@ io.on('connection', (socket) => {
     // Handle chat event
     socket.on('chat', function (data) {
         // console.log(data);
-        // var i,flag=false;
-        // for(i in users){
-        //     if(users[i]==data.id_sender)
-        //      flag=true; //e online 
-        // }
+        var i,flag=false;
+        for(i in users){
+            if(i==data.id_sender)
+             flag=true; //e online 
+        }
+        if(flag==false){
+            io.sockets.emit('nu_e_live', data);
+        }
         io.sockets.emit('chat', data);
     });
 

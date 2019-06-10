@@ -1,7 +1,11 @@
+toastr.options = {
+  "positionClass": "toast-bottom-left",
+  "tapToDismiss": false
+};
 // Make connection
 var socket = io.connect('http://localhost:5500');
 const userId = Cookies.get('userId');
-socket.emit('login',{userId:'YourUserID'});
+socket.emit('login',{userId: userId});
 
 var otherId;
 window.onload = () => {
@@ -60,6 +64,19 @@ socket.on('chat', function(data){
   }}
 });
 
+socket.on('nu_e_live', function(data){
+   console.log("nu e live boss");
+   toastr.error("Nutritionist isn't online!");
+   const notif={
+    id_user: data.id_reciver,
+    text:"New Message from "+data.handle+": "+data.message,
+    date: new Date(),
+    to_check_date: false,
+    href: "./MessageNutri.html?userId="+data.id_sender
+  }
+  db.collection('notifications').add(notif).then();
+});
+
 socket.on('typing', function(data){
   if((data.id_reciver==userId || data.id_reciver==otherId) && (data.id_sender==userId || data.id_sender==otherId))
     feedback.innerHTML = '<p><em>' + data.handle + ' is typing a message...</em></p>';
@@ -94,7 +111,11 @@ function closeForm(i) {
 //     }
 // }, 500)
 
-function openClientM() {
-  openForm(2);
+function logout() {
+  const userId = Cookies.get('userId');
+  if (userId) {
+      Cookies.remove('userId');
+      window.location.href = './LoginClient.html';
 
+  }
 }

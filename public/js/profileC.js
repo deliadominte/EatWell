@@ -1,20 +1,29 @@
 // https://healthyeater.com/how-to-calculate-your-macros
 // https://shapescale.com/blog/health/nutrition/calculate-macronutrient-ratio/
 //https://www.musclehacking.com/calorie-calculator/
+toastr.options = {
+  "positionClass": "toast-bottom-left",
+  "tapToDismiss": false
+};
 
 window.onload = () => {
+  
   const userId = Cookies.get('userId');
-
   if (!userId) {
     console.log("de");
     window.location.href = './LoginNutri.html';
 
   } else {
     const profileId = new URLSearchParams(window.location.search).get('userId');
-    document.getElementById("fav").setAttribute("href","./RecipesFavorites.html?userId="+profileId);
     db.collection('users').doc(profileId).get().then(doc => {
       if (doc.exists) {
         const user = doc.data();
+        document.getElementById("buttons").innerHTML+='<a href="./ProgressClient.html?userId='+doc.id+'" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-line-chart"></i>  Progress</a> \
+        <a href="./MenuDets.html?userId='+doc.id+'" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-bars"></i>  Menu details</a>\
+        <a href="./RecipesFavorites.html?userId='+doc.id+'" id="fav" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-bars"></i>  Favorite Recipes</a>\
+        <a href="./MakeApoint.html?userId='+doc.id+'" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-calendar-plus-o"></i>  Make Appointment</a>\
+        <a href="./MessagesNutri.html?userId='+doc.id+'" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-envelope"></i></i>  Open Chat</a>\
+        <button type="button" onclick="deleteclient('+"'"+profileId+"'"+')" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-edit"></i> Delete Client</button>';
         console.log(user);
         document.getElementById("username").innerHTML += user.username;
         document.getElementById("place").innerHTML += user.place;
@@ -49,6 +58,31 @@ window.onload = () => {
   }
 }
 
+function deleteclient(id){
+  const userId = Cookies.get('userId');
+  db.collection('nutritionists').doc(userId).update({
+    "id_users": firebase.firestore.FieldValue.arrayRemove(id)});
+  db.collection("user_recipe").where("id_user","==",id).get().then(querySnapshot => {
+    querySnapshot.forEach(function (doc) {
+      const i=doc.id;
+      db.collection("user_recipe").doc(i).delete();})});
+  db.collection("notifications").where("id_user","==",id).get().then(querySnapshot => {
+    querySnapshot.forEach(function (doc) {
+      const i=doc.id;
+      db.collection("notifications").doc(i).delete();})});
+  db.collection("menus").where("id_user","==",id).get().then(querySnapshot => {
+    querySnapshot.forEach(function (doc) {
+      const i=doc.id;
+      db.collection("menus").doc(i).delete();})});
+  db.collection("appointments").where("id_user","==",id).get().then(querySnapshot => {
+    querySnapshot.forEach(function (doc) {
+      const i=doc.id;
+      db.collection("appointments").doc(i).delete();})});
+
+  db.collection("users").doc(id).delete().then(function () {
+    toastr["success"]("The client has been deleted!"+ '<br /><br /><button type="button" onclick="window.location.href = '+"'"+'./indexNutri.html'+"'"+';" class="btn clear">Ok</button>');
+});
+}
 function formatDate(date) {
   var monthNames = [
     "January", "February", "March",
