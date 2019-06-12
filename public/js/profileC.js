@@ -15,7 +15,9 @@ window.onload = () => {
 
   } else {
     const profileId = new URLSearchParams(window.location.search).get('userId');
+    document.getElementById("Demo3").innerHTML+=' <button type="button" id="generatebutton" onclick="calculateMacros('+"'"+profileId+"'"+')" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-edit"></i> Generate Percentage</button>';
     db.collection('users').doc(profileId).get().then(doc => {
+
       if (doc.exists) {
         const user = doc.data();
         document.getElementById("buttons").innerHTML+='<a href="./ProgressClient.html?userId='+doc.id+'" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-line-chart"></i>  Progress</a> \
@@ -102,21 +104,19 @@ function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function calculateMacros() {
-
-  const userId = Cookies.get('userId');
-
+function calculateMacros(userId) {
+  
   db.collection('users').doc(userId).get().then(doc => {
     if (doc.exists) {
       const user = doc.data();
-      //console.log(user);
+      console.log(user);
       var tday = new Date();
       const years = tday.getFullYear() - user.bday.toDate().getFullYear();
       const h = user.height[user.height.length - 1];
       const g = user.weight[user.weight.length - 1];
       const bf = user.body_fat[user.body_fat.length - 1];
       var sum;
-      //console.log([years,h,g,bf]);
+      console.log([years,h,g,bf]);
       if (user.gender == "Female") {
         sum = 26;
         if (h < 153)//inaltime
@@ -187,8 +187,8 @@ function calculateMacros() {
       {
         kcal = TDEE;
         carb = kcal * 0.45 / 4;
-        prot = kcal * 0.45 / 4;
-        fat = kcal * 0.45 / 9;
+        prot = kcal * 0.35 / 4;
+        fat = kcal * 0.20 / 9;
       }
       else if (diff < 0) //slabire
       //45 carb, 40 prot, 15 fat
@@ -240,11 +240,12 @@ function salveazaNutri(nutri) {
   db.collection('users').doc(profileId).get().then(doc => {
     if (doc.exists) {
       const user = doc.data();
-      user.nutrition[0] = nutri[0];
-      user.nutrition[1] = nutri[1];
-      user.nutrition[2] = nutri[2];
-      user.nutrition[3] = nutri[3];
+      const u={
+        nutrition: nutri
+      }
+      db.collection('users').doc(profileId).set({ ...u }, { merge: true }).then(function(){
       var y = document.getElementById("Demo3");
+      console.log("update");
       y.innerHTML = '\
               <br>\
               <p id="editbutton"><button type="button" onclick="editp()" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-edit"></i> Edit Percentage</button></p>\
@@ -255,11 +256,11 @@ function salveazaNutri(nutri) {
                   <input id="fat" type="number" name="fat" min="0" max="100" placeholder="Fat Percentage">\
               </div>\
               <button type="button" id="generatebutton" onclick="calculateMacros()" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-edit"></i> Generate Percentage</button>'
-        + '<p>Calories: ' + user.nutrition[0] + ' kcal</p>\
-              <p>Carbohydrates: '+ user.nutrition[1] + ' grams</p>\
-              <p>Protein: '+ user.nutrition[2] + ' grams</p>\
-              <p>Fat: '+ user.nutrition[3] + ' grams</p>\
-              ';
+        + '<p>Calories: ' + nutri[0] + ' kcal</p>\
+              <p>Carbohydrates: '+ nutri[1] + ' grams</p>\
+              <p>Protein: '+ nutri[2] + ' grams</p>\
+              <p>Fat: '+ nutri[3] + ' grams</p>\
+              ';});
     }
   });
 
