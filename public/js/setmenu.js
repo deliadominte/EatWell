@@ -6,7 +6,8 @@ var allergies = [];
 var index = 1;
 let list = "";
 let d;
-toastr.options = {"positionClass": "toast-bottom-left"};
+let is_ok = false;
+toastr.options = { "positionClass": "toast-bottom-left" };
 
 const profileId = new URLSearchParams(window.location.search).get('userId');
 console.log(profileId);
@@ -14,7 +15,7 @@ if (new URLSearchParams(window.location.search).has('date'))
     d = new Date(new URLSearchParams(window.location.search).get('date'));
 else
     d = new Date();
-
+    console.log(d);
 window.onload = () => {
 
 
@@ -149,40 +150,55 @@ function verify() {
 
         console.log(cal + " " + carbo + " " + protein + " " + fat);
         console.log(sum_cal + " " + sum_carbo + " " + sum_protein + " " + sum_fat);
-        if (sum_cal > cal)
+        if (sum_cal > cal) {
+            is_ok = false;
             toastr.warning("Calories over limit: " + cal + "! Yours: " + sum_cal);
-        else if (sum_carbo > carbo)
+        }
+        else if (sum_carbo > carbo) {
+            is_ok = false;
             toastr.warning("Carbohydrates over limit: " + carbo + "! Yours: " + sum_carbo);
-        else if (sum_protein > protein)
+        }
+        else if (sum_protein > protein) {
+            is_ok = false;
             toastr.warning("Protein over limit: " + protein + "! Yours: " + sum_protein);
-        else if (sum_fat > fat)
+        }
+        else if (sum_fat > fat) {
+            is_ok = false;
             toastr.warning("Fat over limit: " + fat + "! Yours: " + sum_fat);
-        else if (flag == 0)
+        }
+        else if (flag == 0) {
+            is_ok = false;
             toastr.warning("Client allergic to: " + a);
-        else {toastr.success("Meniu is OK!"); return 1;}
+        }
+        else {
+            is_ok = true;
+            toastr.success("Meniu is OK!");
+        }
     }, 500);
-    return 0;
+
 }
 
 function setMenu() {
     const userId = Cookies.get('userId');
-    if (verify()==1)
-    {const menu = {
-        id_nutri: userId,
-        id_user: profileId,
-        date: d,
-        description: [],
-        is_done: false,
-        meals: []
-    }
-    for (i = 1; i < index; i++) {
-        menu.meals.push(document.getElementById("options" + i).value);
-        menu.description.push(document.getElementById("dets" + i).value);
-    }
-    db.collection('menus').add(menu).then(docRef => {
+    if (is_ok==true) {
+        const menu = {
+            id_nutri: userId,
+            id_user: profileId,
+            date: d,
+            description: [],
+            is_done: [],
+            meals: []
+        }
+        for (i = 1; i < index; i++) {
+            menu.meals.push(document.getElementById("options" + i).value);
+            menu.description.push(document.getElementById("dets" + i).value);
+            menu.is_done.push(false);
+        }
+        db.collection('menus').add(menu).then(docRef => {
 
-        window.location.href = './DayMenu.html?menuId=' + docRef.id;
-    });}
+            window.location.href = './DayMenu.html?menuId=' + docRef.id;
+        });
+    }
     else {
         toastr.error("Please verify again!");
     }
@@ -196,11 +212,11 @@ function openNav() {
         x.className = x.className.replace(" w3-show", "");
     }
 }
-function logout(){
+function logout() {
     const userId = Cookies.get('userId');
-    if(userId){
-      Cookies.remove('userId');
-      window.location.href = './LoginClient.html';
+    if (userId) {
+        Cookies.remove('userId');
+        window.location.href = './LoginClient.html';
 
     }
- }
+}

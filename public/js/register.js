@@ -12,7 +12,6 @@ window.onload = () => {
                 isClient: true,
                 place: document.getElementById('place').value,
                 phone: document.getElementById('telephone').value,
-                bday: new Date(document.getElementById('bday').value),
                 password: document.getElementById('password').value
             };
             console.log(user);

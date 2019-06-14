@@ -22,7 +22,7 @@ window.onload = () => {
                             toastr.error("Incorrect Password!");
                         }
                 });
-                if(flag==0) toastr.error('Incorrect Username!');
+                if(flag==0) toastr.error('There is no active client account with this username!');
             });
         }
         

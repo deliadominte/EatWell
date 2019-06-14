@@ -1,5 +1,6 @@
 
-toastr.options = {"positionClass": "toast-bottom-left"}; 
+toastr.options = { "positionClass": "toast-bottom-left" };
+var flag_add = false;
 window.onload = function () {
     const userId = Cookies.get('userId');
     if (!userId) {
@@ -30,6 +31,8 @@ window.onload = function () {
                 const user = doc.data();
                 const min = fmin(user.weight);
                 const max = fmax(user.weight);
+                console.log(min);
+                console.log(max);
                 let date;
                 let day;
                 let monthIndex;
@@ -39,11 +42,15 @@ window.onload = function () {
                 for (i = 0; i < user.weight.length; i++) {
                     date = user.time_prog[i].toDate();
                     day = date.getDate();
-                    monthIndex = date.getMonth();
+                    monthIndex = date.getMonth() + 1;
                     year = date.getFullYear();
                     time = new Date(year + "-" + monthIndex + "-" + day);
                     console.log("a asignat");
-                    array[i] = { x: time, y: parseInt(user.weight[i]) };
+                    if (user.weight[i] == max)
+                        array[i] = { x: time, y: parseInt(user.weight[i]), indexLabel: "highest", markerColor: "red", markerType: "triangle" };
+                    else if (user.weight[i] == min)
+                        array[i] = { x: time, y: parseInt(user.weight[i]), indexLabel: "lowest", markerColor: "DarkSlateGrey", markerType: "cross" };
+                    else array[i] = { x: time, y: parseInt(user.weight[i]) };
                 }
             }
         });
@@ -177,14 +184,17 @@ window.onload = function () {
           <p>Butt: '+ user.butt[user.butt.length - 1] + ' cm</p>\
           <p>Thighs: '+ user.thighs[user.thighs.length - 1] + ' cm</p>\
           <p>Level of activity: '+ user.activity[user.activity.length - 1] + '</p>';
-                document.getElementById("goal").innerHTML += user.goal[user.goal.length - 1];
-                document.getElementById("weight").innerHTML += user.weight[user.weight.length - 1];
+                document.getElementById("goal").innerHTML += user.goal[user.goal.length - 1] + " kg";
+                document.getElementById("weight").innerHTML += user.weight[user.weight.length - 1] + " kg";
+                document.getElementById("maxweight").innerHTML += fmax(user.weight) + " kg";
                 document.getElementById("prog").innerHTML += Math.floor(100 - ((user.weight[user.weight.length - 1] - user.goal[user.goal.length - 1]) * 100) / (fmax(user.weight) - user.goal[user.goal.length - 1])) + "%";
                 document.getElementById("prog").setAttribute("aria-valuenow", (-1) * user.weight[user.weight.length - 1]);
-                console.log(fmax(user.weight));
+                console.log(-fmax(user.weight));
+                console.log(-user.goal[user.goal.length - 1]);
+                console.log(-user.weight[user.weight.length - 1]);
                 document.getElementById("prog").setAttribute("aria-valuemin", (-1) * fmax(user.weight));
                 document.getElementById("prog").setAttribute("aria-valuemax", (-1) * user.goal[user.goal.length - 1]);
-                document.getElementById("prog").setAttribute("style", "width:14%");
+                document.getElementById("prog").setAttribute("style", "width:" + Math.floor(100 - ((user.weight[user.weight.length - 1] - user.goal[user.goal.length - 1]) * 100) / (fmax(user.weight) - user.goal[user.goal.length - 1])) + "%");
             }
         });
         document.getElementById('getInfoForum').onsubmit = e => {
@@ -198,21 +208,34 @@ window.onload = function () {
             let p7 = document.getElementById('waistline').value;
             let p8 = document.getElementById('weight1').value;
             let p10 = document.getElementById('activity').value;
-            let today = new Date();
-            let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            if ((isNaN(p1) || isNaN(p2) || isNaN(p3) || isNaN(p4) || isNaN(p5) || isNaN(p6) || isNaN(p7) || isNaN(p8))==false)
+                toastr.error("Please fill in all the fields with numbers!");
+            else {
+                if ((isNaN(p1) || isNaN(p2) || isNaN(p3) || isNaN(p4) || isNaN(p5) || isNaN(p6) || isNaN(p7) || isNaN(p8)) == true) {
+                    let today = new Date();
+                    let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                    console.log("ajunge");
+                    db.collection('users').doc(profileId).update({
+                        "activity": firebase.firestore.FieldValue.arrayUnion(p10),
+                        "arms": firebase.firestore.FieldValue.arrayUnion(p2),
+                        "thighs": firebase.firestore.FieldValue.arrayUnion(p1),
+                        'body_fat': firebase.firestore.FieldValue.arrayUnion(p3),
+                        'butt': firebase.firestore.FieldValue.arrayUnion(p4),
+                        "goal": firebase.firestore.FieldValue.arrayUnion(p5),
+                        "height": firebase.firestore.FieldValue.arrayUnion(p6),
+                        "waistline": firebase.firestore.FieldValue.arrayUnion(p7),
+                        "weight": firebase.firestore.FieldValue.arrayUnion(p8),
+                        "time_prog": firebase.firestore.FieldValue.arrayUnion(new Date(date))
+                    }).then(function () {
+                        toastr.success("Measures added with success!");
+                        flag_add = true;
+                        window.location.href = './ProgressClient.html?userId=' + profileId;
+                    });
+                    if (flag_add == false)
+                        toastr.error("Please fill in all the fields!");
+                }
+            }
 
-            db.collection('users').doc(profileId).update({
-                "activity": firebase.firestore.FieldValue.arrayUnion(p10),
-                "thighs": firebase.firestore.FieldValue.arrayUnion(p2),
-                'body_fat': firebase.firestore.FieldValue.arrayUnion(p3),
-                'butt': firebase.firestore.FieldValue.arrayUnion(p4),
-                "goal": firebase.firestore.FieldValue.arrayUnion(p5),
-                "height": firebase.firestore.FieldValue.arrayUnion(p6),
-                "waistline": firebase.firestore.FieldValue.arrayUnion(p7),
-                "weight": firebase.firestore.FieldValue.arrayUnion(p8),
-                "time_prog": firebase.firestore.FieldValue.arrayUnion(date)
-            });
-            window.location.href = './ProgressClient.html?userId=' + profileId;
         }
     }
 }
@@ -220,15 +243,15 @@ window.onload = function () {
 function fmax(arr) {
     let max = 0, i;
     for (i = 0; i < arr.length; i++)
-        if (arr[i] > max) {
+        if (!isNaN(arr[i]) && arr[i] > max) {
             max = arr[i];
         }
     return max;
 }
 function fmin(arr) {
-    let min = 0, i;
+    let min = 1000, i;
     for (i = 0; i < arr.length; i++)
-        if (arr[i] < min) {
+        if (!isNaN(arr[i]) && arr[i] < min) {
             min = arr[i];
         }
     return min;

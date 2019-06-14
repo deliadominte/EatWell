@@ -60,12 +60,12 @@ async function f(d, userId, today, i) {
         
         console.log(i+" "+d);
         console.log("azi " + today.getUTCDate());
-        document.getElementById("days").innerHTML += '<li id="li' + i + '"><a href="./SetMenu.html?userId=' + userId + '" title="Set the menu"><span class="active">' + i + '</span></a></li>';
+        document.getElementById("days").innerHTML += '<li id="li' + i + '"><a href="./SetMenu.html?userId=' + userId + '" title="Menu was not set!"><span class="active">' + i + '</span></a></li>';
     }
     else if (d > today) {
         // console.log(i+" "+d);
         // console.log("dupa azi " + today);
-        document.getElementById("days").innerHTML += '<li id="li' + i + '"><a href="" title="No data">'+i+'</i></a></li>'
+        document.getElementById("days").innerHTML += '<li id="li' + i + '"><a href="" title="Menu was not set">'+i+'</i></a></li>'
     } else {
         // console.log(i+" "+d);
         // console.log("inainte de azi " + today);
@@ -74,7 +74,11 @@ async function f(d, userId, today, i) {
     db.collection('menus').where('id_user', '==', userId).get().then(querySnapshot => {
         querySnapshot.forEach(function (doc) {
             const menu = doc.data();
-            
+            var j;
+                done=true;
+                for(j=0;j<menu.is_done.length;j++)
+                    if(menu.is_done[j]==false)
+                       done=false;
             // console.log(menu.date.toDate());
             // console.log(d);
             // console.log((menu.date.toDate().getDay() == d.getDay()) && (menu.date.toDate().getMonth() == d.getMonth()) && (menu.date.toDate().getFullYear() == d.getFullYear()));
@@ -82,10 +86,10 @@ async function f(d, userId, today, i) {
             {
                 // console.log("facus");
                 flag = doc.id;
-                done = menu.is_done;
+                
                 if ((d.getDate() == today.getDate()) && (d.getMonth() == today.getMonth()) && (d.getFullYear() == today.getFullYear())){
                     if (done == true)
-                        document.getElementById("li" + i).innerHTML = '<li><a href="./DayMenu.html?menuId=' + flag + '" title="Client finished the menu"><span class="active"><i class="fa fa-check"></i></span></a></li>';
+                        document.getElementById("li" + i).innerHTML = '<li><a href="./DayMenu.html?menuId=' + flag + '" title="You finished the menu"><span class="active"><i class="fa fa-check"></i></span></a></li>';
                     else document.getElementById("li" + i).innerHTML = '<li><a href="./DayMenu.html?menuId=' + flag + '" title="Menu was set"><span class="active">' +i+'</span></a></li>';
                 } 
                 else {
@@ -96,9 +100,9 @@ async function f(d, userId, today, i) {
                             document.getElementById("li" + i).innerHTML = '<li><a href="./DayMenu.html?menuId=' + flag + '" title="Menu was set"><span class="set">' +i+'</span></a></a></li>';
                     } else {
                         if (done == true)
-                            document.getElementById("li" + i).innerHTML = '<li><a href="./DayMenu.html?menuId=' + flag + '" title="Client finished the menu"><i class="fa fa-check"></i></a></li>';
+                            document.getElementById("li" + i).innerHTML = '<li><a href="./DayMenu.html?menuId=' + flag + '" title="You finished the menu"><i class="fa fa-check"></i></a></li>';
                         else
-                            document.getElementById("li" + i).innerHTML = '<li><a href="./DayMenu.html?menuId=' + flag + '" title="Client did not finished the menu">' +i+'</i></a></li>';
+                            document.getElementById("li" + i).innerHTML = '<li><a href="./DayMenu.html?menuId=' + flag + '" title="You did not finished the menu"><i class="	fa fa-remove"></i></i></a></li>';
                     }
                 }
             }

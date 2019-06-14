@@ -22,7 +22,7 @@ window.onload = () => {
                             toastr.error("Incorrect Password!");
                         }
                 });
-                if(flag==0) toastr.error('Incorrect Username!');
+                if(flag==0) toastr.error('There is no active nutritionist account with this username!');
             });
         }
     } else {

@@ -18,7 +18,7 @@ db.collection('users').doc(uI).get().then(doc => {
     if (doc.exists) {
         const user = doc.data();
         flag_is_user = 1;
-        if (toDay.getDay() == 0 || toDay.getDay() == 6)//duminica sau miercuri trimit motivatie sub forma de citat
+        if (toDay.getDay() == 0 || toDay.getDay() == 5)//duminica sau miercuri trimit motivatie sub forma de citat
         {
             console.log("quoteofday");
             db.collection('notifications').where("href", "==", "quoteofday").where('id_user', '==', uI).get().then(querySnapshot => {
@@ -73,7 +73,7 @@ db.collection('users').doc(uI).get().then(doc => {
                             }
                             db.collection('notifications').doc(id).set({ ...not }, { merge: true }).then(function (d) {
                                 nr++;
-                                document.getElementById("notif").innerHTML += '<button onclick="notifclick(' + "'" + d.id + "','" + notif.href + "'" + ')" class="w3-bar-item w3-button">\
+                                document.getElementById("notif").innerHTML += '<button onclick="notifclick(' + "'" + id + "','" + notif.href + "'" + ')" class="w3-bar-item w3-button">\
                         '+ notif.text + '</a>';
                                 document.getElementById("nrNotif").innerHTML = nr.toString();
                             });
@@ -104,6 +104,7 @@ db.collection('users').doc(uI).get().then(doc => {
                         }
                     }
                 });
+                console.log(flag);
                 if (flag == 0) {
                     console.log("nu este");
                     db.collection('users').doc(uI).get().then(doc => {
@@ -139,7 +140,7 @@ db.collection('users').doc(uI).get().then(doc => {
                         if (doc.exists) {
                             const user = doc.data();
                             let difference = user.goal[user.goal.length - 1] - user.weight[user.weight.length - 1];
-                            let quote = "You have " + Math.abs(difference) + "kg left to ";
+                            let quote = "You are doing great, you just have " + Math.abs(difference) + "kg left to ";
                             if (difference > 0)
                                 quote += "gain";
                             else if (difference < 0)
@@ -151,7 +152,7 @@ db.collection('users').doc(uI).get().then(doc => {
                             }
                             db.collection('notifications').doc(id).set({ ...not }, { merge: true }).then(function (d) {
                                 nr++;
-                                document.getElementById("notif").innerHTML += '<button onclick="notifclick(' + "'" + d.id + "','" + "motivationofday" + "'" + ')" class="w3-bar-item w3-button">\
+                                document.getElementById("notif").innerHTML += '<button onclick="notifclick(' + "'" + id + "','" + "motivationofday" + "'" + ')" class="w3-bar-item w3-button">\
             '+ not.text + '</a>';
                                 document.getElementById("nrNotif").innerHTML = nr.toString();
                             });

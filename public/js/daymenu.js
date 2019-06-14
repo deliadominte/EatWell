@@ -65,10 +65,10 @@ window.onload = () => {
                 const menu = doc.data();
                 let i;
                 nr_meals=menu.meals.length;
-                
                 for(i=0;i<nr_meals;i++){
                     let desc=menu.description[i];
                     let id_meal=menu.meals[i];
+                    var done=menu.is_done[i];
                     db.collection('recipes').doc(menu.meals[i]).get().then(doc => {
                         if (doc.exists) {
                             const recipe= doc.data();
@@ -82,16 +82,17 @@ window.onload = () => {
           <p>Protein: '+recipe.nutrition[2]+'</p>\
           <p>Fat: '+recipe.nutrition[3]+'</p>\
           <hr class="w3-clear">\
-          <button onclick="done('+"'"+desc+"'"+')" id="'+desc+'"\
+          <button onclick="done('+"'"+id_meal+"','"+i+"'"+')" id="done'+id_meal+'"\
            class="w3-button w3-theme-d1 w3-margin-bottom" ><i class="fa fa-check"></i>\
              Done</button>\
             <button onclick="add_fav('+"'"+id_meal+"'"+')" id="'+id_meal+'"\
             class="w3-button w3-theme-d1 w3-margin-bottom" ><i class="fa fa-plus"></i>\
-              Add to favorite</button>\
+              Add to favorites</button>\
           <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html?recipeId='+doc.id+'"><i class="fa fa-bars"></i>\
              See Recipe</a>\
            </div>';
-           document.getElementById(desc).disabled = menu.is_done; 
+           console.log(done);
+          document.getElementById('done'+id_meal).disabled = done; 
         }});
                 }
             }
@@ -103,27 +104,34 @@ window.onload = () => {
     }
 }
 
-function done(i){
+function done(id,index){
   done_contor++; 
-  document.getElementById(i).disabled = true; 
+  document.getElementById('done'+id).disabled = true; 
+  db.collection('menus').doc(menuId).get().then(doc => {
+    if(doc.exists){
+      const menu = doc.data();
+       var is_done=menu.is_done;
+       is_done[index]=true;
+       const a ={
+         is_done: is_done
+       } ;
+       db.collection('menus').doc(menuId).set({ ...a }, { merge: true });
+    }
+  })
   if(done_contor==nr_meals)
-        {a={
-          is_done: true
-        }
-        db.collection('appointments').doc(menuId).set({ ...a }, { merge: true }).then(function(){
-          toastr.success("Congratulations you finished todays menu!");});
-}}
+          toastr.success("Congratulations you finished today's menu!");
+}
 function add_fav(id){
   const userId = Cookies.get('userId');
   
   db.collection('user_recipe').where('id_user','==',userId).get().then(querySnapshot => {
     
     querySnapshot.forEach(function (doc) {
-        const favorite = doc.data();
+        const favorites = doc.data();
         const id_u_r=doc.id;
         let i,flag=false;
-        for (i=0;i<favorite.id_recipes.length;i++){
-          if(favorite.id_recipes[i]==id)
+        for (i=0;i<favorites.id_recipes.length;i++){
+          if(favorites.id_recipes[i]==id)
           flag=true;
         }
         console.log(flag);

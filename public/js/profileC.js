@@ -30,6 +30,7 @@ window.onload = () => {
         document.getElementById("username").innerHTML += user.username;
         document.getElementById("place").innerHTML += user.place;
         document.getElementById("date").innerHTML += formatDate(user.bday.toDate());
+        document.getElementById("medical").innerHTML += user.medical;
         if (user.gender == 'Female')
           document.getElementById("gender").innerHTML += '<i class="fa fa-venus fa-fw w3-margin-right w3-text-theme "></i>' + user.gender;
         else

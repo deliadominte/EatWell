@@ -11,6 +11,7 @@ window.onload = () => {
         const user = doc.data();
         document.getElementById("username").innerHTML += user.username;
         document.getElementById("place").innerHTML += user.place;
+        document.getElementById("medical").innerHTML += user.medical;
         document.getElementById("date").innerHTML += formatDate(user.bday.toDate());
         if (user.gender == 'Female')
           document.getElementById("gender").innerHTML += '<i class="fa fa-venus fa-fw w3-margin-right w3-text-theme "></i>' + user.gender;
@@ -21,7 +22,7 @@ window.onload = () => {
           var x = getRndInteger(2, 5);
           document.getElementById("tags").innerHTML += '\
                      <span id="al'+ i.toString() + '" class="w3-tag w3-small w3-theme-d' + x.toString() + '">' + user.allergies[i] + '\
-                    <button onclick="elimina('+ i.toString() + ')"' + ' class="w3-button w3-theme-d' + x.toString() + '">\
+                    <button onclick="elimina('+"'"+ i.toString() +"'"+ ')"' + ' class="w3-button w3-theme-d' + x.toString() + '">\
                     <i class="fa fa-remove"></i>\
                     </button></span>';
         }

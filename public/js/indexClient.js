@@ -14,6 +14,7 @@ window.onload = () => {
         const user = doc.data();
         document.getElementById("username").innerHTML += user.username;
         document.getElementById("place").innerHTML += user.place;
+        document.getElementById("medical").innerHTML += user.medical;
         document.getElementById("date").innerHTML += formatDate(user.bday.toDate());
         if (user.gender == 'Female')
           document.getElementById("gender").innerHTML += '<i class="fa fa-venus fa-fw w3-margin-right w3-text-theme "></i>' + user.gender;
@@ -78,7 +79,7 @@ window.onload = () => {
                                    Done</button>\
                                   <button onclick="add_fav('+ "'" + id_meal + "'" + ')" id="' + id_meal + '"\
             class="w3-button w3-theme-d1 w3-margin-bottom" ><i class="fa fa-plus"></i>\
-              Add to favorite</button>\
+              Add to favorites</button>\
                                 <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html?recipeId='+ doc.id + '"><i class="fa fa-bars"></i>\
                                    See Recipe</a>\
                                  </div>';
@@ -98,7 +99,7 @@ window.onload = () => {
                                      Done</button>\
                                     <button onclick="add_fav('+"'"+id_meal+"'"+')" id="'+id_meal+'"\
             class="w3-button w3-theme-d1 w3-margin-bottom" ><i class="fa fa-plus"></i>\
-              Add to favorite</button>\
+              Add to favorites</button>\
                                   <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html?recipeId='+ doc.id + '"><i class="fa fa-bars"></i>\
                                      See Recipe</a>\
                                    </div>';
@@ -259,7 +260,7 @@ function done(i, menuId) {
       is_done: true
     }
     db.collection('appointments').doc(menuId).set({ ...a }, { merge: true }).then(function () {
-      toastr.success("Congratulations you finished todays menu!");
+      toastr.success("Congratulations you finished today's menu!");
     });
   }
 }

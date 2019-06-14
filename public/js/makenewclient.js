@@ -1,3 +1,5 @@
+import { SSL_OP_PKCS1_CHECK_1 } from "constants";
+
 toastr.options = {
     "positionClass": "toast-bottom-left",
     "tapToDismiss": false
@@ -18,6 +20,8 @@ window.onload = () => {
             var p8 = document.getElementById('weight').value;
             var p9 = document.getElementById('gender').value;
             var p10 = document.getElementById('activity').value;
+            var p11 = document.getElementById('medical').value;
+            var p12 = new Date(document.getElementById('bday').value);
             var today = new Date();
             var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
             var new_code = generateCode();
@@ -28,7 +32,8 @@ window.onload = () => {
                 code: new_code,
                 place: "-",
                 phone: "-",
-                bday: new Date(),
+                medical: p11,
+                bday: p12,
                 id_nutri: userId,
                 activity: [p10],
                 arm: [p2],
