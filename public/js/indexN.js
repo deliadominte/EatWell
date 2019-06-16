@@ -21,9 +21,8 @@ window.onload = () => {
         var elem = document.createElement("div");
         elem.innerHTML ='<div id = "p-'+ord+'" class="pers w3-container w3-card w3-white w3-round w3-margin"><br>\
         <h4 class="name w3-center">'+user.username+'</h4>\
+        <p class="w3-center"><img src="./media/avatar.png" class="w3-circle" style="height:86px;width:86px" alt="Avatar"></p>\
         <hr class="w3-clear">\
-        <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i>'+user.place+'</p>\
-        <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>'+ formatDate(user.bday)+'</p>\
         <a href="./ProfileClient.html?userId='+doc.id+'"  class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-user"></i>  Profile</a>\
         <a href="./ProgressClient.html?userId='+doc.id+'" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-line-chart"></i>  Progress</a> \
         <a href="./MenuDets.html?userId='+doc.id+'" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-bars"></i>  Menu details</a>\

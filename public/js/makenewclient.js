@@ -1,4 +1,4 @@
-import { SSL_OP_PKCS1_CHECK_1 } from "constants";
+
 
 toastr.options = {
     "positionClass": "toast-bottom-left",
@@ -65,6 +65,7 @@ window.onload = () => {
                         }
                         
                         db.collection('user_recipe').add(favorite);
+                        calculateMacros(id_user);
                         toastr["info"]("The new clients code: " + user.code + '<br /><br /><button type="button" onclick="window.location.href = '+"'"+'./ProfileClient.html?userId='+doc.id+"'"+';" class="btn clear">Ok</button>');
                     });
                 });
@@ -112,3 +113,123 @@ function logout() {
 
     }
 }
+
+function calculateMacros(profileId) {
+  
+    db.collection('users').doc(profileId).get().then(doc => {
+      if (doc.exists) {
+        const user = doc.data();
+        console.log(user);
+        var tday = new Date();
+        const years = tday.getFullYear() - user.bday.toDate().getFullYear();
+        const h = user.height[user.height.length - 1];
+        const g = user.weight[user.weight.length - 1];
+        const bf = user.body_fat[user.body_fat.length - 1];
+        var sum;
+        console.log([years,h,g,bf]);
+        if (user.gender == "Female") {
+          sum = 26;
+          if (h < 153)//inaltime
+            sum += -1;
+          else if (h < 170)
+            sum += 0;
+          else sum += 1;
+          if (bf <= 18)//body_fat
+            sum += 0.5;
+          else if (bf <= 27)
+            sum += 0;
+          else if (bf <= 32)
+            sum += -0.5;
+          else if (bf <= 37)
+            sum += -1.5;
+          else if (bf <= 42)
+            sum += -2.5;
+        }
+        else {
+          sum = 28;
+          if (h < 167)
+            sum += -1;
+          else if (h < 185)
+            sum += 0;
+          else sum += 1;
+          if (bf <= 10)
+            sum += 0.5;
+          else if (bf <= 19)
+            sum += 0;
+          else if (bf <= 24)
+            sum += -0.5;
+          else if (bf <= 29)
+            sum += -1.5;
+          else if (bf <= 34)
+            sum += -2.5;
+        }
+        if (years<25)
+           sum+=0.5;
+           else if(years<45)
+                sum+=0;
+                else sum+=-0.5;
+        var REE = g * sum;
+        //console.log(REE);
+        var TDEE;
+        //console.log(user.activity[user.activity.length-1]);
+        switch (user.activity[user.activity.length-1]) {
+          case "Sedentary":
+            TDEE = REE * 1.2;
+            break;
+          case "Light activity":
+            TDEE = REE * 1.375;
+            break;
+          case "Active":
+            TDEE = REE * 1.55;
+            break;
+          case "Very activity":
+            TDEE = REE * 1.725;
+            break;
+          default:
+            TDEE = REE;
+        }
+       // console.log(TDEE);
+        const diff = user.goal[user.goal.length - 1] - user.weight[user.weight.length - 1];
+       // console.log(diff);
+        var kcal, carb, prot, fat;
+        if (diff == 0)// mentinere
+        //45 carb, 35 prot, 20 fat
+        {
+          kcal = TDEE;
+          carb = kcal * 0.45 / 4;
+          prot = kcal * 0.35 / 4;
+          fat = kcal * 0.20 / 9;
+        }
+        else if (diff < 0) //slabire
+        //45 carb, 40 prot, 15 fat
+        {
+          kcal = TDEE - TDEE * 0.20;
+          carb = kcal * 0.45 / 4;
+          prot = kcal * 0.40 / 4;
+          fat = kcal * 0.15 / 9;
+        }
+        else if (diff > 0) //ingrasare
+        //50 carb, 30 prot, 20 fat
+        {
+          kcal = TDEE + TDEE * 0.20;
+          carb = kcal * 0.50 / 4;
+          prot = kcal * 0.30 / 4;
+          fat = kcal * 0.20 / 9;
+        }
+  
+        salveazaNutri([Math.floor(kcal), Math.floor(carb), Math.floor(prot), Math.floor(fat)],profileId);
+      }
+    });
+  }
+
+  function salveazaNutri(nutri,profileId) {
+    db.collection('users').doc(profileId).get().then(doc => {
+      if (doc.exists) {
+        const user = doc.data();
+        const u={
+          nutrition: nutri
+        }
+        db.collection('users').doc(profileId).set({ ...u }, { merge: true }).then();
+    }});
+  
+  }

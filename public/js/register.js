@@ -22,7 +22,7 @@ window.onload = () => {
                     const us_id = doc.id;
                     const us_un = doc.data().username;
                     console.log(us_un+" "+us_id);
-                    if(us_un==" "){//sa nu fie registrat deja alt client cu condul respectiv
+                    if(us_un=="-"){//sa nu fie registrat deja alt client cu condul respectiv
                      flag=1;
                      
                      db.collection('users').where('username', '==', user.username).get().then(querySnapshot => {
@@ -42,6 +42,7 @@ window.onload = () => {
                 });
                 
                 if(flag==0)//cazul in care a fost creat contul de catre nutri si a fost transmis codul clientului
+
                 toastr.error('The code is not valid!');
         });}
     } else {

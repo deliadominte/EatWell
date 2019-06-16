@@ -28,11 +28,14 @@ io.on('connection', (socket) => {
     socket.on('chat', function (data) {
         // console.log(data);
         var i,flag=false;
+        console.log(users);
         for(i in users){
-            if(i==data.id_sender)
+            if(users[i]==data.id_reciver)
              flag=true; //e online 
+             console.log(data.id_reciver+" "+users[i]);
         }
         if(flag==false){
+            console.log("cica nu e lice");
             io.sockets.emit('nu_e_live', data);
         }
         io.sockets.emit('chat', data);

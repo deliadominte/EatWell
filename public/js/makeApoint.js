@@ -41,7 +41,7 @@ window.onload = () => {
                   <p>Appointment</p>\
                   <img src="./media/calendar.png" alt="Calendar" style="width:50%"><br>\
                   <span>'+ p1 + ' ' + p2 + '</span><br>\
-                  <span>'+ p3 + '</span><br>\
+                  <span>Details: '+ p3 + '</span><br>\
                   <span>Client accepted: '+ false + '</span>\
                   <div class="w3-row w3-opacity">\
                     <div class="w3-center">\
@@ -77,7 +77,7 @@ window.onload = () => {
                   <p>Appointment</p>\
                   <img src="./media/calendar.png" alt="Calendar" style="width:50%"><br>\
                   <span>'+ formatDate(apoint.date.toDate()) + '</span><br>\
-                  <span>'+ apoint.details + '</span><br>\
+                  <span>Details: '+ apoint.details + '</span><br>\
                   <span>Client accepted: '+ apoint.isAccepted + '</span>\
                   <div class="w3-row w3-opacity">\
                     <div class="w3-center">\

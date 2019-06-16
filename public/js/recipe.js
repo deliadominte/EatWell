@@ -78,7 +78,7 @@ window.onload = () => {
         document.getElementById("ready").innerHTML+=recipe.info[4]+" h "+recipe.info[5]+" min ";
         var i;
         for(i=0;i < recipe.ing.length ;i++){
-          document.getElementById("ingred").innerHTML+='<li>'+recipe.ing_mesure[i].toString()+' '+recipe.ing_type[i].toString()+' '+recipe.ing[i].toString()+'</li>';
+          document.getElementById("ingred").innerHTML+='<li>'+recipe.ing_measure[i].toString()+' '+recipe.ing_type[i].toString()+' '+recipe.ing[i].toString()+'</li>';
         }
         for(i=0;i< recipe.directions.length;i++){
           document.getElementById("dir").innerHTML+='<li>'+recipe.directions[i]+'</li>';

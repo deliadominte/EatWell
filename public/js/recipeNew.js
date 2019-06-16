@@ -20,14 +20,14 @@ window.onload = () => {
               directions: [],
               info: [p6,p7,p8,p9,p10,p11],
               ing: [],
-              ing_mesure:[],
+              ing_measure:[],
               ing_type:[],
               name: p1,
               nutrition: [p2,p3,p4,p5]
           };
           var i;
           for(i=0;i<=nring;i++){
-            recipe.ing_mesure[i]=document.getElementById('weight'+i.toString()).value ;
+            recipe.ing_measure[i]=document.getElementById('weight'+i.toString()).value ;
             recipe.ing[i]=document.getElementById('ingred'+i.toString()).value ;
             recipe.ing_type[i]=document.getElementById('mySelect'+i.toString()).value ;
           }

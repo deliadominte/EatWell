@@ -156,7 +156,7 @@ function verify() {
         }
         else if (sum_carbo > carbo) {
             is_ok = false;
-            toastr.warning("Carbohydrates over limit: " + carbo + "! Yours: " + sum_carbo);
+            toastr.warning("Calories over limit: " + cal + "! Yours: " + sum_cal);
         }
         else if (sum_protein > protein) {
             is_ok = false;

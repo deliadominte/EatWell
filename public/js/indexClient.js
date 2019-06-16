@@ -177,6 +177,7 @@ function accept(i, id) {
     });
   }
   else {
+    const userId = Cookies.get('userId');
     a = {
       isAccepted: true
     }
@@ -193,10 +194,11 @@ function accept(i, id) {
                 <p>Details: '+ apoint.details + '</p>\
               </div>\
             </div>\
-            <br>'
+            <br>';
         db.collection('users').doc(userId).get().then(doc => {
           if (doc.exists) {
             const user = doc.data();
+            
             const notif = {//notificare ca a acceptat programarea
               id_user: user.id_nutri,
               text: user.username + " accepted your appointment!",
@@ -204,7 +206,8 @@ function accept(i, id) {
               to_check_date: false,
               href: "./MakeApoint.html?userId=" + userId
             }
-            db.collection('notifications').add(notif).then();
+            console.log(notif);
+            db.collection('notifications').add(notif).then(console.log(notif));
 
             var date_before = new Date(date);
             date_before.setDate(date.getDate() - 1);

@@ -188,21 +188,21 @@ db.collection('users').doc(uI).get().then(doc => {
                             }
                         });
                         if (flag_has_menu == false) {
-                            
-                            const href="./SetMenu.html?userId=" + doc.id + "&date=" + dt.getUTCDate() + '-' + dt.getMonth() + '-' + dt.getFullYear();
-                            console.log(href+" "+id);
+
+                            const href = "./SetMenu.html?userId=" + doc.id + "&date=" + dt.getFullYear() + '-' + (dt.getMonth()+1) + '-' + dt.getUTCDate();
+                            // console.log(href + " " + id);
                             db.collection('notifications').where('id_user', '==', id).where('href', '==', href).get().then(querySnapshot => {
-                               let allready=false;
-                               let notif_id,notif_text;
+                                let allready = false;
+                                let notif_id, notif_text;
                                 querySnapshot.forEach(function (doc) {
-                                    allready=true;
+                                    allready = true;
                                     notif = doc.data();
-                                    notif_id=doc.id;
-                                    notif_text=notif.text;
-                                    console.log("a gasit "+notif_id+" "+notif_text);
+                                    notif_id = doc.id;
+                                    notif_text = notif.text;
+                                    // console.log("a gasit " + notif_id + " " + notif_text);
                                 })
-                                if (allready==false){
-                                    console.log("nu a gasit "+id);
+                                if (allready == false) {
+                                    // console.log("nu a gasit " + id);
                                     db.collection('users').doc(id).get().then(doc => {
                                         if (doc.exists) {
                                             const user = doc.data();
@@ -213,14 +213,16 @@ db.collection('users').doc(uI).get().then(doc => {
                                                 to_check_date: true,
                                                 href: href
                                             }
-                                            console.log("adaug");
-                                                            db.collection('notifications').add(not).then(function (d) {
-                                                                console.log(not.href);
-                                                                nr++;
-                                                                document.getElementById("notif").innerHTML += '<button onclick="notifclick(' + "'" + d.id + "','" + not.href + "'" + ')" class="w3-bar-item w3-button">\
+                                            if (user.username != "-") {
+                                                // console.log("adaug");
+                                                db.collection('notifications').add(not).then(function (d) {
+                                                    // console.log(not.href);
+                                                    nr++;
+                                                    document.getElementById("notif").innerHTML += '<button onclick="notifclick(' + "'" + d.id + "','" + not.href + "'" + ')" class="w3-bar-item w3-button">\
                                             '+ not.text + '</a>';
-                                                                document.getElementById("nrNotif").innerHTML = nr.toString();
-                                                            });
+                                                    document.getElementById("nrNotif").innerHTML = nr.toString();
+                                                });
+                                            }
                                         }
                                     });
                                 }
@@ -229,7 +231,7 @@ db.collection('users').doc(uI).get().then(doc => {
                                         date: new Date(),
                                         href: href
                                     }
-                                    console.log("modific"+ href);
+                                    // console.log("modific" + href);
                                     db.collection('notifications').doc(notif_id).set({ ...not }, { merge: true }).then(function () {
                                         nr++;
                                         document.getElementById("notif").innerHTML += '<button onclick="notifclick(' + "'" + notif_id + "','" + not.href + "'" + ')" class="w3-bar-item w3-button">\
@@ -252,6 +254,7 @@ db.collection('users').doc(uI).get().then(doc => {
 db.collection('notifications').where('id_user', '==', uI).get().then(querySnapshot => {
     querySnapshot.forEach(function (doc) {
         const notif = doc.data();
+        console.log(notif.text);
         if (notif.to_check_date == false) {
             nr++;
             document.getElementById("notif").innerHTML += '<button onclick="notifclick(' + "'" + doc.id + "','" + notif.href + "'" + ')" class="w3-bar-item w3-button">\
@@ -259,8 +262,10 @@ db.collection('notifications').where('id_user', '==', uI).get().then(querySnapsh
             document.getElementById("nrNotif").innerHTML = nr.toString();
         }
         else {
-            if (notif.date.toDate().getDate() == toDay.getDate() && notif.date.toDate().getMonth() == toDay.getMonth() && notif.date.toDate().getFullYear() == toDay.getFullYear() && notif.date < toDay) {
+            console.log("am verificat  "+notif);
+            if (notif.date.toDate().getDate() == toDay.getDate() && notif.date.toDate().getMonth() == toDay.getMonth() && notif.date.toDate().getFullYear() == toDay.getFullYear() && notif.date.toDate().getTime()>toDay.getTime()) {
                 //aceasi data(zi,luna,an) dar inainte ca ora:min
+                console.log(notif);
                 nr++;
                 document.getElementById("notif").innerHTML += '<button onclick="notifclick(' + "'" + doc.id + "','" + notif.href + "'" + ')" class="w3-bar-item w3-button">\
             '+ notif.text + '</a>';
@@ -274,10 +279,10 @@ db.collection('notifications').where('id_user', '==', uI).get().then(querySnapsh
 
 
 function notifclick(id, path) {
-    if (path != "quoteofday" && path != "motivationofday" &&  path.indexOf("Menu") == -1) {
+    if (path != "quoteofday" && path != "motivationofday" && path.indexOf("Menu") == -1) {
         db.collection("notifications").doc(id).delete().then(function () {
             window.location.href = path;
-            console.log("s-a sters boss");
+            // console.log("s-a sters boss");
         });
     }
     else if (path == "quoteofday") {
@@ -286,7 +291,7 @@ function notifclick(id, path) {
         let not = {
             date: dt
         }
-        console.log("era ");
+        // console.log("era ");
         db.collection('notifications').doc(id).set({ ...not }, { merge: true }).then(function () {
             window.location.href = "./index.html";
         });
@@ -296,18 +301,18 @@ function notifclick(id, path) {
         let not = {
             date: dt
         }
-        console.log("era ");
+        // console.log("era ");
         db.collection('notifications').doc(id).set({ ...not }, { merge: true }).then(function () {
             window.location.href = "./ProgressClient.html";
         });
     }
-    else if(path.indexOf("Menu") !== -1){
+    else if (path.indexOf("Menu") !== -1) {
         var dt = new Date();
-        dt.setDate(dt.getDate() -1);
+        dt.setDate(dt.getDate() - 1);
         let not = {
             date: dt
         }
-        console.log("era  MENU"+id);
+        // console.log("era  MENU" + id);
         db.collection('notifications').doc(id).set({ ...not }, { merge: true }).then(function () {
             window.location.href = path;
         });
