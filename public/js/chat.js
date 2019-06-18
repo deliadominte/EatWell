@@ -5,6 +5,7 @@ toastr.options = {
 // Make connection
 var socket = io.connect('http://localhost:5500');
 const userId = Cookies.get('userId');
+
 socket.emit('login',{userId: userId});
 
 var otherId;
@@ -64,7 +65,7 @@ socket.on('chat', function(data){
   }}
 });
 
-socket.on('nu_e_live', function(data){
+socket.on('not_online', function(data){
    console.log("nu e live boss");
    toastr.error("Nutritionist isn't online!");
    const notif={

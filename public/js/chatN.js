@@ -71,7 +71,7 @@ socket.on('typing', function(data){
     feedback.innerHTML = '<p><em>' + data.handle + ' is typing a message...</em></p>';
 });
 
-socket.on('nu_e_live', function(data){
+socket.on('not_online', function(data){
   console.log("nu e live boss");
   toastr.error("Client isn't online!");
   const notif={

@@ -45,7 +45,7 @@ window.onload = () => {
                 <p>Weight: '+ user.weight[user.weight.length - 1] + ' kg</p>\
                 <p>Height: '+ user.height[user.height.length - 1] + ' cm</p>\
                 <p>Body Fat: '+ user.body_fat[user.body_fat.length - 1] + ' %</p>\
-                <p>Arm: '+ user.arm[user.arm.length - 1] + ' cm</p>\
+                <p>Arms: '+ user.arms[user.arms.length - 1] + ' cm</p>\
                 <p>Waistline: '+ user.waistline[user.waistline.length - 1] + ' cm</p>\
                 <p>Butt: '+ user.butt[user.butt.length - 1] + ' cm</p>\
                 <p>Thighs: '+ user.thighs[user.thighs.length - 1] + ' cm</p>\

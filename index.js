@@ -36,7 +36,7 @@ io.on('connection', (socket) => {
         }
         if(flag==false){
             console.log("cica nu e lice");
-            io.sockets.emit('nu_e_live', data);
+            io.sockets.emit('not_online', data);
         }
         io.sockets.emit('chat', data);
     });

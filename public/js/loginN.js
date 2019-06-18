@@ -11,10 +11,10 @@ window.onload = () => {
             const password = document.getElementById('password').value;
 
             db.collection('nutritionists').where('username', '==', username).get().then(querySnapshot => {
-                let flag=0;
+                let flag_exists=false;
                 querySnapshot.forEach(function (doc) {
                     const user = doc.data();
-                        flag=1;
+                        flag_exists=true;
                         if (user.password === password) {
                             Cookies.set('userId', doc.id);
                             window.location.href = './indexNutri.html';
@@ -22,7 +22,8 @@ window.onload = () => {
                             toastr.error("Incorrect Password!");
                         }
                 });
-                if(flag==0) toastr.error('There is no active nutritionist account with this username!');
+                if(flag_exists==false)
+                toastr.error('There is no active nutritionist account with this username!');
             });
         }
     } else {

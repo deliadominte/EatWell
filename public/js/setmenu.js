@@ -200,7 +200,7 @@ function setMenu() {
         });
     }
     else {
-        toastr.error("Please verify again!");
+        toastr.error("Please verify the menu again!");
     }
 }
 // Used to toggle the menu on smaller screens when clicking on the menu button

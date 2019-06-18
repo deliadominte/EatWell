@@ -36,7 +36,7 @@ window.onload = () => {
                 bday: p12,
                 id_nutri: userId,
                 activity: [p10],
-                arm: [p2],
+                arms: [p2],
                 body_fat: [p3],
                 butt: [p4],
                 goal: [p5],

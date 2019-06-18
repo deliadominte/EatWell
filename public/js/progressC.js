@@ -157,7 +157,7 @@ window.onload = function () {
             <a href="./RecipesList.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"\
               title="Recipes"><i class="fa fa-bars"></i></a>\
             <a href="./Apointments.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"\
-              title="Apointments"><i class="fa fa-calendar"></i></a>\
+              title="Appointments"><i class="fa fa-calendar"></i></a>\
               <div class="w3-dropdown-hover w3-hide-small">\
               <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span\
                   id="nrNotif" class="w3-badge w3-right w3-small w3-green"></span></button>\
@@ -169,7 +169,7 @@ window.onload = function () {
         <img src="./media/avatar2.png" class="w3-circle w3-theme-d0" style="height:23px;width:23px" alt="Avatar">\
       </button>';
             document.getElementById("navDemo").innerHTML = '<a href="./RecipesList.html" class="w3-bar-item w3-button w3-padding-large">Recipes</a>\
-              <a href="./Apointments.html" class="w3-bar-item w3-button w3-padding-large">Apointments</a>';
+              <a href="./Apointments.html" class="w3-bar-item w3-button w3-padding-large">Appointments</a>';
         }
         db.collection('users').doc(profileId).get().then(doc => {
             if (doc.exists) {
@@ -179,7 +179,7 @@ window.onload = function () {
           <p>Weight: '+ user.weight[user.weight.length - 1] + ' kg</p>\
           <p>Height: '+ user.height[user.height.length - 1] + ' cm</p>\
           <p>Body Fat: '+ user.body_fat[user.body_fat.length - 1] + ' %</p>\
-          <p>Arm: '+ user.arm[user.arm.length - 1] + ' cm</p>\
+          <p>Arms: '+ user.arms[user.arms.length - 1] + ' cm</p>\
           <p>Waistline: '+ user.waistline[user.waistline.length - 1] + ' cm</p>\
           <p>Butt: '+ user.butt[user.butt.length - 1] + ' cm</p>\
           <p>Thighs: '+ user.thighs[user.thighs.length - 1] + ' cm</p>\

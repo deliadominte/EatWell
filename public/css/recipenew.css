@@ -1,0 +1,53 @@
+
+  h4 {
+    font-weight: bold;
+    font-size: 17px;
+  }
+
+  h1 {
+    font-weight: bold;
+    font-size: 15px;
+  }
+
+  h2 {
+    font-weight: bold;
+    font-size: 13px;
+
+  }
+
+  h2 :first-child {
+    font-weight: normal;
+    font-size: 12px;
+  }
+
+  ul {
+    list-style-type: circle;
+    list-style-position: inside;
+  }
+
+  ol {
+    list-style-position: inside;
+  }
+
+  textarea {
+    text-align: left;
+  }
+
+  #dirbut {
+    margin-bottom: 30px;
+  }
+
+  #dir {
+    width: 75%;
+    height: 50px;
+  }
+
+  input,
+  textarea,
+  select {
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #f2f2f2;
+  }

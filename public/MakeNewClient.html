@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-green.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="./css/chat.css">
+<link rel="stylesheet" href="./css/makenewclient.css">
 <link rel="stylesheet" href="/node_modules/toastr/build/toastr.css"/>
 <style>
 	@import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
@@ -24,36 +24,6 @@ html, body, h1, h2, h3, h4, h5
 	  background-size: 100%; 
   	background-repeat: repeat-y;
 }
-#search input[type=text] {
-  padding: 10px;
-	border: 1px solid rgba(255,255,255,0.6);
-  width: 30%;
-  height: 10%;
-  background: #f1f1f1;
-  padding-right: 0;
-}
-
-#search button {
-  width: 10%;
-  height: 10%;
-  padding: 10px;
-  background: rgb(36, 143, 36);
-  color: white;
-  border: 1px solid rgb(187, 184, 184);
-  border-left: none;
-  padding-left: 0;
-  cursor: pointer;
-}
-
-#search button:hover {
-  background:  rgb(187, 184, 184);
-}
-
-#search::after {
-  content: "";
-  clear: both;
-  display: table;
-}
 </style>
 <body class="w3-theme-l5">
 
@@ -67,7 +37,7 @@ html, body, h1, h2, h3, h4, h5
       <a href="./RecipesList.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
         title="Recipes"><i class="fa fa-bars"></i></a>
       <a href="./Apointments.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-        title="Apointments"><i class="fa fa-calendar"></i></a>
+        title="Appointments"><i class="fa fa-calendar"></i></a>
         <div class="w3-dropdown-hover w3-hide-small">
           <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span
               id="nrNotif" class="w3-badge w3-right w3-small w3-green"></span></button>
@@ -84,7 +54,7 @@ html, body, h1, h2, h3, h4, h5
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
     <a href="./RecipesList.html" class="w3-bar-item w3-button w3-padding-large">Recipes</a>
-    <a href="./Apointments.html" class="w3-bar-item w3-button w3-padding-large">Apointments</a>
+    <a href="./Apointments.html" class="w3-bar-item w3-button w3-padding-large">Appointments</a>
   </div>
 
 <!-- Page Container -->

@@ -1,0 +1,18 @@
+h4{
+    font-weight: bold;
+    font-size: 20px;
+    margin: none;
+}
+	body{
+    text-align: center;
+	  background-image: url("./media/Apple.jpg");
+	  background-size: 100%; 
+  	background-repeat: repeat-y;
+}
+input{
+    display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color:#f2f2f2;
+}

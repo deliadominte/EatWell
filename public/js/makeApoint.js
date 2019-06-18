@@ -45,7 +45,7 @@ window.onload = () => {
                   <span>Client accepted: '+ false + '</span>\
                   <div class="w3-row w3-opacity">\
                     <div class="w3-center">\
-                      <button onclick="deleteA('+ "'" + docRef.id + "'" + ', ' + "'" + index + "'" + ')" class="w3-button w3-block w3-red w3-section" title="Delete"><i class="fa fa-remove"></i></button>\
+                      <button onclick="deleteA('+ "'" + docRef.id + "'" + ', ' + "'" + index + "'" +', ' + "'" + profileId + "'" + ')" class="w3-button w3-block w3-red w3-section" title="Delete"><i class="fa fa-remove"></i></button>\
                     </div>\
                   </div>\
                 </div>\
@@ -81,7 +81,7 @@ window.onload = () => {
                   <span>Client accepted: '+ apoint.isAccepted + '</span>\
                   <div class="w3-row w3-opacity">\
                     <div class="w3-center">\
-                      <button onclick="deleteA('+ "'" + doc.id + "'" + ', ' + "'" + index + "'" + ')" class="w3-button w3-block w3-red w3-section" title="Delete"><i class="fa fa-remove"></i></button>\
+                      <button onclick="deleteA('+ "'" + doc.id + "'" + ', ' + "'" + index + "'" +', ' + "'" + profileId + "'" + ')" class="w3-button w3-block w3-red w3-section" title="Delete"><i class="fa fa-remove"></i></button>\
                     </div>\
                   </div>\
                 </div>\
@@ -97,8 +97,20 @@ window.onload = () => {
 } else { window.location.href = './Login.html'; }
 }
 var index = 0;
-function deleteA(id, i) {
-  db.collection("appointments").doc(id).delete().then(document.getElementById('apoint' + i.toString()).style.display = 'none');
+function deleteA(id, i, profileId) {
+  db.collection("appointments").doc(id).delete().then(function(){
+    const notif={
+      id_user: profileId,
+      text:"The nutritionist deleted the appointment!",
+      date: new Date(),
+      to_check_date: false,
+      href: "./index.html"
+    };
+    console.log(profileId,notif);
+    db.collection('notifications').add(notif).then();
+    document.getElementById('apoint' + i.toString()).style.display = 'none';
+  }
+    );
 
 }
 function formatDate(date) {
