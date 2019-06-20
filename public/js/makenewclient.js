@@ -41,7 +41,7 @@ window.onload = () => {
         goal: [p5],
         height: [p6],
         thighs: [p1],
-        time_prog: [date],
+        time_prog: [new Date(date)],
         waistline: [p7],
         weight: [p8],
         nutrition: [],
@@ -64,6 +64,10 @@ window.onload = () => {
             db.collection('user_recipe').add(favorite);
             calculateMacros(id_user);
             toastr["info"]("The new clients code: " + user.code + '<br /><br /><button type="button" onclick="window.location.href = ' + "'" + './ProfileClient.html?userId=' + doc.id + "'" + ';" class="btn clear">Ok</button>');
+            setTimeout(function(){
+              window.location.href = "./ProfileClient.html?userId=" + doc.id ;
+            },15000);
+            
           });
         });
 

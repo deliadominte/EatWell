@@ -129,3 +129,20 @@
 ::-moz-input-placeholder {
     color: rgba(255, 255, 255, 0.6);
 }
+
+
+@media screen and (max-width:720px) {
+
+    .login,.header {
+width: 550px;
+}}
+
+@media screen and (max-width: 420px) {
+    .login,.header {
+width: 350px;
+}
+}
+@media screen and (max-width: 290px) {
+    .login ,.header{
+width: 150px;
+   }}

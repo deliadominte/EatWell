@@ -32,6 +32,7 @@ window.onload = () => {
        <img src="./media/avatar2.png" class="w3-circle w3-theme-d0" style="height:23px;width:23px" alt="Avatar">\
      </button>';
         document.getElementById("navDemo").innerHTML += '\
+                <br><br>\
                 <a href="./SettingsClient.html" class="w3-bar-item w3-button w3-padding-large">Account</a>\
                 <a href="./MenuDetsClient.html" class="w3-bar-item w3-button w3-padding-large">Menu Calendar</a>\
                 <a href="./ProgressClient.html" class="w3-bar-item w3-button w3-padding-large">Progress</a>';
@@ -39,36 +40,41 @@ window.onload = () => {
         db.collection('menus').doc(menuId).get().then(doc => {
           if (doc.exists) {
             const menu = doc.data();
-            let i;
+            let i=0;
             nr_meals = menu.meals.length;
-            for (i = 0; i < nr_meals; i++) {
+            for(i=0;i < nr_meals;i++) {
+              var index=i;
               let desc = menu.description[i];
-              let id_meal = menu.meals[i];
-              var done = menu.is_done[i];
+                let id_meal = menu.meals[i];
+                var done = menu.is_done[i];
+                console.log(index);
               db.collection('recipes').doc(menu.meals[i]).get().then(doc => {
-                if (doc.exists) {
-                  const recipe = doc.data();
-                  document.getElementById("meals").innerHTML += '<div class="w3-container w3-card w3-white w3-round w3-margin"><br>\
-                <span class="w3-right w3-opacity">'+ desc + '</span>\
-                <h4 class="w3-left-align w3-margin-left">'+ recipe.name + '</h4>\
-                <hr class="w3-clear">\
-                <p>Calories: '+ recipe.nutrition[0] + '</p>\
-                <p>Carbohydrates: '+ recipe.nutrition[1] + '</p>\
-                <p>Protein: '+ recipe.nutrition[2] + '</p>\
-                <p>Fat: '+ recipe.nutrition[3] + '</p>\
-                <hr class="w3-clear">\
-                <button onclick="done('+ "'" + id_meal + "','" + i + "'" + ')" id="done' + id_meal + '"\
-                 class="w3-button w3-theme-d1 w3-margin-bottom" ><i class="fa fa-check"></i>\
-                   Done</button>\
-                  <button onclick="add_fav('+ "'" + id_meal + "'" + ')" id="' + id_meal + '"\
-                  class="w3-button w3-theme-d1 w3-margin-bottom" ><i class="fa fa-plus"></i>\
-                    Add to favorites</button>\
-                <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html?recipeId='+ doc.id + '"><i class="fa fa-bars"></i>\
-                   See Recipe</a>\
-                 </div>';
-                  document.getElementById('done' + id_meal).disabled = done;
-                }
-              });
+                
+                    if (doc.exists) {
+                      const recipe = doc.data();
+                      console.log(index);
+                      document.getElementById("meals").innerHTML += '<div class="w3-container w3-card w3-white w3-round w3-margin"><br>\
+                    <span class="w3-right w3-opacity">'+ desc + '</span>\
+                    <h4 class="w3-left-align w3-margin-left">'+ recipe.name + '</h4>\
+                    <hr class="w3-clear">\
+                    <p>Calories: '+ recipe.nutrition[0] + '</p>\
+                    <p>Carbohydrates: '+ recipe.nutrition[1] + '</p>\
+                    <p>Protein: '+ recipe.nutrition[2] + '</p>\
+                    <p>Fat: '+ recipe.nutrition[3] + '</p>\
+                    <hr class="w3-clear">\
+                    <button onclick="done('+ "'" + id_meal + "','" + index + "'" + ')" id="done' + id_meal + '"\
+                     class="w3-button w3-theme-d1 w3-margin-bottom" ><i class="fa fa-check"></i>\
+                       Done</button>\
+                      <button onclick="add_fav('+ "'" + id_meal + "'" + ')" id="' + id_meal + '"\
+                      class="w3-button w3-theme-d1 w3-margin-bottom" ><i class="fa fa-plus"></i>\
+                        Add to favorites</button>\
+                    <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html?recipeId='+ doc.id + '"><i class="fa fa-bars"></i>\
+                       See Recipe</a>\
+                     </div>';
+                      document.getElementById('done' + id_meal).disabled = done;
+                      
+                    }
+                    });
             }
           }
         });
@@ -93,7 +99,9 @@ window.onload = () => {
         <button onclick="logout()" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-theme-d4" title="Logout">\
       <img src="./media/avatar2.png" class="w3-circle w3-theme-d0" style="height:23px;width:23px" alt="Avatar">\
     </button>';
-        document.getElementById("navDemo").innerHTML += '<a href="./RecipesList.html" class="w3-bar-item w3-button w3-padding-large">Recipes</a>\
+        document.getElementById("navDemo").innerHTML += '\
+        <br><br>\
+        <a href="./RecipesList.html" class="w3-bar-item w3-button w3-padding-large">Recipes</a>\
           <a href="./Apointments.html" class="w3-bar-item w3-button w3-padding-large">Appointments</a>';
 
         db.collection('menus').doc(menuId).get().then(doc => {
@@ -142,6 +150,8 @@ function done(id, index) {
     if (doc.exists) {
       const menu = doc.data();
       var is_done = menu.is_done;
+      console.log(is_done);
+      console.log(index);
       is_done[index] = true;
       const a = {
         is_done: is_done

@@ -4,7 +4,6 @@ window.onload = () => {
 
   if (!userId) {
     window.location.href = './LoginNutri.html';
-
   } else {
     var objToday = new Date(),
       weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),
@@ -62,7 +61,8 @@ window.onload = () => {
             if (doc.exists) {
               const user = doc.data();
               if (parseInt(h) <= 19 && parseInt(h) >= 8) {
-                let d = (parseInt(objApp.getDate()) - parseInt(day)) + 1;
+                let d = Math.abs(parseInt(objApp.getDate()) - parseInt(day)) + 1;
+                console.log(h + d.toString());
                 document.getElementById(h + d.toString()).innerHTML += '<a href="./ProfileClient.html?userId=' + doc.id + '">' + user.username + '</a>';
 
               }

@@ -27,7 +27,7 @@ window.onload = () => {
               <button onclick="logout()" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-theme-d4" title="Logout">\
           <img src="./media/avatar2.png" class="w3-circle w3-theme-d0" style="height:23px;width:23px" alt="Avatar">\
         </button>';
-                document.getElementById("navDemo").innerHTML = '\
+                document.getElementById("navDemo").innerHTML = '<br><br>\
                 <a href="./SettingsClient.html" class="w3-bar-item w3-button w3-padding-large">Account</a>\
                 <a href="./MenuDetsClient.html" class="w3-bar-item w3-button w3-padding-large">Menu Calendar</a>\
                 <a href="./ProgressClient.html" class="w3-bar-item w3-button w3-padding-large">Progress</a>';
@@ -53,7 +53,7 @@ window.onload = () => {
           <button onclick="logout()" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-theme-d4" title="Logout">\
           <img src="./media/avatar2.png" class="w3-circle w3-theme-d0" style="height:23px;width:23px" alt="Avatar">\
         </button>';
-            document.getElementById("navDemo").innerHTML = '<a href="./RecipesList.html" class="w3-bar-item w3-button w3-padding-large">Recipes</a>\
+            document.getElementById("navDemo").innerHTML = '<br><br><a href="./RecipesList.html" class="w3-bar-item w3-button w3-padding-large">Recipes</a>\
             <a href="./Apointments.html" class="w3-bar-item w3-button w3-padding-large">Appointments</a>';
         }
         const userI = new URLSearchParams(window.location.search).get('userId');
@@ -86,7 +86,7 @@ window.onload = () => {
         <p>Protein:'+ recipe.nutrition[1] + '</p>\
         <p>Fat:'+ recipe.nutrition[1] + '</p>\
         <hr class="w3-clear">\
-        <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html?recipeId='+ recipe.id + '" ><i class="fa fa-bars"></i>  See Recipe</a>\
+        <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html?recipeId='+ doc.id+ '" ><i class="fa fa-bars"></i>  See Recipe</a>\
        </div>';
                             document.getElementById("container").appendChild(elem);
                         });
@@ -141,3 +141,13 @@ function logout() {
 
     }
 }
+
+// Used to toggle the menu on smaller screens when clicking on the menu button
+function openNav() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+      x.className += " w3-show";
+    } else {
+      x.className = x.className.replace(" w3-show", "");
+    }
+  }

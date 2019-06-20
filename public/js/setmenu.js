@@ -161,15 +161,26 @@ function setMenu() {
             is_done: [],
             meals: []
         }
+        var flag_ok = true;
         for (i = 1; i < index; i++) {
-            menu.meals.push(document.getElementById("options" + i).value);
-            menu.description.push(document.getElementById("dets" + i).value);
+            if (!document.getElementById("options" + i).value || document.getElementById("options" + i).value == "") {
+                toastr.warning("You have to select a recipe for all the meals!");
+                flag_ok = false;
+            }
+            else menu.meals.push(document.getElementById("options" + i).value);
+            console.log(document.getElementById("dets" + i).value);
+            if (!document.getElementById("dets" + i).value || document.getElementById("dets" + i).value == "") {
+                toastr.warning("You have to fill all the description fields!");
+                flag_ok = false;
+            }
+            else menu.description.push(document.getElementById("dets" + i).value);
             menu.is_done.push(false);
         }
+        if(flag_ok){
         db.collection('menus').add(menu).then(docRef => {
 
             window.location.href = './DayMenu.html?menuId=' + docRef.id;
-        });
+        });}
     }
     else {
         toastr.error("Please verify the menu again!");

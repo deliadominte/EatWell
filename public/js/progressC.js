@@ -49,6 +49,7 @@ window.onload = function () {
         <img src="./media/avatar2.png" class="w3-circle w3-theme-d0" style="height:23px;width:23px" alt="Avatar">\
       </button>';
                 document.getElementById("navDemo").innerHTML = '\
+                <br><br>\
                     <a href="./SettingsClient.html" class="w3-bar-item w3-button w3-padding-large">Account</a>\
                     <a href="./MenuDetsClient.html" class="w3-bar-item w3-button w3-padding-large">Menu Calendar</a>\
                     <a href="./ProgressClient.html" class="w3-bar-item w3-button w3-padding-large">Progress</a>';
@@ -74,7 +75,7 @@ window.onload = function () {
             <button onclick="logout()" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-theme-d4" title="Logout">\
         <img src="./media/avatar2.png" class="w3-circle w3-theme-d0" style="height:23px;width:23px" alt="Avatar">\
       </button>';
-            document.getElementById("navDemo").innerHTML = '<a href="./RecipesList.html" class="w3-bar-item w3-button w3-padding-large">Recipes</a>\
+            document.getElementById("navDemo").innerHTML = '<br><br><a href="./RecipesList.html" class="w3-bar-item w3-button w3-padding-large">Recipes</a>\
               <a href="./Apointments.html" class="w3-bar-item w3-button w3-padding-large">Appointments</a>';
         }
         db.collection('users').doc(profileId).get().then(doc => {
@@ -97,59 +98,79 @@ window.onload = function () {
                 document.getElementById("prog").setAttribute("aria-valuemin", (-1) * fmax(user.weight));
                 document.getElementById("prog").setAttribute("aria-valuemax", (-1) * user.goal[user.goal.length - 1]);
                 document.getElementById("prog").setAttribute("style", "width:" + Math.floor(100 - ((user.weight[user.weight.length - 1] - user.goal[user.goal.length - 1]) * 100) / (fmax(user.weight) - user.goal[user.goal.length - 1])) + "%");
-                let difference = user.goal[user.goal.length - 1] - user.weight[user.weight.length - 1];
-                var diff_days = Math.floor((user.time_prog[user.time_prog.length - 1].toDate().getTime() - user.time_prog[0].toDate().getTime()) / (1000 * 60 * 60 * 24));
-                var diff_weight_left = Math.abs(user.goal[user.goal.length - 1] - user.weight[user.weight.length - 1]);
-                var diff_weight_done = Math.abs(user.weight[user.weight.length - 1] - user.goal[user.goal.length - 1]);
-                //console.log((diff_days / diff_weight_done) * diff_weight_left);
-                var date_done = new Date();
-                date_done.setDate(toDay.getDate() + (diff_days / diff_weight_done) * diff_weight_left);
-                //console.log(date_done);
-                var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
-                curMonth = months[date_done.getMonth()];
-                document.getElementById("estimation").innerHTML += "We estimate that you will achive your goal until:<strong> "+ date_done.getUTCDate() + ' ' + curMonth + ' ' + date_done.getFullYear() +"</strong>";
-            }
-        });
-        document.getElementById('getInfoForum').onsubmit = e => {
-            e.preventDefault();
-            let p1 = document.getElementById('thighs').value;
-            let p2 = document.getElementById('arm').value;
-            let p3 = document.getElementById('body_fat').value;
-            let p4 = document.getElementById('butt').value;
-            let p5 = document.getElementById('goal1').value;
-            let p6 = document.getElementById('height').value;
-            let p7 = document.getElementById('waistline').value;
-            let p8 = document.getElementById('weight1').value;
-            let p10 = document.getElementById('activity').value;
-            if ((isNaN(p1) || isNaN(p2) || isNaN(p3) || isNaN(p4) || isNaN(p5) || isNaN(p6) || isNaN(p7) || isNaN(p8)) == false)
-                toastr.error("Please fill in all the fields with numbers!");
-            else {
-                if ((isNaN(p1) || isNaN(p2) || isNaN(p3) || isNaN(p4) || isNaN(p5) || isNaN(p6) || isNaN(p7) || isNaN(p8)) == true) {
-                    let today = new Date();
-                    let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-                    db.collection('users').doc(profileId).update({
-                        "activity": firebase.firestore.FieldValue.arrayUnion(p10),
-                        "arms": firebase.firestore.FieldValue.arrayUnion(p2),
-                        "thighs": firebase.firestore.FieldValue.arrayUnion(p1),
-                        'body_fat': firebase.firestore.FieldValue.arrayUnion(p3),
-                        'butt': firebase.firestore.FieldValue.arrayUnion(p4),
-                        "goal": firebase.firestore.FieldValue.arrayUnion(p5),
-                        "height": firebase.firestore.FieldValue.arrayUnion(p6),
-                        "waistline": firebase.firestore.FieldValue.arrayUnion(p7),
-                        "weight": firebase.firestore.FieldValue.arrayUnion(p8),
-                        "time_prog": firebase.firestore.FieldValue.arrayUnion(new Date(date))
-                    }).then(function () {
-                        toastr.success("Measures added with success!");
-                        flag_add = true;
-                        window.location.href = './ProgressClient.html?userId=' + profileId;
-                    });
-                    if (flag_add == false)
-                        toastr.error("Please fill in all the fields!");
+
+                if (user.time_prog.length >= 2) {
+                    var diff_days = Math.floor((user.time_prog[user.time_prog.length - 1].toDate().getTime() - user.time_prog[0].toDate().getTime()) / (1000 * 60 * 60 * 24));
+                    var diff_weight_left = Math.abs(user.goal[user.goal.length - 1] - user.weight[user.weight.length - 1]);
+                    var diff_weight_done = Math.abs(user.weight[user.weight.length - 1] - user.goal[user.goal.length - 1]);
+                    //console.log((diff_days / diff_weight_done) * diff_weight_left);
+                    var date_done = new Date();
+                    date_done.setDate(toDay.getDate() + (diff_days / diff_weight_done) * diff_weight_left);
+                    //console.log(date_done);
+                    var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
+                        curMonth = months[date_done.getMonth()];
+                }
+                else {
+                    let kg_per_day = (0.5) / 7;
+                    var diff_weight_left = Math.abs(user.goal[0] - user.weight[0]);
+                    var date_done = new Date();
+                    date_done.setDate(toDay.getDate() + ( diff_weight_left/kg_per_day));
+                    //console.log(date_done);
+                    var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
+                        curMonth = months[date_done.getMonth()];
                 }
             }
+            document.getElementById("estimation").innerHTML += "We estimate that you will achive your goal until:<strong> " + date_done.getUTCDate() + ' ' + curMonth + ' ' + date_done.getFullYear() + "</strong>";
+        
+        });
+    document.getElementById('getInfoForum').onsubmit = e => {
+        e.preventDefault();
+        let p1 = document.getElementById('thighs').value;
+        let p2 = document.getElementById('arm').value;
+        let p3 = document.getElementById('body_fat').value;
+        let p4 = document.getElementById('butt').value;
+        let p5 = document.getElementById('goal1').value;
+        let p6 = document.getElementById('height').value;
+        let p7 = document.getElementById('waistline').value;
+        let p8 = document.getElementById('weight1').value;
+        let p10 = document.getElementById('activity').value;
+        console.log(p1=='');
+        console.log(p2=='');
+        console.log(p3=='');
 
+        console.log(p4=='');
+        console.log(p5=='');
+        console.log(p6=='');
+        console.log(p7=='');
+        console.log(p8=='');
+        console.log(p10=='');
+        if ((p1=="" || p2=="" || p3=="" || p4=="" || p5=="" || p6=="" || p7=="" || p8=="" || p10=="") == true)
+            toastr.error("Please fill in all the fields!");
+        else {
+            if ((p1=="" || p2=="" || p3=="" || p4=="" || p5=="" || p6=="" || p7=="" || p8=="" || p10=="") == false) {
+                let today = new Date();
+                let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                db.collection('users').doc(profileId).update({
+                    "activity": firebase.firestore.FieldValue.arrayUnion(p10),
+                    "arms": firebase.firestore.FieldValue.arrayUnion(p2),
+                    "thighs": firebase.firestore.FieldValue.arrayUnion(p1),
+                    'body_fat': firebase.firestore.FieldValue.arrayUnion(p3),
+                    'butt': firebase.firestore.FieldValue.arrayUnion(p4),
+                    "goal": firebase.firestore.FieldValue.arrayUnion(p5),
+                    "height": firebase.firestore.FieldValue.arrayUnion(p6),
+                    "waistline": firebase.firestore.FieldValue.arrayUnion(p7),
+                    "weight": firebase.firestore.FieldValue.arrayUnion(p8),
+                    "time_prog": firebase.firestore.FieldValue.arrayUnion(today)
+                }).then(function () {
+                    toastr.success("Measures added with success!");
+                    flag_add = true;
+                    window.location.href = './ProgressClient.html?userId=' + profileId;
+                });
+            }
         }
+
     }
+}
 }
 
 
@@ -395,5 +416,14 @@ function logout() {
         Cookies.remove('userId');
         window.location.href = './LoginClient.html';
 
+    }
+}
+// Used to toggle the menu on smaller screens when clicking on the menu button
+function openNav() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
     }
 }

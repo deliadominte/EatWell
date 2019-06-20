@@ -65,20 +65,18 @@ ul {list-style-type: none;}
   background:#666;
   color: white !important
 }
-#08{
-  border-style: none;
-}
+
 a{text-decoration: none;}
 /* Add media queries for smaller screens */
 @media screen and (max-width:720px) {
-  .weekdays li, .days li {width: 11%;font-size: 11px;}
+  .weekdays li, .days li {width: 12%;font-size: 10px;}
 }
 
 @media screen and (max-width: 420px) {
-  .weekdays li, .days li {width: 10%;font-size: 10px;}
-  .days li .active {padding: 2px;font-size: 10px;}
+  .weekdays li, .days li {width: 11%;font-size: 9px;}
+  .days li .active {padding: 2px;font-size: 9px;}
 }
 
 @media screen and (max-width: 290px) {
-  .weekdays li, .days li {width: 9%;font-size: 9px;}
+  .weekdays li, .days li {width: 8%;font-size: 9px;}
 }

@@ -34,7 +34,7 @@ window.onload = () => {
                   <button onclick="logout()" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-theme-d4" title="Logout">\
                   <img src="./media/avatar2.png" class="w3-circle w3-theme-d0" style="height:23px;width:23px" alt="Avatar">\
                 </button>';
-        document.getElementById("navDemo").innerHTML = '\
+        document.getElementById("navDemo").innerHTML = '<br><br>\
                     <a href="./SettingsClient.html" class="w3-bar-item w3-button w3-padding-large">Account</a>\
                     <a href="./MenuDetsClient.html" class="w3-bar-item w3-button w3-padding-large">Menu Calendar</a>\
                     <a href="./ProgressClient.html" class="w3-bar-item w3-button w3-padding-large">Progress</a>';
@@ -60,7 +60,7 @@ window.onload = () => {
           <button onclick="logout()" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-theme-d4" title="Logout">\
         <img src="./media/avatar2.png" class="w3-circle w3-theme-d0" style="height:23px;width:23px" alt="Avatar">\
       </button>';
-      document.getElementById("navDemo").innerHTML = '<a href="./RecipesList.html" class="w3-bar-item w3-button w3-padding-large">Recipes</a>\
+      document.getElementById("navDemo").innerHTML = '<br><br><a href="./RecipesList.html" class="w3-bar-item w3-button w3-padding-large">Recipes</a>\
             <a href="./Apointments.html" class="w3-bar-item w3-button w3-padding-large">Appointments</a>';
     }
     const recipeId = new URLSearchParams(window.location.search).get('recipeId');

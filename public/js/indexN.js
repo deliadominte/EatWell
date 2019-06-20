@@ -19,7 +19,7 @@ window.onload = () => {
                     displaystyle = "none";
                 }
                 var elem = document.createElement("div");
-                elem.innerHTML = '<div id = "p-' + ord + '" class="pers w3-container w3-card w3-white w3-round w3-margin"><br>\
+                elem.innerHTML = '<div id = "p-' + ord + '" class="pers w3-container w3-card w3-white w3-round w3-margin" style="display:' + displaystyle + '"><br>\
         <h4 class="name w3-center">'+ user.username + '</h4>\
         <p class="w3-center"><img src="./media/avatar.png" class="w3-circle" style="height:86px;width:86px" alt="Avatar"></p>\
         <hr class="w3-clear">\
@@ -38,6 +38,7 @@ window.onload = () => {
         document.getElementById("more-btn").onclick = e => {
             let i;
             for (i = loaded + 1; i <= loaded + MAX_LOAD; i++) {
+                
                 let element = document.getElementById("p-" + i);
                 if (element) {
                     element.style.display = "block";
