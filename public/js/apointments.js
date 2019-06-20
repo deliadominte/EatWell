@@ -19,7 +19,7 @@ window.onload = () => {
       curSeconds = objToday.getSeconds() < 10 ? "0" + objToday.getSeconds() : objToday.getSeconds(),
       curMeridiem = objToday.getHours() > 12 ? "PM" : "AM";
     var today = curHour + ":" + curMinute + "." + curSeconds + curMeridiem + " " + dayOfWeek + " " + dayOfMonth + " of " + curMonth + ", " + curYear;
-    console.log(today);
+
 
     document.getElementById("title").innerHTML += '<li>\
     '+ curMonth + '<br>\
@@ -35,7 +35,6 @@ window.onload = () => {
     <li>'+ weekday[(objToday.getDay() + 6) % 7] + '</li>';
 
     let day = objToday.getDate();
-    console.log(day);
     db.collection('appointments').where("id_nutri", "==", userId).where("isAccepted", "==", true).get().then(querySnapshot => {
       querySnapshot.forEach(function (doc) {
         const appointments = doc.data();
@@ -63,9 +62,9 @@ window.onload = () => {
             if (doc.exists) {
               const user = doc.data();
               if (parseInt(h) <= 19 && parseInt(h) >= 8) {
-                let d = ( parseInt(objApp.getDate())-parseInt(day) ) + 1;
-                document.getElementById(h+d.toString()).innerHTML += '<a href="./ProfileClient.html?userId=' + doc.id + '">' + user.username + '</a>';
-                
+                let d = (parseInt(objApp.getDate()) - parseInt(day)) + 1;
+                document.getElementById(h + d.toString()).innerHTML += '<a href="./ProfileClient.html?userId=' + doc.id + '">' + user.username + '</a>';
+
               }
             }
           });
@@ -84,9 +83,9 @@ function openNav() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
-function logout(){
+function logout() {
   const userId = Cookies.get('userId');
-  if(userId){
+  if (userId) {
     Cookies.remove('userId');
     window.location.href = './LoginClient.html';
 

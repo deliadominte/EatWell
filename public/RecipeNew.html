@@ -9,7 +9,7 @@
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="./css/recipenew.css">
-<link rel="stylesheet" href="/node_modules/toastr/build/toastr.css"/>
+<link rel="stylesheet" href="/node_modules/toastr/build/toastr.css" />
 <style>
   @import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
   @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
@@ -58,14 +58,15 @@
         title="Recipes"><i class="fa fa-bars"></i></a>
       <a href="./Apointments.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
         title="Appointments"><i class="fa fa-calendar"></i></a>
-        <div class="w3-dropdown-hover w3-hide-small">
-          <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span
-              id="nrNotif" class="w3-badge w3-right w3-small w3-green"></span></button>
-          <div id="notif" class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-            
-          </div>
+      <div class="w3-dropdown-hover w3-hide-small">
+        <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span id="nrNotif"
+            class="w3-badge w3-right w3-small w3-green"></span></button>
+        <div id="notif" class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
+
         </div>
-      <button onclick="logout()" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-theme-d4" title="Logout">
+      </div>
+      <button onclick="logout()" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-theme-d4"
+        title="Logout">
         <img src="./media/avatar2.png" class="w3-circle w3-theme-d0" style="height:23px;width:23px" alt="Avatar">
       </button>
     </div>
@@ -87,36 +88,38 @@
       <div class="w3-col m7" style="width:100%">
         <form id="recipeForum">
           <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-            <h4 class="w3-center"><input  id="name" class="w3-input w3-theme-d0 w3-margin-bottom" type="text" name="name"
+            <h4 class="w3-center"><input id="name" class="w3-input w3-theme-d0 w3-margin-bottom" type="text" name="name"
                 placeholder="Nume reteta..."></h4>
             <hr class="w3-clear">
             <h1>Informations for 100 grams:</h1>
-            <h2>Calories: <span><input id="cal" class="w3-input w3-theme-d0 w3-margin-bottom" type="number" name="Calories"
-                  min="0" placeholder="kcal"></span> </h2>
-            <h2>Carbohydrates: <span><input  id="carbo" class="w3-input w3-theme-d0 w3-margin-bottom" type="number"
+            <h2>Calories: <span><input id="cal" class="w3-input w3-theme-d0 w3-margin-bottom" type="number"
+                  name="Calories" min="0" placeholder="kcal"></span> </h2>
+            <h2>Carbohydrates: <span><input id="carbo" class="w3-input w3-theme-d0 w3-margin-bottom" type="number"
                   name="Carbohydrates" min="0" placeholder="grams"></span></h2>
-            <h2>Protein: <span><input id="protein" class="w3-input w3-theme-d0 w3-margin-bottom" type="number" name="Protein" min="0"
-                  placeholder="grams">
+            <h2>Protein: <span><input id="protein" class="w3-input w3-theme-d0 w3-margin-bottom" type="number"
+                  name="Protein" min="0" placeholder="grams">
               </span></h2>
-            <h2>Fat: <span><input id="fat" class="w3-input w3-theme-d0 w3-margin-bottom" type="number" name="Fat" min="0"
-                  placeholder="grams">
+            <h2>Fat: <span><input id="fat" class="w3-input w3-theme-d0 w3-margin-bottom" type="number" name="Fat"
+                  min="0" placeholder="grams">
               </span></h2>
             <hr class="w3-clear">
-            <h2>Prep Time: <span><input id="preph" class="w3-input w3-theme-d0 w3-margin-bottom" type="number" name="h" min="0"
-                  max="24" placeholder="hours"><input id="prepmin" class="w3-input w3-theme-d0 w3-margin-bottom" type="number"
-                  name="min" min="0" max="60" placeholder="minutes"></span></h2>
-            <h2>Cook Time: <span><input id="cookh" class="w3-input w3-theme-d0 w3-margin-bottom" type="number" name="h" min="0"
-                  max="24" placeholder="hours"><input id="cookmin" class="w3-input w3-theme-d0 w3-margin-bottom" type="number"
-                  name="min" min="0" max="60" placeholder="minutes"></span></h2>
-            <h2>Ready in: <span><input id="readyh" class="w3-input w3-theme-d0 w3-margin-bottom" type="number" name="h" min="0"
-                  max="24" placeholder="hours"><input id="readymin" class="w3-input w3-theme-d0 w3-margin-bottom" type="number"
-                  name="min" min="0" max="60" placeholder="minutes"></span></h2>
+            <h2>Prep Time: <span><input id="preph" class="w3-input w3-theme-d0 w3-margin-bottom" type="number" name="h"
+                  min="0" max="24" placeholder="hours"><input id="prepmin" class="w3-input w3-theme-d0 w3-margin-bottom"
+                  type="number" name="min" min="0" max="60" placeholder="minutes"></span></h2>
+            <h2>Cook Time: <span><input id="cookh" class="w3-input w3-theme-d0 w3-margin-bottom" type="number" name="h"
+                  min="0" max="24" placeholder="hours"><input id="cookmin" class="w3-input w3-theme-d0 w3-margin-bottom"
+                  type="number" name="min" min="0" max="60" placeholder="minutes"></span></h2>
+            <h2>Ready in: <span><input id="readyh" class="w3-input w3-theme-d0 w3-margin-bottom" type="number" name="h"
+                  min="0" max="24" placeholder="hours"><input id="readymin"
+                  class="w3-input w3-theme-d0 w3-margin-bottom" type="number" name="min" min="0" max="60"
+                  placeholder="minutes"></span></h2>
             <hr class="w3-clear">
             <h1>Ingredients: </h1>
             <ul id="ingredient">
               <br>
               <li>
-                <input id="weight0" class="w3-input w3-theme-d0 w3-margin-bottom" type="number" name="weight" min="0" max='1000'>
+                <input id="weight0" class="w3-input w3-theme-d0 w3-margin-bottom" type="number" name="weight" min="0"
+                  max='1000'>
                 <select class="w3-input w3-theme-d0 w3-margin-bottom" id="mySelect0" onChange="check(this);">
                   <option>-</option>
                   <option>grams</option>
@@ -131,29 +134,31 @@
               </li><br>
             </ul>
             <br>
-            <button  type="button" onclick="appearAdd('ingredient');" class="w3-button w3-theme-d2 w3-show">
+            <button type="button" onclick="appearAdd('ingredient');" class="w3-button w3-theme-d2 w3-show">
               <i class="fa fa-plus"></i></button>
             <br>
             <hr class="w3-clear">
             <h1>Directions: </h1>
             <ol id="step" class=" w3-center">
               <li>
-                <textarea id="dir0" class="w3-input w3-theme-d0 w3-margin-bottom" cols="200" rows="10" name="step"></textarea>
+                <textarea id="dir0" class="w3-input w3-theme-d0 w3-margin-bottom" cols="200" rows="10"
+                  name="step"></textarea>
               </li>
               <br>
             </ol>
             <br>
-            <button  type="button" onclick="appearAdd('step');" class="w3-button w3-theme-d2 w3-show">
+            <button type="button" onclick="appearAdd('step');" class="w3-button w3-theme-d2 w3-show">
               <i class="fa fa-plus"></i></button>
             <br>
-            <button type="submit" id="save" class="w3-button w3-theme-d2 w3-margin-bottom w3-center"><i class="	fa fa-check"></i>
+            <button type="submit" id="save" class="w3-button w3-theme-d2 w3-margin-bottom w3-center"><i
+                class="	fa fa-check"></i>
               Save</i></button>
         </form>
       </div>
       <!-- End Middle Column -->
     </div>
 
-   
+
     <!-- End Grid -->
   </div>
 

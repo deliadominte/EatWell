@@ -1,4 +1,4 @@
-toastr.options = {"positionClass": "toast-bottom-left"};
+toastr.options = { "positionClass": "toast-bottom-left" };
 window.onload = () => {
     const userId = Cookies.get('userId');
 
@@ -10,30 +10,29 @@ window.onload = () => {
             const password = document.getElementById('password').value;
 
             db.collection('users').where('username', '==', username).get().then(querySnapshot => {
-                let flag=0;
+                let flag = 0;
                 querySnapshot.forEach(function (doc) {
                     const user = doc.data();
-                    console.log(user.password);
-                        flag=1;
-                        if (user.password === password) {
-                            Cookies.set('userId', doc.id);
-                            window.location.href = './index.html';
-                        } else {
-                            toastr.error("Incorrect Password!");
-                        }
+                    flag = 1;
+                    if (user.password === password) {
+                        Cookies.set('userId', doc.id);
+                        window.location.href = './index.html';
+                    } else {
+                        toastr.error("Incorrect Password!");
+                    }
                 });
-                if(flag==0) toastr.error('There is no active client account with this username!');
+                if (flag == 0) toastr.error('There is no active client account with this username!');
             });
         }
-        
+
     } else {
-        var flag=0;
+        var flag = 0;
         db.collection('users').where('id', '==', userId).get().then(querySnapshot => {
             querySnapshot.forEach(function (doc) {
                 window.location.href = './index.html';
             });
         }
         );
-        if (flag==0){window.location.href = './indexNutri.html';}
+        if (flag == 0) { window.location.href = './indexNutri.html'; }
     }
 }

@@ -1,5 +1,5 @@
 let done_contor = 0, nr_meals;
-toastr.options = {"positionClass": "toast-bottom-left"}
+toastr.options = { "positionClass": "toast-bottom-left" }
 window.onload = () => {
   const userId = Cookies.get('userId');
 
@@ -44,26 +44,24 @@ window.onload = () => {
     }
     );
     var vec_menu = [];
-    console.log(userId);
     let flag = 0;
     db.collection('menus').where('id_user', '==', userId).get().then(querySnapshot => {
       querySnapshot.forEach(function (doc) {
         const menu = doc.data()
         const date = menu.date.toDate();
-        console.log(date);
         flag = 1;
 
-        if ((menu.date.toDate().getUTCDate() == objToday.getUTCDate()) && (menu.date.toDate().getMonth() == objToday.getMonth()) && (menu.date.toDate().getFullYear() == objToday.getFullYear()))//adica e egal
+        if ((menu.date.toDate().getDate() == objToday.getDate()) && (menu.date.toDate().getMonth() == objToday.getMonth()) && (menu.date.toDate().getFullYear() == objToday.getFullYear()))//adica e egal
         {
           let i;
           nr_meals = menu.meals.length;
-          console.log(nr_meals);
           for (i = 0; i < nr_meals; i++) {
             let desc = menu.description[i];
             db.collection('recipes').doc(menu.meals[i]).get().then(doc => {
               if (doc.exists) {
                 const recipe = doc.data();
-                const id_meal=doc.id;
+                const id_meal = doc.id;
+                var done = menu.is_done[i];
                 if (i == 0) {
                   document.getElementById("meals").innerHTML = '<div class="w3-container w3-card w3-white w3-round w3-margin"><br>\
                                 <span class="w3-right w3-opacity">'+ desc + '</span>\
@@ -94,17 +92,17 @@ window.onload = () => {
                                   <p>Protein: '+ recipe.nutrition[2] + '</p>\
                                   <p>Fat: '+ recipe.nutrition[3] + '</p>\
                                   <hr class="w3-clear">\
-                                  <button onclick="done('+ "'" + desc + "'" + ',' + "'" + doc.id + "'" + ')" id="' + desc + '"\
+                                  <button onclick="done('+ "'" + id_meal + "'" + ',' + "'" + doc.id + "'" + ')" id="done' + id_meal + '"\
                                    class="w3-button w3-theme-d1 w3-margin-bottom" ><i class="fa fa-check"></i>\
                                      Done</button>\
-                                    <button onclick="add_fav('+"'"+id_meal+"'"+')" id="'+id_meal+'"\
+                                    <button onclick="add_fav('+ "'" + id_meal + "'" + ')" id="' + id_meal + '"\
             class="w3-button w3-theme-d1 w3-margin-bottom" ><i class="fa fa-plus"></i>\
               Add to favorites</button>\
                                   <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html?recipeId='+ doc.id + '"><i class="fa fa-bars"></i>\
                                      See Recipe</a>\
                                    </div>';
                 }
-                document.getElementById(desc).disabled = menu.is_done;
+                document.getElementById('done' + id_meal).disabled = done;
 
               }
             });
@@ -198,7 +196,7 @@ function accept(i, id) {
         db.collection('users').doc(userId).get().then(doc => {
           if (doc.exists) {
             const user = doc.data();
-            
+
             const notif = {//notificare ca a acceptat programarea
               id_user: user.id_nutri,
               text: user.username + " accepted your appointment!",
@@ -206,8 +204,7 @@ function accept(i, id) {
               to_check_date: false,
               href: "./MakeApoint.html?userId=" + userId
             }
-            console.log(notif);
-            db.collection('notifications').add(notif).then(console.log(notif));
+            db.collection('notifications').add(notif).then();
 
             var date_before = new Date(date);
             date_before.setDate(date.getDate() - 1);
@@ -255,18 +252,24 @@ function accept(i, id) {
 
 }
 
-function done(i, menuId) {
+function done(id, index) {
   done_contor++;
-  document.getElementById(i).disabled = true;
-  if (done_contor == nr_meals) {
-    a = {
-      is_done: true
+  document.getElementById('done' + id).disabled = true;
+  db.collection('menus').doc(menuId).get().then(doc => {
+    if (doc.exists) {
+      const menu = doc.data();
+      var is_done = menu.is_done;
+      is_done[index] = true;
+      const a = {
+        is_done: is_done
+      };
+      db.collection('menus').doc(menuId).set({ ...a }, { merge: true });
     }
-    db.collection('appointments').doc(menuId).set({ ...a }, { merge: true }).then(function () {
-      toastr.success("Congratulations you finished today's menu!");
-    });
-  }
+  })
+  if (done_contor == nr_meals)
+    toastr.success("Congratulations you finished today's menu!");
 }
+
 function formatDate(date) {
   var monthNames = [
     "January", "February", "March",
@@ -294,7 +297,6 @@ function add_fav(id) {
         if (favorite.id_recipes[i] == id)
           flag = true;
       }
-      console.log(flag);
       if (flag == true) toastr.warning("The recipe is already added to your favorites!");
       else {
         db.collection('user_recipe').doc(id_u_r).update({

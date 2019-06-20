@@ -10,21 +10,29 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="./css/chat.css">
 <link rel="stylesheet" href="./css/apointments.css">
-<link rel="stylesheet" href="/node_modules/toastr/build/toastr.css"/>
+<link rel="stylesheet" href="/node_modules/toastr/build/toastr.css" />
 <style>
-	@import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
+  @import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
   @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
-  html, body, h1, h2, h3, h4, h5 
-{
-	font-family: Arial;
-	font-size: 12px;
-	}
-	body{
-	background-image: url("./media/Apple.jpg");
-	background-size: 100%; 
-	background-repeat: repeat-y;
-}
+
+  html,
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: Arial;
+    font-size: 12px;
+  }
+
+  body {
+    background-image: url("./media/Apple.jpg");
+    background-size: 100%;
+    background-repeat: repeat-y;
+  }
 </style>
+
 <body class="w3-theme-l5">
 
   <!-- Navbar -->
@@ -38,14 +46,15 @@
         title="Recipes"><i class="fa fa-bars"></i></a>
       <a href="./Apointments.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
         title="Appointments"><i class="fa fa-calendar"></i></a>
-        <div class="w3-dropdown-hover w3-hide-small">
-          <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span
-              id="nrNotif" class="w3-badge w3-right w3-small w3-green"></span></button>
-          <div id="notif" class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-            
-          </div>
+      <div class="w3-dropdown-hover w3-hide-small">
+        <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span id="nrNotif"
+            class="w3-badge w3-right w3-small w3-green"></span></button>
+        <div id="notif" class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
+
         </div>
-      <button onclick="logout()" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-theme-d4" title="Logout">
+      </div>
+      <button onclick="logout()" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-theme-d4"
+        title="Logout">
         <img src="./media/avatar2.png" class="w3-circle w3-theme-d0" style="height:23px;width:23px" alt="Avatar">
       </button>
     </div>
@@ -57,153 +66,154 @@
     <a href="./Apointments.html" class="w3-bar-item w3-button w3-padding-large">Appointments</a>
   </div>
 
-<!-- Page Container -->
-<div id="body" class="w3-container w3-content" style="max-width:1400px; margin-top:60px;">    
-  <!-- The Grid -->
-  <div class="w3-row">
+  <!-- Page Container -->
+  <div id="body" class="w3-container w3-content" style="max-width:1400px; margin-top:60px;">
+    <!-- The Grid -->
+    <div class="w3-row">
 
-    <!-- Middle Column -->
-    <div class="w3-col m12">
-        <div class="month">      
-            <ul id="title">
-              <!-- <li class="prev">&#10094;</li>
+      <!-- Middle Column -->
+      <div class="w3-col m12">
+        <div class="month">
+          <ul id="title">
+            <!-- <li class="prev">&#10094;</li>
               <li class="next">&#10095;</li> -->
-              
-            </ul>
-          </div>
-          
-          <ul id="week" class="weekdays">
-            <li>Hour</li>
+
           </ul>
-          
-          <ul class="days">  
-            <li id="08">08:00</li>
-            <li id="081"></li>
-            <li id="082"></li>
-            <li id="083"></li>
-            <li id="084"></li>
-            <li id="085"></li>
-            <li id="086"></li>
-            <li id="087"></li>
+        </div>
 
-            <li id="09">09:00</li>
-            <li id="091"></li>
-            <li id="092"></li>
-            <li id="093"></li>
-            <li id="094"></li>
-            <li id="095"></li>
-            <li id="096"></li>
-            <li id="097"></li>
-        
+        <ul id="week" class="weekdays">
+          <li>Hour</li>
+        </ul>
 
-            <li id="10">10:00</li>
-            <li id="101"></li>
-            <li id="102"></li>
-            <li id="103"></li>
-            <li id="104"></li>
-            <li id="105"></li>
-            <li id="106"></li>
-            <li id="107"></li>
+        <ul class="days">
+          <li id="08">08:00</li>
+          <li id="081"></li>
+          <li id="082"></li>
+          <li id="083"></li>
+          <li id="084"></li>
+          <li id="085"></li>
+          <li id="086"></li>
+          <li id="087"></li>
 
-            <li id="11">11:00</li>
-            <li id="111"></li>
-            <li id="112"></li>
-            <li id="113"></li>
-            <li id="114"></li>
-            <li id="115"></li>
-            <li id="116"></li>
-            <li id="117"></li>
+          <li id="09">09:00</li>
+          <li id="091"></li>
+          <li id="092"></li>
+          <li id="093"></li>
+          <li id="094"></li>
+          <li id="095"></li>
+          <li id="096"></li>
+          <li id="097"></li>
 
-            <li id="12">12:00</li>
-            <li id="121"></li>
-            <li id="122"></li>
-            <li id="123"></li>
-            <li id="124"></li>
-            <li id="125"></li>
-            <li id="126"></li>
-            <li id="127"></li>
 
-            <li id="13">13:00</li>
-            <li id="131"></li>
-            <li id="132"></li>
-            <li id="133"></li>
-            <li id="134"></li>
-            <li id="135"></li>
-            <li id="136"></li>
-            <li id="137"></li>
+          <li id="10">10:00</li>
+          <li id="101"></li>
+          <li id="102"></li>
+          <li id="103"></li>
+          <li id="104"></li>
+          <li id="105"></li>
+          <li id="106"></li>
+          <li id="107"></li>
 
-            <li id="14">14:00</li>
-            <li id="141"></li>
-            <li id="142"></li>
-            <li id="143"></li>
-            <li id="144"></li>
-            <li id="145"></li>
-            <li id="146"></li>
-            <li id="147"></li>
+          <li id="11">11:00</li>
+          <li id="111"></li>
+          <li id="112"></li>
+          <li id="113"></li>
+          <li id="114"></li>
+          <li id="115"></li>
+          <li id="116"></li>
+          <li id="117"></li>
 
-            <li id="15">15:00</li>
-            <li id="151"></li>
-            <li id="152"></li>
-            <li id="153"></li>
-            <li id="154"></li>
-            <li id="155"></li>
-            <li id="156"></li>
-            <li id="157"></li>
+          <li id="12">12:00</li>
+          <li id="121"></li>
+          <li id="122"></li>
+          <li id="123"></li>
+          <li id="124"></li>
+          <li id="125"></li>
+          <li id="126"></li>
+          <li id="127"></li>
 
-            <li id="16">16:00</li>
-            <li id="161"></li>
-            <li id="162"></li>
-            <li id="163"></li>
-            <li id="164"></li>
-            <li id="165"></li>
-            <li id="166"></li>
-            <li id="167"></li>
+          <li id="13">13:00</li>
+          <li id="131"></li>
+          <li id="132"></li>
+          <li id="133"></li>
+          <li id="134"></li>
+          <li id="135"></li>
+          <li id="136"></li>
+          <li id="137"></li>
 
-            <li id="17">17:00</li>
-            <li id="171"></li>
-            <li id="172"></li>
-            <li id="173"></li>
-            <li id="174"></li>
-            <li id="175"></li>
-            <li id="176"></li>
-            <li id="177"></li>
+          <li id="14">14:00</li>
+          <li id="141"></li>
+          <li id="142"></li>
+          <li id="143"></li>
+          <li id="144"></li>
+          <li id="145"></li>
+          <li id="146"></li>
+          <li id="147"></li>
 
-            <li id="18">18:00</li>
-            <li id="181"></li>
-            <li id="182"></li>
-            <li id="183"></li>
-            <li id="184"></li>
-            <li id="185"></li>
-            <li id="186"></li>
-            <li id="187"></li>
+          <li id="15">15:00</li>
+          <li id="151"></li>
+          <li id="152"></li>
+          <li id="153"></li>
+          <li id="154"></li>
+          <li id="155"></li>
+          <li id="156"></li>
+          <li id="157"></li>
 
-            <li id="19">19:00</li>
-            <li id="191"></li>
-            <li id="192"></li>
-            <li id="193"></li>
-            <li id="194"></li>
-            <li id="195"></li>
-            <li id="196"></li>
-            <li id="197"></li>
-          </ul>           
+          <li id="16">16:00</li>
+          <li id="161"></li>
+          <li id="162"></li>
+          <li id="163"></li>
+          <li id="164"></li>
+          <li id="165"></li>
+          <li id="166"></li>
+          <li id="167"></li>
+
+          <li id="17">17:00</li>
+          <li id="171"></li>
+          <li id="172"></li>
+          <li id="173"></li>
+          <li id="174"></li>
+          <li id="175"></li>
+          <li id="176"></li>
+          <li id="177"></li>
+
+          <li id="18">18:00</li>
+          <li id="181"></li>
+          <li id="182"></li>
+          <li id="183"></li>
+          <li id="184"></li>
+          <li id="185"></li>
+          <li id="186"></li>
+          <li id="187"></li>
+
+          <li id="19">19:00</li>
+          <li id="191"></li>
+          <li id="192"></li>
+          <li id="193"></li>
+          <li id="194"></li>
+          <li id="195"></li>
+          <li id="196"></li>
+          <li id="197"></li>
+        </ul>
+      </div>
+
+      <!-- End Grid -->
     </div>
 
-  <!-- End Grid -->
+    <!-- End Page Container -->
   </div>
-  
-<!-- End Page Container -->
-</div>
-<br>
+  <br>
 
-<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 
-<script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-firestore.js"></script>
-<script src="/node_modules/toastr/toastr.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-firestore.js"></script>
+  <script src="/node_modules/toastr/toastr.js"></script>
 
-<script src="./js/config-database.js"></script>
-<script src="./js/apointments.js"></script>
-<script src="./js/notification.js"></script>
+  <script src="./js/config-database.js"></script>
+  <script src="./js/apointments.js"></script>
+  <script src="./js/notification.js"></script>
 </body>
-</html> 
+
+</html>

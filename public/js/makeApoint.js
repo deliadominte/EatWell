@@ -1,4 +1,4 @@
-toastr.options = {"positionClass": "toast-bottom-left"};
+toastr.options = { "positionClass": "toast-bottom-left" };
 window.onload = () => {
   const userId = Cookies.get('userId');
   const profileId = new URLSearchParams(window.location.search).get('userId');
@@ -33,7 +33,6 @@ window.onload = () => {
           toastr.warning("There is another appointment at this date and time!");
         }
         else {
-          console.log("incepe");
           db.collection('appointments').add(apoint).then(docRef => {
             index++;
             document.getElementById("active").innerHTML += '<div class="w3-card w3-round w3-white w3-center">\
@@ -45,34 +44,35 @@ window.onload = () => {
                   <span>Client accepted: '+ false + '</span>\
                   <div class="w3-row w3-opacity">\
                     <div class="w3-center">\
-                      <button onclick="deleteA('+ "'" + docRef.id + "'" + ', ' + "'" + index + "'" +', ' + "'" + profileId + "'" + ')" class="w3-button w3-block w3-red w3-section" title="Delete"><i class="fa fa-remove"></i></button>\
+                      <button onclick="deleteA('+ "'" + docRef.id + "'" + ', ' + "'" + index + "'" + ', ' + "'" + profileId + "'" + ')" class="w3-button w3-block w3-red w3-section" title="Delete"><i class="fa fa-remove"></i></button>\
                     </div>\
                   </div>\
                 </div>\
               </div>\
               <br>';
           });
-          const notif={
+          const notif = {
             id_user: profileId,
-            text:"New Appointment! Please accept or decline!",
+            text: "New Appointment! Please accept or decline!",
             date: new Date(),
             to_check_date: false,
             href: "./index.html"
           }
           db.collection('notifications').add(notif).then();
 
-        }}, 1000);
-    
-  }
-  let today = new Date();
-  db.collection('appointments').where('id_nutri', '==', userId).where('id_user', '==', profileId).get().then(querySnapshot => {
-    querySnapshot.forEach(function (doc) {
+        }
+      }, 1000);
 
-      const apoint = doc.data();
-      const date = apoint.date.toDate();
-      index++;
-      if(!(date < today)){
-      document.getElementById("active").innerHTML += '<div class="w3-card w3-round w3-white w3-center">\
+    }
+    let today = new Date();
+    db.collection('appointments').where('id_nutri', '==', userId).where('id_user', '==', profileId).get().then(querySnapshot => {
+      querySnapshot.forEach(function (doc) {
+
+        const apoint = doc.data();
+        const date = apoint.date.toDate();
+        index++;
+        if (!(date < today)) {
+          document.getElementById("active").innerHTML += '<div class="w3-card w3-round w3-white w3-center">\
                 <div class="w3-container"  id="apoint'+ index + '">\
                   <p>Appointment</p>\
                   <img src="./media/calendar.png" alt="Calendar" style="width:50%"><br>\
@@ -81,36 +81,35 @@ window.onload = () => {
                   <span>Client accepted: '+ apoint.isAccepted + '</span>\
                   <div class="w3-row w3-opacity">\
                     <div class="w3-center">\
-                      <button onclick="deleteA('+ "'" + doc.id + "'" + ', ' + "'" + index + "'" +', ' + "'" + profileId + "'" + ')" class="w3-button w3-block w3-red w3-section" title="Delete"><i class="fa fa-remove"></i></button>\
+                      <button onclick="deleteA('+ "'" + doc.id + "'" + ', ' + "'" + index + "'" + ', ' + "'" + profileId + "'" + ')" class="w3-button w3-block w3-red w3-section" title="Delete"><i class="fa fa-remove"></i></button>\
                     </div>\
                   </div>\
                 </div>\
               </div>\
               <br>';
-      }
-      else{
-        db.collection("appointments").doc(doc.id).delete().then();
-      }
+        }
+        else {
+          db.collection("appointments").doc(doc.id).delete().then();
+        }
+      });
     });
-  });
 
-} else { window.location.href = './Login.html'; }
+  } else { window.location.href = './Login.html'; }
 }
 var index = 0;
 function deleteA(id, i, profileId) {
-  db.collection("appointments").doc(id).delete().then(function(){
-    const notif={
+  db.collection("appointments").doc(id).delete().then(function () {
+    const notif = {
       id_user: profileId,
-      text:"The nutritionist deleted the appointment!",
+      text: "The nutritionist deleted the appointment!",
       date: new Date(),
       to_check_date: false,
       href: "./index.html"
     };
-    console.log(profileId,notif);
     db.collection('notifications').add(notif).then();
     document.getElementById('apoint' + i.toString()).style.display = 'none';
   }
-    );
+  );
 
 }
 function formatDate(date) {
@@ -161,9 +160,9 @@ function openNav() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
-function logout(){
+function logout() {
   const userId = Cookies.get('userId');
-  if(userId){
+  if (userId) {
     Cookies.remove('userId');
     window.location.href = './LoginClient.html';
 

@@ -9,22 +9,30 @@
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="./css/makenewclient.css">
-<link rel="stylesheet" href="/node_modules/toastr/build/toastr.css"/>
+<link rel="stylesheet" href="/node_modules/toastr/build/toastr.css" />
 <style>
-	@import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
+  @import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
   @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
-html, body, h1, h2, h3, h4, h5 
-{
-	font-family: Arial;
-	font-size: 12px;
-	}
-	body{
+
+  html,
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: Arial;
+    font-size: 12px;
+  }
+
+  body {
     text-align: center;
-	  background-image: url("./media/Apple.jpg");
-	  background-size: 100%; 
-  	background-repeat: repeat-y;
-}
+    background-image: url("./media/Apple.jpg");
+    background-size: 100%;
+    background-repeat: repeat-y;
+  }
 </style>
+
 <body class="w3-theme-l5">
 
   <!-- Navbar -->
@@ -38,14 +46,15 @@ html, body, h1, h2, h3, h4, h5
         title="Recipes"><i class="fa fa-bars"></i></a>
       <a href="./Apointments.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
         title="Appointments"><i class="fa fa-calendar"></i></a>
-        <div class="w3-dropdown-hover w3-hide-small">
-          <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span
-              id="nrNotif" class="w3-badge w3-right w3-small w3-green"></span></button>
-          <div id="notif" class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-            
-          </div>
+      <div class="w3-dropdown-hover w3-hide-small">
+        <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span id="nrNotif"
+            class="w3-badge w3-right w3-small w3-green"></span></button>
+        <div id="notif" class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
+
         </div>
-      <button onclick="logout()" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-theme-d4" title="Logout">
+      </div>
+      <button onclick="logout()" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-theme-d4"
+        title="Logout">
         <img src="./media/avatar2.png" class="w3-circle w3-theme-d0" style="height:23px;width:23px" alt="Avatar">
       </button>
     </div>
@@ -57,17 +66,17 @@ html, body, h1, h2, h3, h4, h5
     <a href="./Apointments.html" class="w3-bar-item w3-button w3-padding-large">Appointments</a>
   </div>
 
-<!-- Page Container -->
-<div id="body" class="w3-container w3-content" style="max-width:1400px; margin-top:60px;">    
-  <!-- The Grid -->
-  <div class="w3-row">
-  
-    
-    <!-- Middle Column -->
-    <div class="w3-col m7" style="width:100%">
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <form id="getInfoForum">
-                <!-- 
+  <!-- Page Container -->
+  <div id="body" class="w3-container w3-content" style="max-width:1400px; margin-top:60px;">
+    <!-- The Grid -->
+    <div class="w3-row">
+
+
+      <!-- Middle Column -->
+      <div class="w3-col m7" style="width:100%">
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+          <form id="getInfoForum">
+            <!-- 
                 arm: {},
                 body_fat: {},
                 butt: {},
@@ -79,18 +88,19 @@ html, body, h1, h2, h3, h4, h5
                 weight: {},
                 nutrition: {}, -->
             <input class="w3-input w3-theme-d0" type="date" id="bday" name="bday"><br>
-            <input class="w3-input w3-theme-d0" id="medical" type="text" placeholder="Medical history or details important to the clients diet (if none, type: None)"><br>
+            <input class="w3-input w3-theme-d0" id="medical" type="text"
+              placeholder="Medical history or details important to the clients diet (if none, type: None)"><br>
             <input class="w3-input w3-theme-d0" id="gender" placeholder="Gender" type="text" list="gen">
             <datalist id="gen">
-                <option value="F"></option>
-                <option value="M"></option>
+              <option value="F"></option>
+              <option value="M"></option>
             </datalist><br>
             <input class="w3-input w3-theme-d0" id="activity" placeholder="Level of Activity" type="text" list="act">
             <datalist id="act">
-                <option value="Sedentary"></option>
-                <option value="Light Activity"></option>
-                <option value="Active"></option>
-                <option value="Very Active"></option>
+              <option value="Sedentary"></option>
+              <option value="Light Activity"></option>
+              <option value="Active"></option>
+              <option value="Very Active"></option>
             </datalist><br>
             <input class="w3-input w3-theme-d0" min=0 id="weight" type="number" placeholder="Weight (kg)"><br>
             <input class="w3-input w3-theme-d0" min=0 id="goal" type="number" placeholder="Goal (kg)"><br>
@@ -99,55 +109,58 @@ html, body, h1, h2, h3, h4, h5
             <input class="w3-input w3-theme-d0" min=0 id="thighs" type="number" placeholder="Thighs (cm)"><br>
             <input class="w3-input w3-theme-d0" min=0 id="arm" type="number" placeholder="Arm (cm)"><br>
             <input class="w3-input w3-theme-d0" min=0 id="butt" type="number" placeholder="Butt (cm)"><br>
-            <input class="w3-input w3-theme-d0" min=0 max=100 id="body_fat" type="number" placeholder="Body Fat (procentage)"><br>
-            <p class="w3-center"><button type="submit" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-plus"></i> Add Client</button></p>
-        </form>
+            <input class="w3-input w3-theme-d0" min=0 max=100 id="body_fat" type="number"
+              placeholder="Body Fat (procentage)"><br>
+            <p class="w3-center"><button type="submit" class="w3-button w3-theme-d2 w3-margin-bottom"><i
+                  class="fa fa-plus"></i> Add Client</button></p>
+          </form>
         </div>
-      <!-- End Middle Column -->
+        <!-- End Middle Column -->
+      </div>
+
+      <!-- End Grid -->
     </div>
-    
-  <!-- End Grid -->
+
+    <!-- End Page Container -->
   </div>
-  
-<!-- End Page Container -->
-</div>
-<br>
+  <br>
 
 
- 
-<script>
-// Accordion
-function myFunction(id) {
-  var x = document.getElementById(id);
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-    x.previousElementSibling.className += " w3-theme-d1";
-  } else { 
-    x.className = x.className.replace("w3-show", "");
-    x.previousElementSibling.className = 
-    x.previousElementSibling.className.replace(" w3-theme-d1", "");
-  }
-}
 
-// Used to toggle the menu on smaller screens when clicking on the menu button
-function openNav() {
-  var x = document.getElementById("navDemo");
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-  } else { 
-    x.className = x.className.replace(" w3-show", "");
-  }
-}
-</script>
-<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+  <script>
+    // Accordion
+    function myFunction(id) {
+      var x = document.getElementById(id);
+      if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className += " w3-theme-d1";
+      } else {
+        x.className = x.className.replace("w3-show", "");
+        x.previousElementSibling.className =
+          x.previousElementSibling.className.replace(" w3-theme-d1", "");
+      }
+    }
 
-<script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-firestore.js"></script>
-<script src="/node_modules/toastr/toastr.js"></script>
+    // Used to toggle the menu on smaller screens when clicking on the menu button
+    function openNav() {
+      var x = document.getElementById("navDemo");
+      if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+      } else {
+        x.className = x.className.replace(" w3-show", "");
+      }
+    }
+  </script>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 
-<script src="./js/config-database.js"></script>
-<script src="./js/notification.js"></script>
-<script src="./js/makenewclient.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-firestore.js"></script>
+  <script src="/node_modules/toastr/toastr.js"></script>
+
+  <script src="./js/config-database.js"></script>
+  <script src="./js/notification.js"></script>
+  <script src="./js/makenewclient.js"></script>
 </body>
-</html> 
+
+</html>

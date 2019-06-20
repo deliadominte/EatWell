@@ -10,17 +10,14 @@ let is_ok = false;
 toastr.options = { "positionClass": "toast-bottom-left" };
 
 const profileId = new URLSearchParams(window.location.search).get('userId');
-console.log(profileId);
 if (new URLSearchParams(window.location.search).has('date'))
     d = new Date(new URLSearchParams(window.location.search).get('date'));
 else
     d = new Date();
-    console.log(d);
 window.onload = () => {
 
 
     const userId = Cookies.get('userId');
-    console.log(userId);
     if (userId) {
         db.collection('users').doc(profileId).get().then(doc => {
             if (doc.exists) {
@@ -41,15 +38,6 @@ window.onload = () => {
             });
         });
         setTimeout(function () {
-            console.log(list);
-            console.log('\
-        <div id="meal' + index + '" class="w3-container w3-card w3-white w3-round w3-margin"><br>' +
-                '<input class="w3-input w3-theme-d0" id="dets' + index + '" type="text" placeholder="Type Meal"><br>' +
-                '<select  class="w3-left-align w3-input w3-theme-d0" id="options' + index + '" size="6">' + list + '\
-            </select> \
-            <hr class="w3-clear">' +
-                '<a id="see' + index + '" class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html"><i class="fa fa-bars"></i>  See Recipe</a>' +
-                '</div>');
 
             var container = document.createElement("div");
             container.innerHTML = '\
@@ -63,7 +51,6 @@ window.onload = () => {
             document.getElementById("meals").appendChild(container);
             index++;
         }, 1000);
-        console.log("done");
 
     } else {
 
@@ -75,7 +62,6 @@ window.onload = () => {
 
 
 function update(i, id) {
-    console.log(i + "update");
     if (document.getElementById("see" + i.toString()))
         document.getElementById("see" + i.toString()).setAttribute('href', "./Recipe.html?recipeId=" + id.toString());
 
@@ -90,15 +76,6 @@ function addMeal() {
         });
     });
     setTimeout(function () {
-        console.log(list);
-        console.log('\
-    <div id="meal' + index + '" class="w3-container w3-card w3-white w3-round w3-margin"><br>' +
-            '<input class="w3-input w3-theme-d0" id="dets' + index + '" type="text" placeholder="Type Meal"><br>' +
-            '<select  class="w3-left-align w3-input w3-theme-d0" id="options' + index + '" size="6">' + list + '\
-        </select> \
-        <hr class="w3-clear">' +
-            '<a id="see' + index + '" class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html"><i class="fa fa-bars"></i>  See Recipe</a>' +
-            '</div>');
 
         var container = document.createElement("div");
         container.innerHTML = '\
@@ -122,18 +99,15 @@ function verify() {
     let flag = 1;
     for (i = 1; i < index; i++) {
         recipes.push(document.getElementById("options" + i).value);
-        console.log(recipes[i - 1]);
         db.collection('recipes').doc(recipes[i - 1]).get().then(doc => {
             if (doc.exists) {
                 const recipe = doc.data();
-                console.log(recipe);
                 sum_cal += parseInt(recipe.nutrition[0]);
                 sum_protein += parseInt(recipe.nutrition[1]);
                 sum_carbo += parseInt(recipe.nutrition[2]);
                 sum_fat += parseInt(recipe.nutrition[3]);
                 for (j = 0; j < recipe.ing.length; j++) {
                     for (l = 0; l < allergies.length; l++) {
-                        console.log(recipe.ing[j] + " " + allergies[l]);
                         if (recipe.ing[j] == allergies[l]) {
                             flag = 0;
                             a = recipe.ing[j];
@@ -148,8 +122,6 @@ function verify() {
     }
     setTimeout(function () {
 
-        console.log(cal + " " + carbo + " " + protein + " " + fat);
-        console.log(sum_cal + " " + sum_carbo + " " + sum_protein + " " + sum_fat);
         if (sum_cal > cal) {
             is_ok = false;
             toastr.warning("Calories over limit: " + cal + "! Yours: " + sum_cal);
@@ -180,7 +152,7 @@ function verify() {
 
 function setMenu() {
     const userId = Cookies.get('userId');
-    if (is_ok==true) {
+    if (is_ok == true) {
         const menu = {
             id_nutri: userId,
             id_user: profileId,

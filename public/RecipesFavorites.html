@@ -9,29 +9,36 @@
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="./css/indexNutri.css">
-<link rel="stylesheet" href="/node_modules/toastr/build/toastr.css"/>
+<link rel="stylesheet" href="/node_modules/toastr/build/toastr.css" />
 <style>
-	@import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
+  @import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
   @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
-  html, body, h1, h2, h3, h4, h5 
-{
-	font-family: 'Exo', sans-serif;
-	font-size: 12px;
-	}
-	body{
-     text-align: center; 
-	  background-image: url("./media/Apple.jpg");
-	  background-size: 100%; 
-  	background-repeat: repeat-y;
-}
 
+  html,
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: 'Exo', sans-serif;
+    font-size: 12px;
+  }
+
+  body {
+    text-align: center;
+    background-image: url("./media/Apple.jpg");
+    background-size: 100%;
+    background-repeat: repeat-y;
+  }
 </style>
+
 <body class="w3-theme-l5">
 
- <!-- Navbar -->
- <div class="w3-top">
+  <!-- Navbar -->
+  <div class="w3-top">
     <div id="nav" class="w3-bar w3-theme-d2 w3-left-align w3-large">
-      
+
     </div>
   </div>
 
@@ -39,47 +46,48 @@
   <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
   </div>
 
-<!-- Page Container -->
-<div id="body" class="w3-container w3-content" style="max-width:1400px; margin-top:60px;">    
-  <!-- The Grid -->
-  <div class="w3-row">
-  
-    
-    <!-- Middle Column -->
-    <div class="w3-col m7" style="width:100%">
-    
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <form id="search" class="w3-center w3-margin-bottom">
-          <input id="searchbar" type="text" placeholder="Search.." name="search">
-          <button disabled><i class="fa fa-search"></i></button>
-        </form>
-      </div>
-      <div id="container" >
+  <!-- Page Container -->
+  <div id="body" class="w3-container w3-content" style="max-width:1400px; margin-top:60px;">
+    <!-- The Grid -->
+    <div class="w3-row">
 
-      </div>
-       <a id="more-btn" class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" >More</a>
-      
+
+      <!-- Middle Column -->
+      <div class="w3-col m7" style="width:100%">
+
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+          <form id="search" class="w3-center w3-margin-bottom">
+            <input id="searchbar" type="text" placeholder="Search.." name="search">
+            <button disabled><i class="fa fa-search"></i></button>
+          </form>
+        </div>
+        <div id="container">
+
+        </div>
+        <a id="more-btn" class=" w3-center w3-button w3-theme-d2 w3-margin-bottom">More</a>
+
       </div>
 
       <!-- End Middle Column -->
     </div>
-    
-  <!-- End Grid -->
+
+    <!-- End Grid -->
   </div>
-  
-<!-- End Page Container -->
-</div>
-<br>
 
-<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+  <!-- End Page Container -->
+  </div>
+  <br>
 
-<script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-firestore.js"></script>
-<script src="/node_modules/toastr/toastr.js"></script>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 
-<script src="./js/config-database.js"></script>
-<script src="./js/notification.js"></script>
-<script src="./js/recipesFavorites.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-firestore.js"></script>
+  <script src="/node_modules/toastr/toastr.js"></script>
+
+  <script src="./js/config-database.js"></script>
+  <script src="./js/notification.js"></script>
+  <script src="./js/recipesFavorites.js"></script>
 </body>
-</html> 
+
+</html>

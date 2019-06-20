@@ -7,115 +7,21 @@ window.onload = function () {
         window.location.href = './Login.html';
 
     } else {
-        let data = [
-            { x: new Date(2017, 0, 3), y: 68 },
-            { x: new Date(2017, 1, 4), y: 70 },
-            { x: new Date(2017, 2, 5), y: 71 },
-            { x: new Date(2017, 3, 6), y: 68 },
-            { x: new Date(2017, 4, 7), y: 67 },
-            { x: new Date(2017, 5, 8), y: 66 },
-            { x: new Date(2017, 6, 9), y: 64 },
-            { x: new Date(2017, 7, 10), y: 67 },
-            { x: new Date(2017, 8, 11), y: 65 }
-        ];
 
         let profileId;
-        console.log(new URLSearchParams(window.location.search).has('userId'));
         if (new URLSearchParams(window.location.search).has('userId'))
             profileId = new URLSearchParams(window.location.search).get('userId');
         else profileId = userId;
-        let array = [{ x: new Date(2000, 1, 1), y: 0 }];
 
-        db.collection('users').doc(profileId).get().then(doc => {
-            if (doc.exists) {
-                const user = doc.data();
-                const min = fmin(user.weight);
-                const max = fmax(user.weight);
-                console.log(min);
-                console.log(max);
-                let date;
-                let day;
-                let monthIndex;
-                let year;
-                let time;
-                let i = 0;
-                for (i = 0; i < user.weight.length; i++) {
-                    date = user.time_prog[i].toDate();
-                    day = date.getDate();
-                    monthIndex = date.getMonth() + 1;
-                    year = date.getFullYear();
-                    time = new Date(year + "-" + monthIndex + "-" + day);
-                    console.log("a asignat");
-                    if (user.weight[i] == max)
-                        array[i] = { x: time, y: parseInt(user.weight[i]), indexLabel: "highest", markerColor: "red", markerType: "triangle" };
-                    else if (user.weight[i] == min)
-                        array[i] = { x: time, y: parseInt(user.weight[i]), indexLabel: "lowest", markerColor: "DarkSlateGrey", markerType: "cross" };
-                    else array[i] = { x: time, y: parseInt(user.weight[i]) };
-                }
-            }
-        });
-
-        console.log(typeof array[0].x);
-        console.log(typeof data[0].x);
-        console.log(array);
-        console.log(data);
-        setTimeout(function () {
-            let chart = new CanvasJS.Chart("chartContainer", {
-                animationEnabled: true,
-                theme: "light2",
-                title: {
-                    text: " Progress"
-                },
-                axisX: {
-                    valueFormatString: "DD MMM",
-                    crosshair: {
-                        enabled: true,
-                        snapToDataPoint: true
-                    }
-                },
-                axisY: {
-                    title: "Weight",
-                    includeZero: false,
-                    crosshair: {
-                        enabled: true
-                    },
-                    scaleBreaks: {
-                        autoCalculate: true
-                    }
-                },
-                toolTip: {
-                    shared: true
-                },
-                legend: {
-                    cursor: "pointer",
-                    verticalAlign: "bottom",
-                    horizontalAlign: "left",
-                    dockInsidePlotArea: true,
-                    itemclick: toogleDataSeries
-                },
-                data: [{
-                    type: "line",
-                    showInLegend: true,
-                    name: "Kg",
-                    markerType: "square",
-                    xValueFormatString: "DD MMM, YYYY",
-                    color: "#F08080",
-                    dataPoints: array
-                }]
-            });
-            console.log("a facut");
-            chart.render();
-        }, 1000);
-
-
-        function toogleDataSeries(e) {
-            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                e.dataSeries.visible = false;
-            } else {
-                e.dataSeries.visible = true;
-            }
-            chart.render();
-        }
+        document.getElementById('btn').innerHTML = '\
+        <button id="btn1" class="w3-button w3-theme-d2 w3-margin-bottom" disabled="true" onclick="make_chart(1,'+ "'" + profileId + "'" + ')">Weight</button>\
+        <button id="btn2" class="w3-button w3-theme-d2 w3-margin-bottom" onclick="make_chart(2,'+ "'" + profileId + "'" + ')">Height</button>\
+        <button id="btn3" class="w3-button w3-theme-d2 w3-margin-bottom" onclick="make_chart(3,'+ "'" + profileId + "'" + ')">BodyFat</button>\
+        <button id="btn4" class="w3-button w3-theme-d2 w3-margin-bottom" onclick="make_chart(4,'+ "'" + profileId + "'" + ')">Arms</button>\
+        <button id="btn5" class="w3-button w3-theme-d2 w3-margin-bottom" onclick="make_chart(5,'+ "'" + profileId + "'" + ')">Waistline</button>\
+        <button id="btn6" class="w3-button w3-theme-d2 w3-margin-bottom" onclick="make_chart(6,'+ "'" + profileId + "'" + ')">Butt</button>\
+        <button id="btn7" class="w3-button w3-theme-d2 w3-margin-bottom" onclick="make_chart(7,'+ "'" + profileId + "'" + ')">Thighs</button>';
+        make_chart(1, profileId);
 
         let flag = 0;
         db.collection('users').doc(userId).get().then(doc => {
@@ -174,7 +80,6 @@ window.onload = function () {
         db.collection('users').doc(profileId).get().then(doc => {
             if (doc.exists) {
                 const user = doc.data();
-                console.log(user);
                 document.getElementById("measures").innerHTML += '\
           <p>Weight: '+ user.weight[user.weight.length - 1] + ' kg</p>\
           <p>Height: '+ user.height[user.height.length - 1] + ' cm</p>\
@@ -189,12 +94,20 @@ window.onload = function () {
                 document.getElementById("maxweight").innerHTML += fmax(user.weight) + " kg";
                 document.getElementById("prog").innerHTML += Math.floor(100 - ((user.weight[user.weight.length - 1] - user.goal[user.goal.length - 1]) * 100) / (fmax(user.weight) - user.goal[user.goal.length - 1])) + "%";
                 document.getElementById("prog").setAttribute("aria-valuenow", (-1) * user.weight[user.weight.length - 1]);
-                console.log(-fmax(user.weight));
-                console.log(-user.goal[user.goal.length - 1]);
-                console.log(-user.weight[user.weight.length - 1]);
                 document.getElementById("prog").setAttribute("aria-valuemin", (-1) * fmax(user.weight));
                 document.getElementById("prog").setAttribute("aria-valuemax", (-1) * user.goal[user.goal.length - 1]);
                 document.getElementById("prog").setAttribute("style", "width:" + Math.floor(100 - ((user.weight[user.weight.length - 1] - user.goal[user.goal.length - 1]) * 100) / (fmax(user.weight) - user.goal[user.goal.length - 1])) + "%");
+                let difference = user.goal[user.goal.length - 1] - user.weight[user.weight.length - 1];
+                var diff_days = Math.floor((user.time_prog[user.time_prog.length - 1].toDate().getTime() - user.time_prog[0].toDate().getTime()) / (1000 * 60 * 60 * 24));
+                var diff_weight_left = Math.abs(user.goal[user.goal.length - 1] - user.weight[user.weight.length - 1]);
+                var diff_weight_done = Math.abs(user.weight[user.weight.length - 1] - user.goal[user.goal.length - 1]);
+                //console.log((diff_days / diff_weight_done) * diff_weight_left);
+                var date_done = new Date();
+                date_done.setDate(toDay.getDate() + (diff_days / diff_weight_done) * diff_weight_left);
+                //console.log(date_done);
+                var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
+                curMonth = months[date_done.getMonth()];
+                document.getElementById("estimation").innerHTML += "We estimate that you will achive your goal until:<strong> "+ date_done.getUTCDate() + ' ' + curMonth + ' ' + date_done.getFullYear() +"</strong>";
             }
         });
         document.getElementById('getInfoForum').onsubmit = e => {
@@ -208,13 +121,12 @@ window.onload = function () {
             let p7 = document.getElementById('waistline').value;
             let p8 = document.getElementById('weight1').value;
             let p10 = document.getElementById('activity').value;
-            if ((isNaN(p1) || isNaN(p2) || isNaN(p3) || isNaN(p4) || isNaN(p5) || isNaN(p6) || isNaN(p7) || isNaN(p8))==false)
+            if ((isNaN(p1) || isNaN(p2) || isNaN(p3) || isNaN(p4) || isNaN(p5) || isNaN(p6) || isNaN(p7) || isNaN(p8)) == false)
                 toastr.error("Please fill in all the fields with numbers!");
             else {
                 if ((isNaN(p1) || isNaN(p2) || isNaN(p3) || isNaN(p4) || isNaN(p5) || isNaN(p6) || isNaN(p7) || isNaN(p8)) == true) {
                     let today = new Date();
                     let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-                    console.log("ajunge");
                     db.collection('users').doc(profileId).update({
                         "activity": firebase.firestore.FieldValue.arrayUnion(p10),
                         "arms": firebase.firestore.FieldValue.arrayUnion(p2),
@@ -240,6 +152,226 @@ window.onload = function () {
     }
 }
 
+
+function make_chart(type, profileId) {
+    let array = [{ x: new Date(2000, 1, 1), y: 0 }];
+    var i;
+    for (i = 1; i <= 7; i++)
+        if (i != type)
+            document.getElementById('btn' + i).disabled = false;
+        else
+            document.getElementById('btn' + i).disabled = true;
+    db.collection('users').doc(profileId).get().then(doc => {
+        if (doc.exists) {
+            const user = doc.data();
+            let date;
+            let day;
+            let monthIndex;
+            let year;
+            let time;
+            let i = 0;
+            if (type == 1) {
+                const min = fmin(user.weight);
+                const max = fmax(user.weight);
+                for (i = 0; i < user.weight.length; i++) {
+                    date = user.time_prog[i].toDate();
+                    day = date.getDate();
+                    monthIndex = date.getMonth() + 1;
+                    year = date.getFullYear();
+                    time = new Date(year + "-" + monthIndex + "-" + day);
+                    if (user.weight[i] == max)
+                        array[i] = { x: time, y: parseInt(user.weight[i]), indexLabel: "highest", markerColor: "red", markerType: "triangle" };
+                    else if (user.weight[i] == min)
+                        array[i] = { x: time, y: parseInt(user.weight[i]), indexLabel: "lowest", markerColor: "DarkSlateGrey", markerType: "cross" };
+                    else array[i] = { x: time, y: parseInt(user.weight[i]) };
+                }
+            }
+            else if (type == 2) {
+                const min = fmin(user.height);
+                const max = fmax(user.height);
+                for (i = 0; i < user.height.length; i++) {
+                    date = user.time_prog[i].toDate();
+                    day = date.getDate();
+                    monthIndex = date.getMonth() + 1;
+                    year = date.getFullYear();
+                    time = new Date(year + "-" + monthIndex + "-" + day);
+                    if (user.height[i] == max)
+                        array[i] = { x: time, y: parseInt(user.height[i]), indexLabel: "highest", markerColor: "red", markerType: "triangle" };
+                    else if (user.height[i] == min)
+                        array[i] = { x: time, y: parseInt(user.height[i]), indexLabel: "lowest", markerColor: "DarkSlateGrey", markerType: "cross" };
+                    else array[i] = { x: time, y: parseInt(user.height[i]) };
+                }
+            }
+            else if (type == 3) {
+                const min = fmin(user.body_fat);
+                const max = fmax(user.body_fat);
+                for (i = 0; i < user.body_fat.length; i++) {
+                    date = user.time_prog[i].toDate();
+                    day = date.getDate();
+                    monthIndex = date.getMonth() + 1;
+                    year = date.getFullYear();
+                    time = new Date(year + "-" + monthIndex + "-" + day);
+                    if (user.body_fat[i] == max)
+                        array[i] = { x: time, y: parseInt(user.body_fat[i]), indexLabel: "highest", markerColor: "red", markerType: "triangle" };
+                    else if (user.body_fat[i] == min)
+                        array[i] = { x: time, y: parseInt(user.body_fat[i]), indexLabel: "lowest", markerColor: "DarkSlateGrey", markerType: "cross" };
+                    else array[i] = { x: time, y: parseInt(user.body_fat[i]) };
+                }
+            }
+            else if (type == 4) {
+                const min = fmin(user.arms);
+                const max = fmax(user.arms);
+                for (i = 0; i < user.arms.length; i++) {
+                    date = user.time_prog[i].toDate();
+                    day = date.getDate();
+                    monthIndex = date.getMonth() + 1;
+                    year = date.getFullYear();
+                    time = new Date(year + "-" + monthIndex + "-" + day);
+                    if (user.arms[i] == max)
+                        array[i] = { x: time, y: parseInt(user.arms[i]), indexLabel: "highest", markerColor: "red", markerType: "triangle" };
+                    else if (user.arms[i] == min)
+                        array[i] = { x: time, y: parseInt(user.arms[i]), indexLabel: "lowest", markerColor: "DarkSlateGrey", markerType: "cross" };
+                    else array[i] = { x: time, y: parseInt(user.arms[i]) };
+                }
+            }
+            else if (type == 5) {
+                const min = fmin(user.waistline);
+                const max = fmax(user.waistline);
+                for (i = 0; i < user.waistline.length; i++) {
+                    date = user.time_prog[i].toDate();
+                    day = date.getDate();
+                    monthIndex = date.getMonth() + 1;
+                    year = date.getFullYear();
+                    time = new Date(year + "-" + monthIndex + "-" + day);
+                    if (user.waistline[i] == max)
+                        array[i] = { x: time, y: parseInt(user.waistline[i]), indexLabel: "highest", markerColor: "red", markerType: "triangle" };
+                    else if (user.waistline[i] == min)
+                        array[i] = { x: time, y: parseInt(user.waistline[i]), indexLabel: "lowest", markerColor: "DarkSlateGrey", markerType: "cross" };
+                    else array[i] = { x: time, y: parseInt(user.waistline[i]) };
+                }
+            }
+            else if (type == 6) {
+                const min = fmin(user.waistline);
+                const max = fmax(user.waistline);
+                for (i = 0; i < user.waistline.length; i++) {
+                    date = user.time_prog[i].toDate();
+                    day = date.getDate();
+                    monthIndex = date.getMonth() + 1;
+                    year = date.getFullYear();
+                    time = new Date(year + "-" + monthIndex + "-" + day);
+                    if (user.waistline[i] == max)
+                        array[i] = { x: time, y: parseInt(user.waistline[i]), indexLabel: "highest", markerColor: "red", markerType: "triangle" };
+                    else if (user.waistline[i] == min)
+                        array[i] = { x: time, y: parseInt(user.waistline[i]), indexLabel: "lowest", markerColor: "DarkSlateGrey", markerType: "cross" };
+                    else array[i] = { x: time, y: parseInt(user.waistline[i]) };
+                }
+            }
+            else if (type == 7) {
+                const min = fmin(user.thighs);
+                const max = fmax(user.thighs);
+                for (i = 0; i < user.thighs.length; i++) {
+                    date = user.time_prog[i].toDate();
+                    day = date.getDate();
+                    monthIndex = date.getMonth() + 1;
+                    year = date.getFullYear();
+                    time = new Date(year + "-" + monthIndex + "-" + day);
+                    if (user.thighs[i] == max)
+                        array[i] = { x: time, y: parseInt(user.thighs[i]), indexLabel: "highest", markerColor: "red", markerType: "triangle" };
+                    else if (user.thighs[i] == min)
+                        array[i] = { x: time, y: parseInt(user.thighs[i]), indexLabel: "lowest", markerColor: "DarkSlateGrey", markerType: "cross" };
+                    else array[i] = { x: time, y: parseInt(user.thighs[i]) };
+                }
+            }
+
+        }
+    });
+    setTimeout(function () {
+        let name_chart, unit;
+        if (type == 1) {
+            name_chart = "Weight";
+            unit = "kg";
+        }
+        else if (type == 2) {
+            name_chart = "Height";
+            unit = "cm";
+        }
+        else if (type == 3) {
+            name_chart = "BodyFat";
+            unit = "%";
+        }
+        else if (type == 4) {
+            name_chart = "Arms";
+            unit = "cm";
+        }
+        else if (type == 5) {
+            name_chart = "Waistline";
+            unit = "cm";
+        }
+        else if (type == 6) {
+            name_chart = "Butt";
+            unit = "cm";
+        }
+        else if (type == 7) {
+            name_chart = "Thighs";
+            unit = "cm";
+        }
+
+        let chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            theme: "light2",
+            title: {
+                text: " Progress"
+            },
+            axisX: {
+                valueFormatString: "DD MMM",
+                crosshair: {
+                    enabled: true,
+                    snapToDataPoint: true
+                }
+            },
+            axisY: {
+                title: name_chart,
+                includeZero: false,
+                crosshair: {
+                    enabled: true
+                },
+                scaleBreaks: {
+                    autoCalculate: true
+                }
+            },
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                cursor: "pointer",
+                verticalAlign: "bottom",
+                horizontalAlign: "left",
+                dockInsidePlotArea: true,
+                itemclick: toogleDataSeries
+            },
+            data: [{
+                type: "line",
+                showInLegend: true,
+                name: unit,
+                markerType: "square",
+                xValueFormatString: "DD MMM, YYYY",
+                color: "#F08080",
+                dataPoints: array
+            }]
+        });
+        chart.render();
+    }, 1000);
+
+}
+
+function toogleDataSeries(e) {
+    if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+        e.dataSeries.visible = false;
+    } else {
+        e.dataSeries.visible = true;
+    }
+    chart.render();
+}
 function fmax(arr) {
     let max = 0, i;
     for (i = 0; i < arr.length; i++)

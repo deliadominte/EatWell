@@ -2,8 +2,6 @@ let nr = 0;
 let toDay = new Date();
 
 const uI = Cookies.get('userId');
-console.log("notif");
-console.log(toDay.getDay());
 let i;
 
 function getRndInteger(min, max) {
@@ -17,16 +15,15 @@ db.collection('users').doc(uI).get().then(doc => {
     let flag_is_user = 0;
     if (doc.exists) {
         const user = doc.data();
+
         flag_is_user = 1;
         if (toDay.getDay() == 0 || toDay.getDay() == 5)//duminica sau miercuri trimit motivatie sub forma de citat
         {
-            console.log("quoteofday");
             db.collection('notifications').where("href", "==", "quoteofday").where('id_user', '==', uI).get().then(querySnapshot => {
                 var flag = 0;
                 var id;
                 querySnapshot.forEach(function (doc) {
                     if (doc.exists) {
-                        console.log("Document data:", doc.data());
                         notif = doc.data();
                         date = notif.date.toDate();
                         if (((date.getDate() == toDay.getDate()) || (date.getDate() == toDay.getDate() - 1)) && date.getMonth() == toDay.getMonth() && date.getFullYear() == toDay.getFullYear())
@@ -38,7 +35,6 @@ db.collection('users').doc(uI).get().then(doc => {
                     }
                 });
                 if (flag == 0) {
-                    console.log("nu este");
                     $(document).ready(function () {
                         $.getJSON("./js/quotes.json", function (result) {
                             i = getRndInteger(0, result.length - 1);
@@ -51,7 +47,6 @@ db.collection('users').doc(uI).get().then(doc => {
                                 href: "quoteofday"
                             }
                             db.collection('notifications').add(not).then(function (d) {
-                                console.log(not.href);
                                 nr++;
                                 document.getElementById("notif").innerHTML += '<button onclick="notifclick(' + "'" + d.id + "','" + not.href + "'" + ')" class="w3-bar-item w3-button">\
                         '+ not.text + '</a>';
@@ -62,7 +57,6 @@ db.collection('users').doc(uI).get().then(doc => {
                     });
                 }
                 else if (flag == 2) {
-                    console.log("este dar din zile anterioara");
                     $(document).ready(function () {
                         $.getJSON("./js/quotes.json", function (result) {
                             i = getRndInteger(0, result.length - 1);
@@ -90,32 +84,30 @@ db.collection('users').doc(uI).get().then(doc => {
             db.collection('notifications').where("href", "==", "motivationofday").where('id_user', '==', uI).get().then(querySnapshot => {
                 var flag = 0;
                 var id;
-                console.log("motivationofday");
                 querySnapshot.forEach(function (doc) {
                     if (doc.exists) {
-                        console.log("Document data:", doc.data());
                         notif = doc.data();
                         date = notif.date.toDate();
                         if (((date.getDate() == toDay.getDate()) || (date.getDate() == toDay.getDate() - 1)) && date.getMonth() == toDay.getMonth() && date.getFullYear() == toDay.getFullYear())
-                            flag = 1;//cazul in care nu a mai fost trimis un citat motivational
+                            flag = 1;//cazul in care a mai fost trimis un citat motivational
                         else if (date < toDay) {
                             flag = 2;//cazul in care a mai fost trimis citat
                             id = doc.id;
                         }
                     }
                 });
-                console.log(flag);
                 if (flag == 0) {
-                    console.log("nu este");
                     db.collection('users').doc(uI).get().then(doc => {
                         if (doc.exists) {
                             const user = doc.data();
-                            let difference = user.goal[user.goal.length - 1] - user.weight[user.weight.length - 1];
+                            
                             let quote = "You have " + Math.abs(difference) + "kg left to ";
-                            if (difference > 0)
+                            if (difference > 0) {
                                 quote += "gain";
-                            else if (difference < 0)
+                            }
+                            else if (difference < 0) {
                                 quote += "lose";
+                            }
                             else quote = "You are doing great, you're on track!";
                             let not = {
                                 id_user: uI,
@@ -125,7 +117,6 @@ db.collection('users').doc(uI).get().then(doc => {
                                 href: "motivationofday"
                             }
                             db.collection('notifications').add(not).then(function (d) {
-                                console.log(not.href);
                                 nr++;
                                 document.getElementById("notif").innerHTML += '<button onclick="notifclick(' + "'" + d.id + "','" + not.href + "'" + ')" class="w3-bar-item w3-button">\
             '+ not.text + '</a>';
@@ -135,7 +126,6 @@ db.collection('users').doc(uI).get().then(doc => {
                     });
                 }
                 else if (flag == 2) {
-                    console.log("este dar din zile anterioara");
                     db.collection('users').doc(uI).get().then(doc => {
                         if (doc.exists) {
                             const user = doc.data();
@@ -165,7 +155,6 @@ db.collection('users').doc(uI).get().then(doc => {
         }
     }
     if (flag_is_user == 0) {//e nutritionist
-        console.log("e nutri");
         db.collection('nutritionists').doc(uI).get().then(doc => {
             let flag_is_user = 0;
             if (doc.exists) {
@@ -173,7 +162,6 @@ db.collection('users').doc(uI).get().then(doc => {
                 var list_u = nutri.id_users;
                 var i;
                 for (i = 0; i < list_u.length; i++) {
-                    console.log(list_u[i]);
                     let id = list_u[i];
                     db.collection('menus').where('id_nutri', '==', uI).where('id_user', '==', list_u[i]).get().then(querySnapshot => {
                         let flag_has_menu = false;//for tomorrow
@@ -189,8 +177,8 @@ db.collection('users').doc(uI).get().then(doc => {
                         });
                         if (flag_has_menu == false) {
 
-                            const href = "./SetMenu.html?userId=" + doc.id + "&date=" + dt.getFullYear() + '-' + (dt.getMonth()+1) + '-' + dt.getUTCDate();
-                            // console.log(href + " " + id);
+                            const href = "./SetMenu.html?userId=" + doc.id + "&date=" + dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getUTCDate();
+
                             db.collection('notifications').where('id_user', '==', id).where('href', '==', href).get().then(querySnapshot => {
                                 let allready = false;
                                 let notif_id, notif_text;
@@ -199,10 +187,8 @@ db.collection('users').doc(uI).get().then(doc => {
                                     notif = doc.data();
                                     notif_id = doc.id;
                                     notif_text = notif.text;
-                                    // console.log("a gasit " + notif_id + " " + notif_text);
                                 })
                                 if (allready == false) {
-                                    // console.log("nu a gasit " + id);
                                     db.collection('users').doc(id).get().then(doc => {
                                         if (doc.exists) {
                                             const user = doc.data();
@@ -214,9 +200,7 @@ db.collection('users').doc(uI).get().then(doc => {
                                                 href: href
                                             }
                                             if (user.username != "-") {
-                                                // console.log("adaug");
                                                 db.collection('notifications').add(not).then(function (d) {
-                                                    // console.log(not.href);
                                                     nr++;
                                                     document.getElementById("notif").innerHTML += '<button onclick="notifclick(' + "'" + d.id + "','" + not.href + "'" + ')" class="w3-bar-item w3-button">\
                                             '+ not.text + '</a>';
@@ -231,7 +215,6 @@ db.collection('users').doc(uI).get().then(doc => {
                                         date: new Date(),
                                         href: href
                                     }
-                                    // console.log("modific" + href);
                                     db.collection('notifications').doc(notif_id).set({ ...not }, { merge: true }).then(function () {
                                         nr++;
                                         document.getElementById("notif").innerHTML += '<button onclick="notifclick(' + "'" + notif_id + "','" + not.href + "'" + ')" class="w3-bar-item w3-button">\
@@ -254,7 +237,6 @@ db.collection('users').doc(uI).get().then(doc => {
 db.collection('notifications').where('id_user', '==', uI).get().then(querySnapshot => {
     querySnapshot.forEach(function (doc) {
         const notif = doc.data();
-        console.log(notif.text);
         if (notif.to_check_date == false) {
             nr++;
             document.getElementById("notif").innerHTML += '<button onclick="notifclick(' + "'" + doc.id + "','" + notif.href + "'" + ')" class="w3-bar-item w3-button">\
@@ -262,10 +244,8 @@ db.collection('notifications').where('id_user', '==', uI).get().then(querySnapsh
             document.getElementById("nrNotif").innerHTML = nr.toString();
         }
         else {
-            console.log("am verificat  "+notif);
-            if (notif.date.toDate().getDate() == toDay.getDate() && notif.date.toDate().getMonth() == toDay.getMonth() && notif.date.toDate().getFullYear() == toDay.getFullYear() && notif.date.toDate().getTime()>toDay.getTime()) {
+            if (notif.date.toDate().getDate() == toDay.getDate() && notif.date.toDate().getMonth() == toDay.getMonth() && notif.date.toDate().getFullYear() == toDay.getFullYear() && notif.date.toDate().getTime() > toDay.getTime()) {
                 //aceasi data(zi,luna,an) dar inainte ca ora:min
-                console.log(notif);
                 nr++;
                 document.getElementById("notif").innerHTML += '<button onclick="notifclick(' + "'" + doc.id + "','" + notif.href + "'" + ')" class="w3-bar-item w3-button">\
             '+ notif.text + '</a>';
@@ -282,7 +262,6 @@ function notifclick(id, path) {
     if (path != "quoteofday" && path != "motivationofday" && path.indexOf("Menu") == -1) {
         db.collection("notifications").doc(id).delete().then(function () {
             window.location.href = path;
-            // console.log("s-a sters boss");
         });
     }
     else if (path == "quoteofday") {
@@ -291,7 +270,6 @@ function notifclick(id, path) {
         let not = {
             date: dt
         }
-        // console.log("era ");
         db.collection('notifications').doc(id).set({ ...not }, { merge: true }).then(function () {
             window.location.href = "./index.html";
         });
@@ -301,7 +279,6 @@ function notifclick(id, path) {
         let not = {
             date: dt
         }
-        // console.log("era ");
         db.collection('notifications').doc(id).set({ ...not }, { merge: true }).then(function () {
             window.location.href = "./ProgressClient.html";
         });
@@ -312,7 +289,6 @@ function notifclick(id, path) {
         let not = {
             date: dt
         }
-        // console.log("era  MENU" + id);
         db.collection('notifications').doc(id).set({ ...not }, { merge: true }).then(function () {
             window.location.href = path;
         });

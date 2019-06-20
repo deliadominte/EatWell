@@ -7,26 +7,24 @@ toastr.options = {
 };
 
 window.onload = () => {
-  
+
   const userId = Cookies.get('userId');
   if (!userId) {
-    console.log("de");
     window.location.href = './LoginNutri.html';
 
   } else {
     const profileId = new URLSearchParams(window.location.search).get('userId');
-    document.getElementById("Demo3").innerHTML+=' <button type="button" id="generatebutton" onclick="calculateMacros('+"'"+profileId+"'"+')" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-edit"></i> Generate Percentage</button>';
+    document.getElementById("Demo3").innerHTML += ' <button type="button" id="generatebutton" onclick="calculateMacros(' + "'" + profileId + "'" + ')" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-edit"></i> Generate Percentage</button>';
     db.collection('users').doc(profileId).get().then(doc => {
 
       if (doc.exists) {
         const user = doc.data();
-        document.getElementById("buttons").innerHTML+='<a href="./ProgressClient.html?userId='+doc.id+'" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-line-chart"></i>  Progress</a> \
-        <a href="./MenuDets.html?userId='+doc.id+'" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-bars"></i>  Menu details</a>\
-        <a href="./RecipesFavorites.html?userId='+doc.id+'" id="fav" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-bars"></i>  Favorite Recipes</a>\
-        <a href="./MakeApoint.html?userId='+doc.id+'" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-calendar-plus-o"></i>  Make Appointment</a>\
-        <a href="./MessagesNutri.html?userId='+doc.id+'" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-envelope"></i></i>  Open Chat</a>\
-        <button type="button" onclick="deleteclient('+"'"+profileId+"'"+')" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-edit"></i> Delete Client</button>';
-        console.log(user);
+        document.getElementById("buttons").innerHTML += '<a href="./ProgressClient.html?userId=' + doc.id + '" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-line-chart"></i>  Progress</a> \
+        <a href="./MenuDets.html?userId='+ doc.id + '" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-bars"></i>  Menu details</a>\
+        <a href="./RecipesFavorites.html?userId='+ doc.id + '" id="fav" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-bars"></i>  Favorite Recipes</a>\
+        <a href="./MakeApoint.html?userId='+ doc.id + '" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-calendar-plus-o"></i>  Make Appointment</a>\
+        <a href="./MessagesNutri.html?userId='+ doc.id + '" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-envelope"></i></i>  Open Chat</a>\
+        <button type="button" onclick="deleteclient('+ "'" + profileId + "'" + ')" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-edit"></i> Delete Client</button>';
         document.getElementById("username").innerHTML += user.username;
         document.getElementById("place").innerHTML += user.place;
         document.getElementById("date").innerHTML += formatDate(user.bday.toDate());
@@ -61,30 +59,39 @@ window.onload = () => {
   }
 }
 
-function deleteclient(id){
+function deleteclient(id) {
   const userId = Cookies.get('userId');
   db.collection('nutritionists').doc(userId).update({
-    "id_users": firebase.firestore.FieldValue.arrayRemove(id)});
-  db.collection("user_recipe").where("id_user","==",id).get().then(querySnapshot => {
+    "id_users": firebase.firestore.FieldValue.arrayRemove(id)
+  });
+  db.collection("user_recipe").where("id_user", "==", id).get().then(querySnapshot => {
     querySnapshot.forEach(function (doc) {
-      const i=doc.id;
-      db.collection("user_recipe").doc(i).delete();})});
-  db.collection("notifications").where("id_user","==",id).get().then(querySnapshot => {
+      const i = doc.id;
+      db.collection("user_recipe").doc(i).delete();
+    })
+  });
+  db.collection("notifications").where("id_user", "==", id).get().then(querySnapshot => {
     querySnapshot.forEach(function (doc) {
-      const i=doc.id;
-      db.collection("notifications").doc(i).delete();})});
-  db.collection("menus").where("id_user","==",id).get().then(querySnapshot => {
+      const i = doc.id;
+      db.collection("notifications").doc(i).delete();
+    })
+  });
+  db.collection("menus").where("id_user", "==", id).get().then(querySnapshot => {
     querySnapshot.forEach(function (doc) {
-      const i=doc.id;
-      db.collection("menus").doc(i).delete();})});
-  db.collection("appointments").where("id_user","==",id).get().then(querySnapshot => {
+      const i = doc.id;
+      db.collection("menus").doc(i).delete();
+    })
+  });
+  db.collection("appointments").where("id_user", "==", id).get().then(querySnapshot => {
     querySnapshot.forEach(function (doc) {
-      const i=doc.id;
-      db.collection("appointments").doc(i).delete();})});
+      const i = doc.id;
+      db.collection("appointments").doc(i).delete();
+    })
+  });
 
   db.collection("users").doc(id).delete().then(function () {
-    toastr["success"]("The client has been deleted!"+ '<br /><br /><button type="button" onclick="window.location.href = '+"'"+'./indexNutri.html'+"'"+';" class="btn clear">Ok</button>');
-});
+    toastr["success"]("The client has been deleted!" + '<br /><br /><button type="button" onclick="window.location.href = ' + "'" + './indexNutri.html' + "'" + ';" class="btn clear">Ok</button>');
+  });
 }
 function formatDate(date) {
   var monthNames = [
@@ -106,18 +113,16 @@ function getRndInteger(min, max) {
 }
 
 function calculateMacros(userId) {
-  
+
   db.collection('users').doc(userId).get().then(doc => {
     if (doc.exists) {
       const user = doc.data();
-      console.log(user);
       var tday = new Date();
       const years = tday.getFullYear() - user.bday.toDate().getFullYear();
       const h = user.height[user.height.length - 1];
       const g = user.weight[user.weight.length - 1];
       const bf = user.body_fat[user.body_fat.length - 1];
       var sum;
-      console.log([years,h,g,bf]);
       if (user.gender == "Female") {
         sum = 26;
         if (h < 153)//inaltime
@@ -154,16 +159,14 @@ function calculateMacros(userId) {
         else if (bf <= 34)
           sum += -2.5;
       }
-      if (years<25)
-         sum+=0.5;
-         else if(years<45)
-              sum+=0;
-              else sum+=-0.5;
+      if (years < 25)
+        sum += 0.5;
+      else if (years < 45)
+        sum += 0;
+      else sum += -0.5;
       var REE = g * sum;
-      //console.log(REE);
       var TDEE;
-      //console.log(user.activity[user.activity.length-1]);
-      switch (user.activity[user.activity.length-1]) {
+      switch (user.activity[user.activity.length - 1]) {
         case "Sedentary":
           TDEE = REE * 1.2;
           break;
@@ -179,9 +182,7 @@ function calculateMacros(userId) {
         default:
           TDEE = REE;
       }
-     // console.log(TDEE);
       const diff = user.goal[user.goal.length - 1] - user.weight[user.weight.length - 1];
-     // console.log(diff);
       var kcal, carb, prot, fat;
       if (diff == 0)// mentinere
       //45 carb, 35 prot, 20 fat
@@ -241,13 +242,12 @@ function salveazaNutri(nutri) {
   db.collection('users').doc(profileId).get().then(doc => {
     if (doc.exists) {
       const user = doc.data();
-      const u={
+      const u = {
         nutrition: nutri
       }
-      db.collection('users').doc(profileId).set({ ...u }, { merge: true }).then(function(){
-      var y = document.getElementById("Demo3");
-      console.log("update");
-      y.innerHTML = '\
+      db.collection('users').doc(profileId).set({ ...u }, { merge: true }).then(function () {
+        var y = document.getElementById("Demo3");
+        y.innerHTML = '\
               <br>\
               <p id="editbutton"><button type="button" onclick="editp()" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-edit"></i> Edit Percentage</button></p>\
               <div id="edit" class=" w3-container w3-white w3-round w3-margin-bottom w3-hide" style="padding-left: 0;">\
@@ -257,11 +257,12 @@ function salveazaNutri(nutri) {
                   <input id="fat" type="number" name="fat" min="0" max="100" placeholder="Fat Percentage">\
               </div>\
               <button type="button" id="generatebutton" onclick="calculateMacros()" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-edit"></i> Generate Percentage</button>'
-        + '<p>Calories: ' + nutri[0] + ' kcal</p>\
+          + '<p>Calories: ' + nutri[0] + ' kcal</p>\
               <p>Carbohydrates: '+ nutri[1] + ' grams</p>\
               <p>Protein: '+ nutri[2] + ' grams</p>\
               <p>Fat: '+ nutri[3] + ' grams</p>\
-              ';});
+              ';
+      });
     }
   });
 
@@ -284,9 +285,9 @@ function savep() {
   y.innerHTML = '<button type="button" onclick="editp()" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-edit"></i> Edit Percentage</button>';
 }
 
-function logout(){
+function logout() {
   const userId = Cookies.get('userId');
-  if(userId){
+  if (userId) {
     Cookies.remove('userId');
     window.location.href = './LoginClient.html';
 

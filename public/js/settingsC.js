@@ -5,7 +5,7 @@ window.onload = () => {
     window.location.href = './LoginClient.html';
 
   } else {
-    document.getElementById("fav").setAttribute("href","./RecipesFavorites.html?userId="+userId);
+    document.getElementById("fav").setAttribute("href", "./RecipesFavorites.html?userId=" + userId);
     db.collection('users').doc(userId).get().then(doc => {
       if (doc.exists) {
         const user = doc.data();
@@ -22,7 +22,7 @@ window.onload = () => {
           var x = getRndInteger(2, 5);
           document.getElementById("tags").innerHTML += '\
                      <span id="al'+ i.toString() + '" class="w3-tag w3-small w3-theme-d' + x.toString() + '">' + user.allergies[i] + '\
-                    <button onclick="elimina('+"'"+ i.toString() +"'"+ ')"' + ' class="w3-button w3-theme-d' + x.toString() + '">\
+                    <button onclick="elimina('+ "'" + i.toString() + "'" + ')"' + ' class="w3-button w3-theme-d' + x.toString() + '">\
                     <i class="fa fa-remove"></i>\
                     </button></span>';
         }
@@ -121,9 +121,9 @@ function appearAdd(id) {
     });
   }
 }
-function logout(){
+function logout() {
   const userId = Cookies.get('userId');
-  if(userId){
+  if (userId) {
     Cookies.remove('userId');
     window.location.href = './LoginClient.html';
 

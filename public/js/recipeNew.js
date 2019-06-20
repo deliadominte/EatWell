@@ -34,7 +34,6 @@ window.onload = () => {
           for(i=0;i<=nrdir;i++){
             recipe.directions[i]=document.getElementById('dir'+i.toString()).value ;
           }
-          console.log(recipe);
           db.collection('recipes').add(recipe).then(docRef => {
   
               window.location.href = './Recipe.html?recipeId='+docRef.id;
