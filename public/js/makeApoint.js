@@ -23,7 +23,7 @@ window.onload = () => {
       db.collection('appointments').where('id_nutri', '==', userId).get().then(querySnapshot => {
         querySnapshot.forEach(function (doc) {
           const apoint = doc.data();
-          if (!(apoint.date.toDate() < p4) && !(apoint.date.toDate() > p4)) {
+          if ( apoint.date.toDate().getTime() == p4.getTime()) {
             flag = 1;
           }
         });
@@ -31,6 +31,7 @@ window.onload = () => {
       setTimeout(function () {
         if (flag == 1) {
           toastr.warning("There is another appointment at this date and time!");
+
         }
         else {
           db.collection('appointments').add(apoint).then(docRef => {
@@ -39,7 +40,7 @@ window.onload = () => {
                 <div class="w3-container"  id="apoint">\
                   <p>Appointment</p>\
                   <img src="./media/calendar.png" alt="Calendar" style="width:50%"><br>\
-                  <span>'+ p1 + ' ' + p2 + '</span><br>\
+                  <span>'+ formatDate(p4) + '</span><br>\
                   <span>Details: '+ p3 + '</span><br>\
                   <span>Client accepted: '+ false + '</span>\
                   <div class="w3-row w3-opacity">\
@@ -50,6 +51,9 @@ window.onload = () => {
                 </div>\
               </div>\
               <br>';
+              document.getElementById('date').value="";
+              document.getElementById('time').value="";
+              document.getElementById("dets").value="";
           });
           const notif = {
             id_user: profileId,

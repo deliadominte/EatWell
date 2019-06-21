@@ -28,7 +28,7 @@ window.onload = () => {
                     let myDecipher = decipher('mySecretSalt');
                     var decrypted = myDecipher(user.password);   // --> 'the secret string'
                     console.log(decrypted);
-                    if (user.password === password) {
+                    if (decrypted=== password) {
                         Cookies.set('userId', doc.id);
                         window.location.href = './index.html';
                     } else {

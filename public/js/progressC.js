@@ -93,19 +93,43 @@ window.onload = function () {
                 document.getElementById("goal").innerHTML += user.goal[user.goal.length - 1] + " kg";
                 document.getElementById("weight").innerHTML += user.weight[user.weight.length - 1] + " kg";
                 document.getElementById("maxweight").innerHTML += fmax(user.weight) + " kg";
-                document.getElementById("prog").innerHTML += Math.floor(100 - ((user.weight[user.weight.length - 1] - user.goal[user.goal.length - 1]) * 100) / (fmax(user.weight) - user.goal[user.goal.length - 1])) + "%";
-                document.getElementById("prog").setAttribute("aria-valuenow", (-1) * user.weight[user.weight.length - 1]);
-                document.getElementById("prog").setAttribute("aria-valuemin", (-1) * fmax(user.weight));
-                document.getElementById("prog").setAttribute("aria-valuemax", (-1) * user.goal[user.goal.length - 1]);
-                document.getElementById("prog").setAttribute("style", "width:" + Math.floor(100 - ((user.weight[user.weight.length - 1] - user.goal[user.goal.length - 1]) * 100) / (fmax(user.weight) - user.goal[user.goal.length - 1])) + "%");
-
+                var difference=user.goal[user.goal.length - 1] - user.weight[user.weight.length - 1];
+                if(difference>0){//ingrasare
+                    document.getElementById("prog").innerHTML += Math.floor(100 - ((user.weight[user.weight.length - 1] - user.goal[user.goal.length - 1]) * 100) / (fmin(user.weight) - user.goal[user.goal.length - 1])) + "%";
+                    document.getElementById("prog").setAttribute("aria-valuenow", (-1) * user.weight[user.weight.length - 1]);
+                    document.getElementById("prog").setAttribute("aria-valuemin", (-1) * fmin(user.weight));
+                    document.getElementById("prog").setAttribute("aria-valuemax", (-1) * user.goal[user.goal.length - 1]);
+                    document.getElementById("prog").setAttribute("style", "width:" + Math.floor(100 - ((user.weight[user.weight.length - 1] - user.goal[user.goal.length - 1]) * 100) / (fmin(user.weight) - user.goal[user.goal.length - 1])) + "%");
+    
+                }
+                else if(difference<0){//slabit
+                    document.getElementById("prog").innerHTML += Math.floor(100- ((user.weight[user.weight.length - 1] - user.goal[user.goal.length - 1]) * 100) / (fmax(user.weight) - user.goal[user.goal.length - 1])) + "%";
+                    document.getElementById("prog").setAttribute("aria-valuenow", (-1) * user.weight[user.weight.length - 1]);
+                    document.getElementById("prog").setAttribute("aria-valuemin", (-1) * fmax(user.weight));
+                    document.getElementById("prog").setAttribute("aria-valuemax", (-1) * user.goal[user.goal.length - 1]);
+                    document.getElementById("prog").setAttribute("style", "width:" + Math.floor(100 - ((user.weight[user.weight.length - 1] - user.goal[user.goal.length - 1]) * 100) / (fmax(user.weight) - user.goal[user.goal.length - 1])) + "%");
+    
+                }
+                else{
+                    document.getElementById("prog").innerHTML += 100 + "%";
+                    document.getElementById("prog").setAttribute("aria-valuenow", (-1) * user.weight[user.weight.length - 1]);
+                    document.getElementById("prog").setAttribute("aria-valuemin", (-1) * fmax(user.weight));
+                    document.getElementById("prog").setAttribute("aria-valuemax", (-1) * user.goal[user.goal.length - 1]);
+                    document.getElementById("prog").setAttribute("style", "width:" + 100 + "%");
+    
+                }
+                
                 if (user.time_prog.length >= 2) {
                     var diff_days = Math.floor((user.time_prog[user.time_prog.length - 1].toDate().getTime() - user.time_prog[0].toDate().getTime()) / (1000 * 60 * 60 * 24));
                     var diff_weight_left = Math.abs(user.goal[user.goal.length - 1] - user.weight[user.weight.length - 1]);
                     var diff_weight_done = Math.abs(user.weight[user.weight.length - 1] - user.goal[user.goal.length - 1]);
                     //console.log((diff_days / diff_weight_done) * diff_weight_left);
                     var date_done = new Date();
-                    date_done.setDate(toDay.getDate() + (diff_days / diff_weight_done) * diff_weight_left);
+                    if(diff_weight_left==0){
+                        date_done.setDate(toDay.getDate());
+                    }
+                    else{
+                    date_done.setDate(toDay.getDate() + (diff_days / diff_weight_done) * diff_weight_left);}
                     //console.log(date_done);
                     var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
                         curMonth = months[date_done.getMonth()];
@@ -114,7 +138,12 @@ window.onload = function () {
                     let kg_per_day = (0.5) / 7;
                     var diff_weight_left = Math.abs(user.goal[0] - user.weight[0]);
                     var date_done = new Date();
+                    if(diff_weight_left==0){
+                        date_done.setDate(toDay.getDate());
+                    }
+                    else{
                     date_done.setDate(toDay.getDate() + ( diff_weight_left/kg_per_day));
+                    }
                     //console.log(date_done);
                     var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
                         curMonth = months[date_done.getMonth()];

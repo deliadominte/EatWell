@@ -108,9 +108,10 @@ function verify() {
                 sum_fat += parseInt(recipe.nutrition[3]);
                 for (j = 0; j < recipe.ing.length; j++) {
                     for (l = 0; l < allergies.length; l++) {
-                        if (recipe.ing[j] == allergies[l]) {
+                        console.log(recipe.ing[j]+ " "+ allergies[l]);
+                        if ( recipe.ing[j].toUpperCase().indexOf(allergies[l].toUpperCase())>-1) {
                             flag = 0;
-                            a = recipe.ing[j];
+                            a = allergies[l]+", and the recepie hasc"+ recipe.ing[j];
                             break;
 
                         }

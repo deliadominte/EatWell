@@ -55,12 +55,12 @@ async function f(d, profileId, today, i) {
     let flag = 0;
     let done = false;
     if ((d.getDate() == today.getDate()) && (d.getMonth() == today.getMonth()) && (d.getFullYear() == today.getFullYear())) {
-        document.getElementById("days").innerHTML += '<li id="li' + i + '"><a href="./SetMenu.html?userId=' + profileId + '&date=' + d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getUTCDate() + '" title="Set the menu"><span class="active">' + i + '</span></a></li>';
+        document.getElementById("days").innerHTML += '<li id="li' + i + '"><a href="./SetMenu.html?userId=' + profileId + '&date=' + d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + '" title="Set the menu"><span class="active">' + i + '</span></a></li>';
     }
     else if (d > today) {
-        document.getElementById("days").innerHTML += '<li id="li' + i + '"><a href="./SetMenu.html?userId=' + profileId + '&date=' + d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getUTCDate() + '" title="Set the menu">' + i + '</a></li>';
+        document.getElementById("days").innerHTML += '<li id="li' + i + '"><a href="./SetMenu.html?userId=' + profileId + '&date=' + d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + '" title="Set the menu">' + i + '</a></li>';
     } else {
-        document.getElementById("days").innerHTML += '<li id="li' + i + '"><a href="" title="No data">' + i + '</a></li>';
+        document.getElementById("days").innerHTML += '<li id="li' + i + '"><a href="" title="No data'+ d.getDate() +'">' + i + '</a></li>';
     }
     db.collection('menus').where('id_user', '==', profileId).get().then(querySnapshot => {
         querySnapshot.forEach(function (doc) {

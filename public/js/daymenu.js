@@ -1,6 +1,7 @@
 let done_contor = 0, nr_meals;
 toastr.options = { "positionClass": "toast-bottom-left" }
 const menuId = new URLSearchParams(window.location.search).get('menuId');
+
 window.onload = () => {
 
 
@@ -45,14 +46,18 @@ window.onload = () => {
             for(i=0;i < nr_meals;i++) {
               var index=i;
               let desc = menu.description[i];
-                let id_meal = menu.meals[i];
-                var done = menu.is_done[i];
+                let id_meal = [menu.meals[i],i,menu.is_done[i]];
+                if(menu.is_done[i]==true){
+                  done_contor++;
+                }
                 console.log(index);
               db.collection('recipes').doc(menu.meals[i]).get().then(doc => {
                 
                     if (doc.exists) {
                       const recipe = doc.data();
-                      console.log(index);
+                      var done=id_meal[2];
+                      index=id_meal[1];
+                      console.log(id_meal);
                       document.getElementById("meals").innerHTML += '<div class="w3-container w3-card w3-white w3-round w3-margin"><br>\
                     <span class="w3-right w3-opacity">'+ desc + '</span>\
                     <h4 class="w3-left-align w3-margin-left">'+ recipe.name + '</h4>\
@@ -62,16 +67,16 @@ window.onload = () => {
                     <p>Protein: '+ recipe.nutrition[2] + '</p>\
                     <p>Fat: '+ recipe.nutrition[3] + '</p>\
                     <hr class="w3-clear">\
-                    <button onclick="done('+ "'" + id_meal + "','" + index + "'" + ')" id="done' + id_meal + '"\
+                    <button onclick="done('+ "'" + id_meal[0] + "','" + index + "'" + ')" id="done' + id_meal[0] + '"\
                      class="w3-button w3-theme-d1 w3-margin-bottom" ><i class="fa fa-check"></i>\
                        Done</button>\
-                      <button onclick="add_fav('+ "'" + id_meal + "'" + ')" id="' + id_meal + '"\
+                      <button onclick="add_fav('+ "'" + id_meal[0] + "'" + ')" id="' + id_meal[0] + '"\
                       class="w3-button w3-theme-d1 w3-margin-bottom" ><i class="fa fa-plus"></i>\
                         Add to favorites</button>\
                     <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html?recipeId='+ doc.id + '"><i class="fa fa-bars"></i>\
                        See Recipe</a>\
                      </div>';
-                      document.getElementById('done' + id_meal).disabled = done;
+                      document.getElementById('done' + id_meal[0]).disabled = done;
                       
                     }
                     });
