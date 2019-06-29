@@ -24,7 +24,7 @@ window.onload = () => {
         <p>Protein:'+ recipe.nutrition[1] + '</p>\
         <p>Fat:'+ recipe.nutrition[1] + '</p>\
         <hr class="w3-clear">\
-        <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html?recipeId='+ recipe.id + '" ><i class="fa fa-bars"></i>  See Recipe</a>\
+        <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html?recipeId='+ doc.id + '" ><i class="fa fa-bars"></i>  See Recipe</a>\
        </div>';
                 document.getElementById("container").appendChild(elem);
             });

@@ -277,12 +277,16 @@ function editp() {
 function savep() {
   var x = document.getElementById("edit"), y = document.getElementById("editbutton");
   const cal = document.getElementById("cal").value;
-  const carb = document.getElementById("carbo").value;
-  const fat = document.getElementById("fat").value;
-  const protein = document.getElementById("protein").value;
-  salveazaNutri([cal, carb, protein, fat]);
-  x.className = x.className.replace("w3-show", "w3-hide");
-  y.innerHTML = '<button type="button" onclick="editp()" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-edit"></i> Edit Percentage</button>';
+  if (parseInt(document.getElementById("carbo").value) + parseInt(document.getElementById("fat").value) + parseInt(document.getElementById("protein").value) != 100)
+    toastr.error("Macronutrients sum must equal 100%");
+  else {
+    const carb = Math.floor(cal * document.getElementById("carbo").value / 100 / 4);
+    const fat = Math.floor(cal * document.getElementById("fat").value / 100 / 9);
+    const protein = Math.floor(cal * document.getElementById("protein").value / 100 / 4);
+    salveazaNutri([cal, carb, protein, fat]);
+    x.className = x.className.replace("w3-show", "w3-hide");
+    y.innerHTML = '<button type="button" onclick="editp()" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-edit"></i> Edit Percentage</button>';
+  }
 }
 
 function logout() {

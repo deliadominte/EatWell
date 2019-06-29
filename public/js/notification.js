@@ -177,7 +177,7 @@ db.collection('users').doc(uI).get().then(doc => {
                         });
                         if (flag_has_menu == false) {
 
-                            const href = "./SetMenu.html?userId=" + doc.id + "&date=" + dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getUTCDate();
+                            const href = "./SetMenu.html?userId=" + id + "&date=" + dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getUTCDate();
 
                             db.collection('notifications').where('id_user', '==', id).where('href', '==', href).get().then(querySnapshot => {
                                 let allready = false;
@@ -192,8 +192,10 @@ db.collection('users').doc(uI).get().then(doc => {
                                     db.collection('users').doc(id).get().then(doc => {
                                         if (doc.exists) {
                                             const user = doc.data();
+                                            const i=doc.id
+console.log(i);
                                             let not = {
-                                                id_user: id,
+                                                id_user: i,
                                                 text: "You didn't set the menu for tomorrow for: " + user.username,
                                                 date: new Date(),
                                                 to_check_date: true,

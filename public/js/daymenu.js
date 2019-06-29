@@ -115,12 +115,16 @@ window.onload = () => {
             let i;
             nr_meals = menu.meals.length;
             for (i = 0; i < nr_meals; i++) {
+              var index=i;
               let desc = menu.description[i];
-              let id_meal = menu.meals[i];
-              var done = menu.is_done[i];
+                let id_meal = [menu.meals[i],i,menu.is_done[i]];
+                console.log(index);
               db.collection('recipes').doc(menu.meals[i]).get().then(doc => {
-                if (doc.exists) {
-                  const recipe = doc.data();
+                
+                    if (doc.exists) {
+                      const recipe = doc.data();
+                      var done=id_meal[2];
+                      index=id_meal[1];
                   document.getElementById("meals").innerHTML += '<div class="w3-container w3-card w3-white w3-round w3-margin"><br>\
           <span class="w3-right w3-opacity">'+ desc + '</span>\
           <h4 class="w3-left-align w3-margin-left">'+ recipe.name + '</h4>\
@@ -130,9 +134,16 @@ window.onload = () => {
           <p>Protein: '+ recipe.nutrition[2] + '</p>\
           <p>Fat: '+ recipe.nutrition[3] + '</p>\
           <hr class="w3-clear">\
-          <a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html?recipeId='+ doc.id + '"><i class="fa fa-bars"></i>\
-             See Recipe</a>\
+          <div id="done' + id_meal[0] + '"><a class=" w3-center w3-button w3-theme-d2 w3-margin-bottom" href="./Recipe.html?recipeId='+ doc.id + '"><i class="fa fa-bars"></i>\
+           See Recipe</a>\
+          </div>\
            </div>';
+           if(done==true)
+            document.getElementById('done' + id_meal[0]).innerHTML+= '<button  \
+            class="w3-button w3-theme-d1 w3-margin-bottom w3-hover-green" ><i class="fa fa-check"></i>\
+             Done</button>\
+            ';
+            
                 }
               });
             }

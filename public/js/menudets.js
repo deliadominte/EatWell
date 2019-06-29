@@ -20,6 +20,15 @@ window.onload = () => {
 
     } else {
 
+//         menu={
+// date: new Date('2019-06-28'),
+// description:["breakfast","lunch","dinner"],
+// id_nutri:"r4gXABlPsltaCX7RD2k2",
+// id_user:"NuGXB2eFg1Lsm2tb7zi7",
+// is_done:[true,true,true],
+// meals:["VMRD2eacL0rVkfyThoPk","KxveQ21oj8OQC4GooCWK","xZXhBELaa0P8phqsE64G"]
+//         }
+//         db.collection('menus').add(menu).then(console.log('done'));
         document.getElementById("title").innerHTML += '<li>\
       '+ curMonth + '<br>\
       <span style="font-size:18px">'+ curYear + '</span><br>\
@@ -60,7 +69,7 @@ async function f(d, profileId, today, i) {
     else if (d > today) {
         document.getElementById("days").innerHTML += '<li id="li' + i + '"><a href="./SetMenu.html?userId=' + profileId + '&date=' + d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + '" title="Set the menu">' + i + '</a></li>';
     } else {
-        document.getElementById("days").innerHTML += '<li id="li' + i + '"><a href="" title="No data'+ d.getDate() +'">' + i + '</a></li>';
+        document.getElementById("days").innerHTML += '<li id="li' + i + '"><a href="" title="No data">' + i + '</a></li>';
     }
     db.collection('menus').where('id_user', '==', profileId).get().then(querySnapshot => {
         querySnapshot.forEach(function (doc) {

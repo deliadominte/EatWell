@@ -301,19 +301,19 @@ function make_chart(type, profileId) {
                 }
             }
             else if (type == 6) {
-                const min = fmin(user.waistline);
-                const max = fmax(user.waistline);
-                for (i = 0; i < user.waistline.length; i++) {
+                const min = fmin(user.butt);
+                const max = fmax(user.butt);
+                for (i = 0; i < user.butt.length; i++) {
                     date = user.time_prog[i].toDate();
                     day = date.getDate();
                     monthIndex = date.getMonth() + 1;
                     year = date.getFullYear();
                     time = new Date(year + "-" + monthIndex + "-" + day);
-                    if (user.waistline[i] == max)
-                        array[i] = { x: time, y: parseInt(user.waistline[i]), indexLabel: "highest", markerColor: "red", markerType: "triangle" };
-                    else if (user.waistline[i] == min)
-                        array[i] = { x: time, y: parseInt(user.waistline[i]), indexLabel: "lowest", markerColor: "DarkSlateGrey", markerType: "cross" };
-                    else array[i] = { x: time, y: parseInt(user.waistline[i]) };
+                    if (user.butt[i] == max)
+                        array[i] = { x: time, y: parseInt(user.butt[i]), indexLabel: "highest", markerColor: "red", markerType: "triangle" };
+                    else if (user.butt[i] == min)
+                        array[i] = { x: time, y: parseInt(user.butt[i]), indexLabel: "lowest", markerColor: "DarkSlateGrey", markerType: "cross" };
+                    else array[i] = { x: time, y: parseInt(user.butt[i]) };
                 }
             }
             else if (type == 7) {

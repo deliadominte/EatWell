@@ -73,7 +73,7 @@ socket.on('not_online', function (data) {
     text: "New Message from " + data.handle + ": " + data.message,
     date: new Date(),
     to_check_date: false,
-    href: "./MessageNutri.html?userId=" + data.id_sender
+    href: "./MessagesNutri.html?userId=" + data.id_sender
   }
   db.collection('notifications').add(notif).then();
 });

@@ -16,7 +16,8 @@ else
     d = new Date();
 window.onload = () => {
 
-
+    console.log(cal+" "+protein+" "+carbo+" "+fat);
+    console.log(profileId+" "+d);
     const userId = Cookies.get('userId');
     if (userId) {
         db.collection('users').doc(profileId).get().then(doc => {
@@ -27,7 +28,7 @@ window.onload = () => {
                 carbo = user.nutrition[2];
                 fat = user.nutrition[3];
                 allergies = user.allergies;
-
+                console.log(cal+" "+protein+" "+carbo+" "+fat);
             }
         });
         db.collection('recipes').get().then(querySnapshot => {
@@ -94,6 +95,7 @@ function addMeal() {
 function verify() {
     let i = 0, j, l;
     let sum_cal = 0, sum_protein = 0, sum_fat = 0, sum_carbo = 0;
+    console.log(cal+" "+protein+" "+carbo+" "+fat);
     let recipes = [];
     let a;
     let flag = 1;
@@ -111,7 +113,7 @@ function verify() {
                         console.log(recipe.ing[j]+ " "+ allergies[l]);
                         if ( recipe.ing[j].toUpperCase().indexOf(allergies[l].toUpperCase())>-1) {
                             flag = 0;
-                            a = allergies[l]+", and the recepie hasc"+ recipe.ing[j];
+                            a = allergies[l]+", and the recipe has "+ recipe.ing[j];
                             break;
 
                         }

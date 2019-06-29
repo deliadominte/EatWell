@@ -46,6 +46,13 @@ window.onload = () => {
             }
             loaded = loaded + MAX_LOAD;
         }
+        // db.collection('notifications').get().then(querySnapshot => {
+        //     querySnapshot.forEach(function (doc) {
+        //         const not = doc.data();
+        //         if(not.text.toUpperCase().indexOf("tomorrow".toUpperCase())>-1)
+        //         db.collection("notifications").doc(doc.id).delete();
+        //     })
+        // })
         document.getElementById("searchbar").onkeyup = e => {
             document.getElementById("more-btn").style.display = "none";
             let pers = document.getElementsByClassName("pers w3-container w3-card w3-white w3-round w3-margin");
